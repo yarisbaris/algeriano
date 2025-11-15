@@ -1,81 +1,644 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Algeriano</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Algeriano — منصة فيديو جزائرية</title>
 
+<!-- ====== CSS (Clean Modern) ====== -->
 <style>
-    body {
-        margin: 0;
-        font-family: sans-serif;
-        background: #111;
-        color: white;
-        text-align: center;
-    }
+:root{
+  --bg:#0f1720; --card:#0b1220; --muted:#98a0ad;
+  --primary:#00c78a; --accent:#6a00ff; --glass: rgba(255,255,255,0.03);
+  --text:#f8fafc; --radius:12px; --gap:14px;
+  font-family: 'Tajawal', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#07080b);color:var(--text);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,0.02);backdrop-filter: blur(6px)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:900;color:#010101;font-size:20px}
+.title{font-weight:800;font-size:18px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.btn{background:var(--primary);border:none;color:#021;padding:8px 12px;border-radius:10px;font-weight:800;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.container{max-width:1100px;margin:18px auto;padding:0 12px}
+.layout{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+@media(max-width:980px){ .layout{grid-template-columns:1fr} .suggestions{order:2} .mainVideo{order:1} }
+.mainVideo{background:rgba(255,255,255,0.02);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.03);height:65vh;display:flex;flex-direction:column}
+.mainVideo video{width:100%;height:100%;object-fit:cover;background:#000}
+.infoRow{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid rgba(255,255,255,0.02)}
+.meta{display:flex;gap:12px;align-items:center}
+.avatar{width:48px;height:48;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--primary));display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}
+.actions{display:flex;gap:8px;align-items:center}
+.iconBtn{background:var(--glass);border-radius:10px;padding:8px 10px;border:1px solid rgba(255,255,255,0.02);cursor:pointer;color:var(--primary);font-weight:800}
+.suggestions{width:100%;max-width:360px}
+.suggestions h3{margin:0 0 10px 0;color:var(--muted);font-weight:800}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:10px;border-radius:10px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.02);display:flex;gap:10px;align-items:center}
+.card img{width:94px;height:64px;border-radius:8px;object-fit:cover}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.grid .cell{background:#071018;border-radius:10px;padding:12px;text-align:center;min-height:90px}
+.footer{padding:24px;text-align:center;color:var(--muted);margin-top:20px}
 
-    header {
-        padding: 30px 0;
-        background: linear-gradient(45deg,#0f0,#0a0);
-        font-size: 28px;
-        font-weight: bold;
-    }
+/* forms */
+.input, textarea, select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
+.label{font-weight:700;color:var(--muted);margin-bottom:6px;display:block}
 
-    .box {
-        margin: 40px auto;
-        width: 90%;
-        max-width: 450px;
-        padding: 25px;
-        background: #222;
-        border-radius: 15px;
-        box-shadow: 0 0 15px #0f0;
-    }
+/* admin */
+.admin-shell{display:flex;gap:14px}
+.aside{width:260px;background:linear-gradient(180deg,#07101a,#05060a);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.aside .item{padding:10px;border-radius:10px;cursor:pointer;color:var(--muted);margin-bottom:8px}
+.aside .item.active{background:rgba(255,255,255,0.02);color:var(--text);font-weight:800}
+.admin-main{flex:1;background:linear-gradient(180deg,#06070a,#05050a);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
 
-    input, button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 12px;
-        border-radius: 10px;
-        border: none;
-        font-size: 17px;
-    }
+/* small */
+.small{font-size:13px;color:var(--muted)}
 
-    input {
-        background: #333;
-        color: white;
-    }
-
-    button {
-        background: #0f0;
-        color: #000;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    footer {
-        margin-top: 40px;
-        font-size: 13px;
-        opacity: .5;
-    }
+/* responsive */
+@media(max-width:600px){
+  .header{padding:8px}
+  .title{font-size:16px}
+  .mainVideo{height:48vh}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
-
 </head>
 <body>
 
-<header>
-    ALGERIANO SYSTEM
+<!-- ====== Header ====== -->
+<header class="header">
+  <div class="brand">
+    <div class="logo">A</div>
+    <div>
+      <div class="title">Algeriano</div>
+      <div class="small">منصة فيديو جزائرية — تجريبي</div>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button class="btn ghost" onclick="go('#upload')">+ زيد فيديو</button>
+    <button class="btn ghost" onclick="go('#profile')">بروفايلي</button>
+    <button class="btn" onclick="go('#admin')">Admin</button>
+  </div>
 </header>
 
-<div class="box">
-    <h2>تسجيل الدخول</h2>
-    <input type="email" placeholder="أدخل الإيميل" />
-    <input type="password" placeholder="أدخل كلمة السر" />
-    <button>دخول</button>
-</div>
+<!-- ====== Main ====== -->
+<main class="container">
+  <div id="view-root"></div>
+</main>
 
-<footer>
-    © 2025 - Algeriano
-</footer>
+<!-- ====== Templates (rendered by JS) ====== -->
+<script>
+/* ========== Simple Router ========== */
+function go(hash){ location.hash = hash; }
+window.addEventListener('hashchange', renderRoute);
+function onLoad(){ if(!location.hash) location.hash='#home'; renderRoute(); }
+function renderRoute(){
+  const root = document.getElementById('view-root');
+  const h = location.hash.replace('#','') || 'home';
+  if(h==='home') root.innerHTML = HomeHTML();
+  else if(h==='upload') root.innerHTML = UploadHTML();
+  else if(h==='profile') root.innerHTML = ProfileHTML();
+  else if(h==='admin') root.innerHTML = AdminHTML();
+  else if(h==='payments') root.innerHTML = PaymentsHTML();
+  else root.innerHTML = HomeHTML();
+  // hydrate after HTML injection
+  setTimeout(hydrate,50);
+}
 
+/* ========== Local Storage Keys & Helpers ========== */
+const LS_VIDEOS = 'alg_videos_v3';
+const LS_PAYMENTS = 'alg_payments_v3';
+const LS_USERS = 'alg_users_v3';
+const LS_SETTINGS = 'alg_settings_v3';
+
+function save(key,val){ localStorage.setItem(key, JSON.stringify(val)); }
+function load(key){ return JSON.parse(localStorage.getItem(key) || 'null'); }
+function ensure(key, init){ if(!localStorage.getItem(key)) save(key,init); return load(key); }
+
+/* ========== Init sample data if empty ========== */
+function initData(){
+  ensure(LS_SETTINGS, {siteName:'Algeriano', baridiNumber:'', adminUser:'admin', adminPass:'admin123'});
+  if(!localStorage.getItem(LS_VIDEOS)){
+    save(LS_VIDEOS, [
+      {id:1, title:'تجريبي — الجزائر', user:'algeriano', src:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', likes:120, created:Date.now()},
+      {id:2, title:'زهرة', user:'sara_dz', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', likes:88, created:Date.now()-60000},
+      {id:3, title:'قصير', user:'yassine', src:'https://samplelib.com/lib/preview/mp4/sample-5s.mp4', likes:45, created:Date.now()-120000}
+    ]);
+  }
+  if(!localStorage.getItem(LS_PAYMENTS)) save(LS_PAYMENTS, []);
+  if(!localStorage.getItem(LS_USERS)) save(LS_USERS, [{id:'guest', username:'guest', display:'زائر', coins:0}]);
+}
+initData();
+
+/* ========== UI Templates ========== */
+function HomeHTML(){
+  return `
+  <div class="layout">
+    <section class="mainVideo">
+      <video id="heroVideo" controls playsinline></video>
+      <div class="infoRow">
+        <div class="meta">
+          <div class="avatar">A</div>
+          <div style="text-align:right">
+            <div id="heroTitle" style="font-weight:800"></div>
+            <div class="small" id="heroUser"></div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="iconBtn" id="likeBtn">❤ <span id="heroLikes">0</span></button>
+          <button class="iconBtn" onclick="shareCurrent()">🔁</button>
+          <button class="btn" id="buyBtn">اشترِ</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="suggestions">
+      <h3>مقترحات ليك</h3>
+      <div id="suggestGrid"></div>
+      <div style="margin-top:14px">
+        <h4 class="small">قسم تجاري</h4>
+        <div class="grid">
+          <div class="cell">منتوج 1<br><small class="small">500 دج</small></div>
+          <div class="cell">منتوج 2<br><small class="small">1200 دج</small></div>
+          <div class="cell">منتوج 3<br><small class="small">250 دج</small></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <div class="footer">© <strong>${ensure(LS_SETTINGS).siteName}</strong> — نسخة تجريبية</div>
+  `;
+}
+
+function UploadHTML(){
+  return `
+  <div style="max-width:800px;margin:auto">
+    <h2>رفع فيديو جديد</h2>
+    <p class="small">ترسل ملف MP4 من جهازك أو تصق رابط مباشر (mp4). هذا الاختبار يخزن محلياً في المتصفح.</p>
+
+    <div style="margin-top:12px">
+      <label class="label">اختار ملف (MP4)</label>
+      <input id="fileInput" type="file" accept="video/*">
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="label">أو رابط فيديو (mp4)</label>
+      <input id="urlInput" placeholder="https://...video.mp4">
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="label">عنوان الفيديو</label>
+      <input id="titleInput" placeholder="عنوان الفيديو">
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="handleUpload()">رفع ونشر</button>
+      <button class="btn ghost" onclick="go('#home')">إلغاء</button>
+    </div>
+  </div>
+  `;
+}
+
+function ProfileHTML(){
+  const me = currentUser();
+  return `
+  <div style="max-width:900px;margin:auto">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="avatar" style="width:88px;height:88px">${(me.display||me.username).slice(0,1)}</div>
+      <div>
+        <div style="font-weight:900">@${me.username}</div>
+        <div class="small">Coins: <strong id="myCoins">${me.coins||0}</strong></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:18px">فيديوهاتي</h3>
+    <div class="grid" id="myGrid"></div>
+  </div>
+  `;
+}
+
+function AdminHTML(){
+  const settings = ensure(LS_SETTINGS);
+  return `
+  <div class="admin-shell">
+    <aside class="aside">
+      <div style="font-weight:900;margin-bottom:8px">${settings.siteName} — Admin</div>
+      <div class="item active" onclick="showAdminTab('overview')">الرئيسية</div>
+      <div class="item" onclick="showAdminTab('videos')">الفيديوهات</div>
+      <div class="item" onclick="showAdminTab('users')">المستخدمين</div>
+      <div class="item" onclick="showAdminTab('payments')">المدفوعات</div>
+      <div style="margin-top:12px">
+        <div class="small">BaridiMob (placeholder)</div>
+        <input id="baridiNumberInput" class="input" placeholder="07XXXXXXXX" value="${settings.baridiNumber||''}" style="margin-top:8px">
+        <div style="margin-top:8px"><button class="btn" onclick="saveBaridi()">حفظ</button></div>
+      </div>
+      <div style="margin-top:16px"><button class="btn ghost" onclick="logoutAdmin()">خروج</button></div>
+    </aside>
+
+    <main class="admin-main" id="adminMain">
+      <div id="adminOverview">
+        <h3>نظرة عامة</h3>
+        <div style="display:flex;gap:12px">
+          <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:140px">
+            <div class="small">الملخص</div>
+            <div style="font-weight:900;font-size:22px" id="countVideos">--</div>
+            <div class="small">فيديو</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;min-width:140px">
+            <div class="small">المدفوعات</div>
+            <div style="font-weight:900;font-size:22px" id="countPayments">--</div>
+            <div class="small">طلبات</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="adminVideos" style="display:none;margin-top:12px">
+        <h3>قائمة الفيديوهات</h3>
+        <table style="width:100%;border-collapse:collapse"><thead><tr><th>المستخدم</th><th>العنوان</th><th>أفعال</th></tr></thead>
+        <tbody id="videosTableBody"></tbody></table>
+      </div>
+
+      <div id="adminUsers" style="display:none;margin-top:12px">
+        <h3>المستخدمين</h3>
+        <table style="width:100%"><thead><tr><th>اليوزر</th><th>Coins</th><th>أفعال</th></tr></thead>
+        <tbody id="usersTableBody"></tbody></table>
+      </div>
+
+      <div id="adminPayments" style="display:none;margin-top:12px">
+        <h3>طلبات الدفع</h3>
+        <div id="paymentsList"></div>
+      </div>
+    </main>
+  </div>
+  `;
+}
+
+function PaymentsHTML(){
+  const settings = ensure(LS_SETTINGS);
+  return `
+  <div style="max-width:720px;margin:auto">
+    <h3>الدفع اليدوي — BaridiMob</h3>
+    <p class="small">باش تشري: اتبع التعليمات وارسال صورة الوصل.</p>
+
+    <div style="margin-top:12px">
+      <label class="label">المبلغ (دج)</label>
+      <input id="payAmount" type="number" placeholder="مثال: 200">
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="label">ملاحظة الدفع (اختياري)</label>
+      <input id="payNote" placeholder="مثال: تحويل اشتراك VIP">
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="label">رفع صورة الوصل</label>
+      <input id="payReceipt" type="file" accept="image/*">
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="createPayment()">إرسال الطلب</button>
+      <button class="btn ghost" onclick="go('#home')">إلغاء</button>
+    </div>
+
+    <div style="margin-top:18px" class="small">ملاحظة: بعد الإرسال، Admin سيراجع الطلب ويؤكده يدوياً.</div>
+  </div>
+  `;
+}
+
+/* ========== Hydration (attach event handlers & render dynamic data) ========== */
+function hydrate(){
+  // Home
+  const vidEl = document.getElementById('heroVideo');
+  if(vidEl){
+    renderFeed();
+    document.getElementById('likeBtn').onclick = function(){ likeCurrent(); };
+    document.getElementById('buyBtn').onclick = function(){ go('#payments'); };
+    // autoplay first
+    vidEl.onplay = ()=>{};
+  }
+
+  // Upload
+  const fileInput = document.getElementById('fileInput');
+  if(fileInput) {
+    // nothing extra
+  }
+
+  // Profile
+  if(document.getElementById('myGrid')) renderProfileGrid();
+
+  // Admin
+  if(document.getElementById('countVideos')) renderAdminOverview();
+  if(document.getElementById('videosTableBody')) renderAdminVideos();
+  if(document.getElementById('usersTableBody')) renderAdminUsers();
+  if(document.getElementById('paymentsList')) renderAdminPayments();
+
+  // Save baridi number input on change
+  const barInput = document.getElementById('baridiNumberInput');
+  if(barInput){ barInput.onchange = ()=>{}; }
+}
+
+/* ========== Data operations ========== */
+function getVideos(){ return ensure(LS_VIDEOS); }
+function setVideos(v){ save(LS_VIDEOS,v); }
+
+function renderFeed(){
+  const videos = getVideos();
+  if(!videos || !videos.length) return;
+  const first = videos[0];
+  const vid = document.getElementById('heroVideo');
+  vid.src = first.src;
+  document.getElementById('heroTitle').innerText = first.title;
+  document.getElementById('heroUser').innerText = '@'+first.user;
+  document.getElementById('heroLikes').innerText = first.likes || 0;
+
+  const grid = document.getElementById('suggestGrid'); grid.innerHTML='';
+  for(let i=1;i<videos.length;i++){
+    const v = videos[i];
+    const div = document.createElement('div'); div.className='card';
+    div.innerHTML = `<img src="https://via.placeholder.com/180x120.png?text=AL+${v.id}"><div style="flex:1;text-align:right"><div style="font-weight:900">${v.title}</div><div class="small">${v.user}</div></div>`;
+    div.onclick = ()=>{ playVideoById(v.id); };
+    grid.appendChild(div);
+  }
+}
+
+function playVideoById(id){
+  const videos = getVideos();
+  const v = videos.find(x=>x.id===id);
+  if(v){
+    // move it to top
+    const idx = videos.indexOf(v);
+    videos.splice(idx,1);
+    videos.unshift(v);
+    setVideos(videos);
+    renderFeed();
+    go('#home');
+  }
+}
+
+function likeCurrent(){
+  const videos = getVideos();
+  if(!videos.length) return;
+  videos[0].likes = (videos[0].likes||0)+1;
+  setVideos(videos);
+  document.getElementById('heroLikes').innerText = videos[0].likes;
+}
+
+/* Upload handling */
+function handleUpload(){
+  const file = document.getElementById('fileInput')?.files?.[0];
+  const url = (document.getElementById('urlInput')?.value || '').trim();
+  const title = (document.getElementById('titleInput')?.value || '').trim() || 'بدون عنوان';
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const videos = getVideos();
+      const id = Date.now();
+      videos.unshift({id:id, title:title, user:localUsername(), src:e.target.result, likes:0, created:Date.now()});
+      setVideos(videos);
+      alert('تم الرفع محلياً');
+      go('#home');
+    };
+    reader.readAsDataURL(file);
+    return;
+  }
+  if(url){
+    const videos = getVideos();
+    const id = Date.now();
+    videos.unshift({id:id, title:title, user:localUsername(), src:url, likes:0, created:Date.now()});
+    setVideos(videos);
+    alert('تم إضافة الرابط');
+    go('#home');
+    return;
+  }
+  alert('اختار ملف أو رابط');
+}
+
+/* Profile render */
+function currentUser(){
+  // for prototype, user stored in LS_USERS[0] or a simple "you"
+  const users = ensure(LS_USERS);
+  // make sure there is a 'you' user
+  let u = users.find(x=>x.username==='you');
+  if(!u){ u = {id:'you', username:'you', display:'أنت', coins:0}; users.push(u); save(LS_USERS, users); }
+  return u;
+}
+function localUsername(){ return currentUser().username; }
+function renderProfileGrid(){
+  const all = getVideos();
+  const mine = all.filter(v=>v.user===localUsername());
+  const grid = document.getElementById('myGrid');
+  grid.innerHTML='';
+  mine.forEach(v=>{
+    const d = document.createElement('div'); d.className='cell';
+    d.innerHTML = `<div style="font-weight:800">${v.title}</div><div style="margin-top:8px"><button class="btn" onclick="openVideoInHero('${escapeJs(v.src)}')">عرض</button></div>`;
+    grid.appendChild(d);
+  });
+  document.getElementById('myCoins')?.innerText = currentUser().coins || 0;
+}
+function openVideoInHero(src){
+  // insert as data at top
+  const videos = getVideos();
+  const id = Date.now();
+  videos.unshift({id:id, title:'من بروفايلي', user:localUsername(), src:src, likes:0, created:Date.now()});
+  setVideos(videos);
+  renderFeed();
+  go('#home');
+}
+
+/* Admin functions */
+function showAdminTab(t){
+  document.getElementById('adminOverview').style.display = (t==='overview')?'block':'none';
+  document.getElementById('adminVideos').style.display = (t==='videos')?'block':'none';
+  document.getElementById('adminUsers').style.display = (t==='users')?'block':'none';
+  document.getElementById('adminPayments').style.display = (t==='payments')?'block':'none';
+  // active item highlight
+  document.querySelectorAll('.aside .item').forEach(it=>{ it.classList.remove('active'); if(it.textContent.includes(t==='overview'?'الرئيسية': t==='videos'?'الفيديوهات': t==='users'?'المستخدمين':'المدفوعات')) it.classList.add('active'); })
+}
+function renderAdminOverview(){
+  const videos = getVideos();
+  const payments = ensure(LS_PAYMENTS);
+  document.getElementById('countVideos').innerText = videos.length;
+  document.getElementById('countPayments').innerText = payments.length;
+}
+function renderAdminVideos(){
+  const videos = getVideos();
+  const tbody = document.getElementById('videosTableBody'); tbody.innerHTML='';
+  videos.forEach(v=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${v.user}</td><td>${v.title}</td><td><button class="btn ghost" onclick="adminDeleteVideo(${v.id})">حذف</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function adminDeleteVideo(id){
+  if(!confirm('تأكد حذف الفيديو؟')) return;
+  let videos = getVideos(); videos = videos.filter(x=>x.id!==id); setVideos(videos);
+  renderAdminOverview(); renderAdminVideos(); alert('تم الحذف');
+}
+function renderAdminUsers(){
+  const users = ensure(LS_USERS);
+  const tbody = document.getElementById('usersTableBody'); tbody.innerHTML='';
+  users.forEach(u=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>@${u.username}</td><td>${u.coins||0}</td><td><button class="btn ghost" onclick="adminAdjustCoins('${u.username}')">تعديل</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function adminAdjustCoins(username){
+  const amount = parseInt(prompt('كم تريد تضيف/تنقص (مثال +100 أو -50) للـ '+username,'+100'));
+  if(isNaN(amount)) return alert('قيمة غير صحيحة');
+  const users = ensure(LS_USERS);
+  const u = users.find(x=>x.username===username);
+  if(!u) return;
+  u.coins = (u.coins||0)+amount;
+  save(LS_USERS, users);
+  renderAdminUsers();
+  alert('تم التعديل');
+}
+
+/* Payments handling - manual BaridiMob flow */
+function createPayment(){
+  const amount = parseInt(document.getElementById('payAmount')?.value || 0);
+  const note = document.getElementById('payNote')?.value || '';
+  const file = document.getElementById('payReceipt')?.files?.[0];
+  if(!amount || amount<=0) return alert('دخل مبلغ صالح');
+  if(!file) return alert('حط صورة الوصل');
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const payments = ensure(LS_PAYMENTS);
+    const id = Date.now();
+    const me = currentUser();
+    payments.unshift({id:id, user:me.username, amount:amount, note:note, receipt:e.target.result, status:'pending', created:Date.now()});
+    save(LS_PAYMENTS,payments);
+    alert('تم ارسال الطلب — Admin رح يراجعه');
+    go('#home');
+  };
+  reader.readAsDataURL(file);
+}
+function renderAdminPayments(){
+  const payments = ensure(LS_PAYMENTS);
+  const el = document.getElementById('paymentsList'); el.innerHTML='';
+  if(!payments.length) el.innerHTML = '<div class="small">ماكان حتى طلب</div>';
+  payments.forEach(p=>{
+    const d = document.createElement('div'); d.className='card';
+    d.innerHTML = `<div style="flex:1;text-align:right"><div style="font-weight:900">${p.user}</div><div class="small">المبلغ: ${p.amount} دج — الحالة: ${p.status}</div><div style="margin-top:8px">${p.note||''}</div></div>
+      <div style="width:120px"><img src="${p.receipt}" style="width:100%;border-radius:8px"></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-right:12px">
+        ${p.status==='pending'?'<button class="btn" onclick="adminConfirmPayment('+p.id+')">قبول</button><button class="btn ghost" onclick="adminRejectPayment('+p.id+')">رفض</button>':''}
+      </div>`;
+    el.appendChild(d);
+  });
+}
+function adminConfirmPayment(id){
+  if(!confirm('تأكيد الدفع؟')) return;
+  const payments = ensure(LS_PAYMENTS);
+  const p = payments.find(x=>x.id===id);
+  if(!p) return;
+  p.status='confirmed';
+  save(LS_PAYMENTS,payments);
+  // grant coins as example: 100 coins per 1000 DZD
+  const users = ensure(LS_USERS);
+  let u = users.find(x=>x.username===p.user);
+  if(!u){ u = {id:p.user, username:p.user, display:p.user, coins:0}; users.push(u); }
+  const coins = Math.round(p.amount/10); // simple rate: 1 coin = 10 DZD
+  u.coins = (u.coins||0) + coins;
+  save(LS_USERS, users);
+  renderAdminPayments(); renderAdminUsers(); alert('تم التأكيد والمستخدم ربِح ' + coins + ' coins');
+}
+function adminRejectPayment(id){
+  if(!confirm('رفض الطلب؟')) return;
+  const payments = ensure(LS_PAYMENTS);
+  const idx = payments.findIndex(x=>x.id===id);
+  if(idx===-1) return;
+  payments[idx].status='rejected';
+  save(LS_PAYMENTS,payments);
+  renderAdminPayments();
+  alert('تم الرفض');
+}
+
+/* Settings: save baridi number */
+function saveBaridi(){
+  const settings = ensure(LS_SETTINGS);
+  const v = document.getElementById('baridiNumberInput').value.trim();
+  settings.baridiNumber = v;
+  save(LS_SETTINGS, settings);
+  alert('تم حفظ BaridiMob');
+}
+
+/* Admin login (simple local) */
+function logoutAdmin(){ localStorage.setItem('alg_admin_logged','false'); alert('تم الخروج'); go('#home'); }
+function adminLoginFlow(){
+  const settings = ensure(LS_SETTINGS);
+  const username = prompt('اسم الادمن','admin');
+  const pass = prompt('كلمة المرور','admin123');
+  if(username===settings.adminUser && pass===settings.adminPass){
+    localStorage.setItem('alg_admin_logged','true');
+    alert('مرحبا Admin');
+    go('#admin');
+  } else {
+    alert('معلومات خاطئة');
+    go('#home');
+  }
+}
+
+/* security: only show admin if logged-in or ask login */
+function beforeRenderAdmin(){
+  const logged = localStorage.getItem('alg_admin_logged') === 'true';
+  if(!logged){
+    adminLoginFlow();
+    return false;
+  }
+  return true;
+}
+
+/* helpers */
+function escapeJs(s){ return s.replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+
+/* ========== Small page mount actions ========== */
+function hydrateAdminGate(){
+  if(!beforeRenderAdmin()) return;
+  renderAdminOverview(); renderAdminVideos(); renderAdminUsers(); renderAdminPayments();
+}
+
+/* ========== Page rendering guard ========== */
+function renderRoute(){
+  const root = document.getElementById('view-root');
+  const h = location.hash.replace('#','') || 'home';
+  if(h==='admin'){
+    // admin protected
+    const can = beforeRenderAdmin();
+    if(!can) return;
+    root.innerHTML = AdminHTML();
+  } else if(h==='home') root.innerHTML = HomeHTML();
+  else if(h==='upload') root.innerHTML = UploadHTML();
+  else if(h==='profile') root.innerHTML = ProfileHTML();
+  else if(h==='payments') root.innerHTML = PaymentsHTML();
+  else root.innerHTML = HomeHTML();
+  setTimeout(hydrate,50);
+}
+
+/* ========== share and small utilities ========== */
+function shareCurrent(){
+  const videos = getVideos();
+  if(!videos.length) return alert('ماكانش فيديو');
+  const url = videos[0].src;
+  if(navigator.share){
+    navigator.share({title:videos[0].title,text:'شوف هاد الفيديو',url:url}).catch(()=>{});
+  } else {
+    prompt('انسخ الرابط وشاركو', url);
+  }
+}
+
+/* ========== Admin quick controls for demo: auto-login if default creds set ========== */
+(function autoOpen(){
+  // if admin logged flag exists true keep it
+  if(localStorage.getItem('alg_admin_logged')==='true'){}
+})();
+
+/* start */
+window.addEventListener('load', onLoad);
+</script>
+
+<!-- ====== End of app ====== -->
 </body>
 </html>
