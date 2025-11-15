@@ -1,47 +1,47 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Algeriano — TikTok Style (Prototype)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Algeriano_Neo — منصة فيديو</title>
+
 <style>
 :root{
-  --bg:#08090b; --card:#0d1114; --muted:#98a0ad;
-  --primary:#00c78a; --accent:#6a00ff; --glass: rgba(255,255,255,0.03);
-  font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --bg:#05060a; --panel:#0b0f19; --muted:#9aa3b2;
+  --primary:#00c2ff; --accent:#8b00ff; --glass: rgba(255,255,255,0.03);
+  --text:#e8f6ff;
+  font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:var(--bg);color:#fff;overflow:hidden}
-.header{height:56px;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.03)}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{width:40px;height:40;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}
-.title{font-weight:800}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#020207);color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden}
+.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.02);position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));z-index:99}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#020202;font-weight:900;font-size:16px}
+.title{font-weight:900;font-size:18px}
 .controls{display:flex;gap:8px;align-items:center}
-.btn{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;color:var(--primary);cursor:pointer;font-weight:800}
+.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);color:var(--primary);cursor:pointer;font-weight:800}
 .btn.primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#000;border:none}
-.container{position:absolute;top:56px;bottom:0;left:0;right:0;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
-.feed-item{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;background:#000}
-video.feed-video{width:100%;height:100%;object-fit:cover}
-.meta-panel{position:absolute;left:12px;bottom:28px;right:80px;display:flex;flex-direction:column;gap:6px}
-.meta-panel .user{font-weight:900}
-.side-controls{position:absolute;right:10px;bottom:100px;display:flex;flex-direction:column;gap:12px;align-items:center}
-.icon{width:56px;height:56px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
-.icon .count{display:block;font-size:12px;margin-top:6px;color:var(--muted)}
-.top-actions{display:flex;gap:8px;align-items:center}
-.search{padding:6px 10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:720px;width:100%}
-.form-row{display:flex;gap:8px;align-items:center}
-.input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:#fff}
-.small{font-size:13px;color:var(--muted)}
-.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.thumb{background:#071018;border-radius:8px;height:84px;display:flex;align-items:center;justify-content:center;color:#888}
-.footer{position:fixed;left:0;right:0;bottom:0;height:56px;background:linear-gradient(90deg, rgba(0,0,0,0.6), transparent);display:flex;align-items:center;justify-content:center}
-.note{font-size:12px;color:var(--muted);text-align:center;padding:8px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.03)}
 
-/* responsive tweaks */
+.container{position:fixed;top:64px;bottom:0;left:0;right:0;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+.feed-item{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+.feed-video{width:100%;height:100%;object-fit:cover;background:#000}
+.meta{position:absolute;left:16px;bottom:26px;right:86px;display:flex;flex-direction:column;gap:6px;text-align:right;z-index:40}
+.meta .user{font-weight:900;font-size:16px}
+.meta .title{font-size:14px;color:var(--muted)}
+.side-controls{position:absolute;right:12px;bottom:100px;display:flex;flex-direction:column;gap:12px;align-items:center;z-index:50}
+.icon{width:56px;height:56;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,0.03);font-weight:900}
+.icon .count{display:block;font-size:12px;color:var(--muted);margin-top:6px;text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:720px;width:100%}
+.form-row{display:flex;gap:8px;align-items:center}
+.input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
+.small{font-size:13px;color:var(--muted)}
+.footer-note{position:fixed;left:0;right:0;bottom:0;padding:8px;text-align:center;color:var(--muted);font-size:12px}
+
+/* responsive */
 @media(max-width:600px){
-  .meta-panel{left:10px;right:70px}
+  .meta{left:12px;right:70px}
   .icon{width:48px;height:48}
 }
 </style>
@@ -50,52 +50,51 @@ video.feed-video{width:100%;height:100%;object-fit:cover}
 
 <header class="header">
   <div class="brand">
-    <div class="logo">A</div>
+    <div class="logo">AN</div>
     <div>
-      <div class="title">Algeriano</div>
-      <div class="small">منصة فيديو — نسخة تجريبية</div>
+      <div class="title">Algeriano_Neo</div>
+      <div class="small">منصة فيديو — نسخة نهائية</div>
     </div>
   </div>
+
   <div class="controls">
-    <input id="search" class="search" placeholder="دور على فيديو أو يوزر">
+    <input id="search" class="input" placeholder="دور على فيديو أو يوزر" style="width:220px">
     <button class="btn" id="btnRandom">عشوائي</button>
     <button class="btn primary" id="btnUpload">رفع</button>
     <button class="btn" id="btnProfile">بروفايلي</button>
   </div>
 </header>
 
-<main class="container" id="feed"></main>
+<main id="feed" class="container" aria-live="polite"></main>
 
-<div class="footer">
-  <div class="note">Algeriano — Prototype</div>
-</div>
+<div class="footer-note">Algeriano_Neo — All rights reserved</div>
 
-<!-- Overlays -->
-<div id="overlay" class="overlay">
+<!-- overlay -->
+<div id="overlay" class="overlay" aria-hidden="true">
   <div class="card" id="overlayCard"></div>
 </div>
 
 <script>
-/* -------------------------
-  Algeriano — Single file app
-  - storage: localStorage (videos, users, comments, likes)
-  - features: feed, upload, profile, like, comments, simple algo
---------------------------*/
+/* Algeriano_Neo — single file final app
+   Storage: localStorage (videos, comments, likes, settings)
+   Features: feed (scroll), upload (file/url), likes, comments, profile, admin quick
+*/
 
-/* Keys */
-const LS_VIDEOS = 'alg_videos_v4';
-const LS_USERS = 'alg_users_v4';
-const LS_COMMENTS = 'alg_comments_v4';
-const LS_LIKES = 'alg_likes_v4';
-const LS_CURRENT = 'alg_current_v4';
+const LS_VIDEOS = 'algeriano_videos_final';
+const LS_COMMENTS = 'algeriano_comments_final';
+const LS_LIKES = 'algeriano_likes_final';
+const LS_USERS = 'algeriano_users_final';
+const LS_SETTINGS = 'algeriano_settings_final';
+const LS_CURRENT = 'algeriano_current_final';
 
-/* Helpers */
-function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
-function load(key){ return JSON.parse(localStorage.getItem(key) || 'null'); }
-function ensure(key, init){ if(!localStorage.getItem(key)) save(key, init); return load(key); }
+function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+function load(k){ return JSON.parse(localStorage.getItem(k) || 'null'); }
+function ensure(k,init){ if(!localStorage.getItem(k)) save(k,init); return load(k); }
+function uid(){ return Date.now() + Math.floor(Math.random()*999); }
 
-/* Init sample */
-function init(){
+/* Init data */
+function initData(){
+  ensure(LS_SETTINGS, {siteName:'Algeriano_Neo', baridiNumber:'', adminUser:'admin', adminPass:'admin123'});
   ensure(LS_USERS, [{id:'you', username:'you', display:'أنت', coins:0}]);
   ensure(LS_COMMENTS, []);
   ensure(LS_LIKES, {});
@@ -108,47 +107,37 @@ function init(){
   }
   ensure(LS_CURRENT, {username:'you'});
 }
-init();
+initData();
 
-/* Utilities */
-function q(sel){ return document.querySelector(sel); }
-function qAll(sel){ return Array.from(document.querySelectorAll(sel)); }
-function uid(){ return Date.now() + Math.floor(Math.random()*999); }
-
-/* Feed rendering */
+/* Render feed */
 function renderFeed(order='latest', filter=''){
-  const feed = q('#feed'); feed.innerHTML='';
-  let videos = ensure(LS_VIDEOS);
-  // algorithm
-  if(order==='latest') videos = videos.sort((a,b)=>b.created - a.created);
-  else if(order==='random') videos = videos.sort(()=>Math.random()-0.5);
-  if(filter) videos = videos.filter(v=> v.title.includes(filter) || v.user.includes(filter));
-
-  videos.forEach(v=>{
-    const el = document.createElement('section'); el.className='feed-item';
-    el.innerHTML = `
-      <video class="feed-video" src="${v.src}" playsinline muted></video>
-      <div class="meta-panel">
-        <div class="user">@${v.user} • <span class="small">${v.title}</span></div>
+  const root = document.getElementById('feed'); root.innerHTML='';
+  let vids = ensure(LS_VIDEOS);
+  if(order==='latest') vids = vids.sort((a,b)=>b.created - a.created);
+  else vids = vids.sort(()=>Math.random()-0.5);
+  if(filter) vids = vids.filter(v=> v.title.includes(filter) || v.user.includes(filter));
+  vids.forEach(v=>{
+    const sec = document.createElement('section'); sec.className='feed-item';
+    sec.innerHTML = `
+      <video class="feed-video" src="${v.src}" playsinline muted preload="metadata"></video>
+      <div class="meta">
+        <div class="user">@${v.user}</div>
+        <div class="title">${v.title}</div>
       </div>
       <div class="side-controls">
-        <div class="icon" data-id="${v.id}" onclick="toggleLike(event)">
-          ❤ <span class="count" id="like-count-${v.id}">${v.likes||0}</span>
-        </div>
+        <div class="icon" data-id="${v.id}" onclick="toggleLike(event)">❤ <span class="count" id="like-${v.id}">${v.likes||0}</span></div>
         <div class="icon" onclick="openComments(${v.id})">💬</div>
         <div class="icon" onclick="shareVideo('${encodeURIComponent(v.src)}')">🔗</div>
       </div>`;
-    feed.appendChild(el);
+    root.appendChild(sec);
   });
-
-  // autoplay visible video
-  setTimeout(()=>{ attachVideoObservers(); },50);
+  setTimeout(()=> attachObservers(), 50);
 }
 
-/* IntersectionObserver autoplay */
+/* autoplay via IntersectionObserver */
 let io;
-function attachVideoObservers(){
-  const vids = qAll('video.feed-video');
+function attachObservers(){
+  const videos = Array.from(document.querySelectorAll('video.feed-video'));
   if(io) io.disconnect();
   io = new IntersectionObserver(entries=>{
     entries.forEach(en=>{
@@ -157,161 +146,177 @@ function attachVideoObservers(){
       else v.pause();
     });
   }, {threshold:[0.6]});
-  vids.forEach(v=> io.observe(v));
+  videos.forEach(v=> io.observe(v));
 }
 
-/* Like handling */
+/* Likes */
 function toggleLike(e){
   const id = parseInt(e.currentTarget.dataset.id);
   const likes = ensure(LS_LIKES);
-  const current = ensure(LS_CURRENT);
-  const key = `${current.username}_${id}`;
-  if(likes[key]){ // unlike
-    delete likes[key];
-    updateLikesCount(id, -1);
-  } else {
-    likes[key]=true;
-    updateLikesCount(id, +1);
-  }
+  const user = ensure(LS_CURRENT).username;
+  const key = `${user}_${id}`;
+  if(likes[key]){ delete likes[key]; updateLikes(id,-1); }
+  else { likes[key]=true; updateLikes(id,+1); }
   save(LS_LIKES, likes);
   renderLikeUI(id);
 }
-function updateLikesCount(id, delta){
+function updateLikes(id,delta){
   const vids = ensure(LS_VIDEOS);
   const v = vids.find(x=>x.id===id);
-  if(v){ v.likes = (v.likes||0) + delta; save(LS_VIDEOS, vids); document.getElementById('like-count-'+id).innerText = v.likes; }
+  if(v){ v.likes = (v.likes||0)+delta; save(LS_VIDEOS, vids); const el = document.getElementById('like-'+id); if(el) el.innerText = v.likes; }
 }
 function renderLikeUI(id){
-  const likes = ensure(LS_LIKES);
-  const current = ensure(LS_CURRENT);
-  const key = `${current.username}_${id}`;
-  const el = document.querySelector(`[data-id="${id}"]`);
-  if(el) el.style.background = likes[key] ? 'linear-gradient(90deg,var(--primary),var(--accent))' : '';
+  const likes = ensure(LS_LIKES); const user = ensure(LS_CURRENT).username; const key = `${user}_${id}`; const el = document.querySelector(`[data-id="${id}"]`); if(el) el.style.background = likes[key] ? 'linear-gradient(90deg,var(--primary),var(--accent))' : '';
 }
 
 /* Comments overlay */
 function openComments(id){
   const comments = ensure(LS_COMMENTS).filter(c=>c.videoId===id);
-  showOverlay(`<h3>التعليقات</h3>
-    <div style="max-height:40vh;overflow:auto;margin:8px 0">${comments.map(c=>`<div style="padding:6px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>@${c.user}</strong><div class="small">${c.text}</div></div>`).join('') || '<div class="small">لا تعليقات بعد</div>'}</div>
-    <div class="form-row"><input id="commentText" class="input" placeholder="اكتب تعليق"><button class="btn primary" onclick="postComment(${id})">نشر</button></div>
-  `);
+  const html = `<h3>التعليقات</h3>
+    <div style="max-height:40vh;overflow:auto;margin-top:8px">${comments.map(c=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>@${c.user}</strong><div class="small">${c.text}</div></div>`).join('') || '<div class="small">لا تعليقات بعد</div>'}</div>
+    <div style="margin-top:8px" class="form-row"><input id="cText" class="input" placeholder="اكتب تعليق"><button class="btn primary" onclick="postComment(${id})">نشر</button></div>`;
+  showOverlay(html);
 }
 function postComment(id){
-  const txt = q('#commentText').value.trim();
+  const txt = document.getElementById('cText').value.trim();
   if(!txt) return alert('اكتب تعليق');
-  const comments = ensure(LS_COMMENTS);
-  const current = ensure(LS_CURRENT);
-  comments.unshift({id:uid(), videoId:id, user:current.username, text:txt, created:Date.now()});
-  save(LS_COMMENTS, comments);
-  closeOverlay();
-  alert('تم النشر');
-}
-
-/* Share */
-function shareVideo(srcEnc){
-  const src = decodeURIComponent(srcEnc);
-  if(navigator.share){ navigator.share({title:'شوف هاد الفيديو', url:src}).catch(()=>{}); }
-  else prompt('انسخ الرابط وشاركه', src);
+  const comments = ensure(LS_COMMENTS); const user = ensure(LS_CURRENT).username;
+  comments.unshift({id:uid(), videoId:id, user:user, text:txt, created:Date.now()}); save(LS_COMMENTS, comments); closeOverlay(); alert('تم النشر');
 }
 
 /* Overlay helpers */
 function showOverlay(html){
-  const ov = q('#overlay'); const card = q('#overlayCard');
-  card.innerHTML = html + `<div style="text-align:left;margin-top:10px"><button class="btn" onclick="closeOverlay()">إغلاق</button></div>`;
-  ov.style.display = 'flex';
+  const ov = document.getElementById('overlay'); const card = document.getElementById('overlayCard');
+  card.innerHTML = html + '<div style="text-align:left;margin-top:10px"><button class="btn" onclick="closeOverlay()">إغلاق</button></div>';
+  ov.style.display='flex'; ov.setAttribute('aria-hidden','false');
 }
-function closeOverlay(){ q('#overlay').style.display='none'; q('#overlayCard').innerHTML=''; }
+function closeOverlay(){ const ov=document.getElementById('overlay'); ov.style.display='none'; ov.setAttribute('aria-hidden','true'); document.getElementById('overlayCard').innerHTML=''; }
 
 /* Upload */
-q('#btnUpload').addEventListener('click', ()=> openUpload());
+document.getElementById('btnUpload').addEventListener('click', openUpload);
 function openUpload(){
-  showOverlay(`<h3>رفع فيديو</h3>
+  showOverlay(`<h3>رفع فيديو جديد</h3>
     <div class="form-row"><input id="upFile" type="file" accept="video/*" class="input"></div>
     <div style="margin-top:8px"><input id="upUrl" placeholder="أو ألصق رابط mp4" class="input"></div>
     <div style="margin-top:8px"><input id="upTitle" placeholder="عنوان الفيديو" class="input"></div>
     <div style="margin-top:8px"><button class="btn primary" onclick="doUpload()">رفع</button></div>
-    <div class="small" style="margin-top:8px">ملاحظة: رفع الملفات الكبيرة على localStorage ممكن يكون محدود</div>
-  `);
+    <div class="small" style="margin-top:8px">ملاحظة: رفع ملفات كبيرة على localStorage ممكن يكون محدود — استعمل روابط إن أمكن</div>`);
 }
 function doUpload(){
-  const f = q('#upFile')?.files?.[0];
-  const url = q('#upUrl')?.value.trim();
-  const title = q('#upTitle')?.value.trim() || 'بدون عنوان';
+  const f = document.getElementById('upFile')?.files?.[0]; const url = document.getElementById('upUrl')?.value.trim(); const title = document.getElementById('upTitle')?.value.trim()||'بدون عنوان';
   if(f){
     const r = new FileReader();
-    r.onload = function(e){
-      addVideo({src:e.target.result, title});
-      closeOverlay(); alert('تم الرفع (محلي)');
-    };
-    r.readAsDataURL(f);
-    return;
+    r.onload = function(e){ addVideo({src:e.target.result, title}); closeOverlay(); alert('تم الرفع (محلي)'); };
+    r.readAsDataURL(f); return;
   }
-  if(url){
-    addVideo({src:url, title}); closeOverlay(); alert('تم الإضافة'); return;
-  }
+  if(url){ addVideo({src:url, title}); closeOverlay(); alert('تم الإضافة'); return; }
   alert('اختار ملف أو رابط');
 }
-function addVideo({src, title}){
-  const videos = ensure(LS_VIDEOS);
-  const id = uid();
-  videos.unshift({id:id, user: ensure(LS_CURRENT).username || 'you', title:title, src:src, likes:0, created:Date.now()});
-  save(LS_VIDEOS, videos);
-  renderFeed();
-}
+function addVideo({src,title}){ const vids = ensure(LS_VIDEOS); const id=uid(); vids.unshift({id:id, user:ensure(LS_CURRENT).username||'you', title:title, src:src, likes:0, created:Date.now()}); save(LS_VIDEOS, vids); renderFeed(); }
 
 /* Profile */
-q('#btnProfile').addEventListener('click', ()=> openProfile());
+document.getElementById('btnProfile').addEventListener('click', openProfile);
 function openProfile(){
+  const cur = ensure(LS_CURRENT);
+  showOverlay(`<h3>بروفايلي — @${cur.username}</h3><div class="small">Coins: ${cur.coins||0}</div><div style="margin-top:8px"><button class="btn" onclick="logout()">خروج</button></div><h4 style="margin-top:12px">فيديوهاتي</h4><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">${ensure(LS_VIDEOS).filter(v=>v.user===cur.username).map(v=>`<div style="background:#071018;border-radius:8px;padding:8px;text-align:center;cursor:pointer" onclick="openFromThumb('${encodeURIComponent(v.src)}')">${v.title}</div>`).join('')||'<div class="small">لا فيديوهات</div>'}</div>`);
+}
+function openFromThumb(enc){ const src=decodeURIComponent(enc); const vids=ensure(LS_VIDEOS); const v=vids.find(x=>x.src===src); if(v){ const idx=vids.indexOf(v); vids.splice(idx,1); vids.unshift(v); save(LS_VIDEOS, vids); renderFeed(); closeOverlay(); document.querySelector('.container')?.scrollTo({top:0,behavior:'smooth'}); } }
+function logout(){ if(confirm('تريد تخرج؟')){ save(LS_CURRENT,{username:'guest'}); closeOverlay(); alert('تم الخروج'); } }
+
+/* Search & Random */
+document.getElementById('search').addEventListener('input', (e)=>{ const v=e.target.value.trim(); if(v.length>0) renderFeed('latest', v); else renderFeed('latest',''); });
+document.getElementById('btnRandom').addEventListener('click', ()=>{ renderFeed('random',''); document.getElementById('feed').scrollTo({top:0,behavior:'smooth'}); });
+
+/* Admin quick: double-click header to open admin panel (local) */
+document.querySelector('.header').addEventListener('dblclick', ()=>{
+  const settings = ensure(LS_SETTINGS);
+  const u = prompt('اسم الادمن','admin'); const p = prompt('كلمة السر','admin123');
+  if(u===settings.adminUser && p===settings.adminPass){
+    showOverlay(`<h3>لوحة Admin — Algeriano_Neo</h3>
+      <div class="small">عدد الفيديوهات: ${ensure(LS_VIDEOS).length}</div>
+      <div style="margin-top:8px"><button class="btn" onclick="clearVideos()">مسح كل الفيديوهات</button></div>
+      <div style="margin-top:8px"><button class="btn" onclick="showPayments()">طلبات الدفع</button></div>
+      <div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`);
+  } else alert('معلومات خاطئة');
+});
+
+function clearVideos(){ if(confirm('تأكيد مسح كل الفيديوهات؟')){ save(LS_VIDEOS,[]); renderFeed(); closeOverlay(); alert('تم المسح'); } }
+
+/* Payments (manual flow) */
+function showPayments(){
+  const payments = ensure('algeriano_payments_final', []);
+  const settings = ensure(LS_SETTINGS);
+  const html = `<h3>طلبات الدفع (BaridiMob placeholder)</h3>
+    <div class="small">BaridiMob: ${settings.baridiNumber || '(فارغ) — عدل في Admin لاحقًا'}</div>
+    <div style="margin-top:8px">${payments.length? payments.map(p=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>@${p.user}</strong> — ${p.amount} دج<div style="margin-top:6px"><img src="${p.receipt}" style="max-width:160px;border-radius:6px"></div><div style="margin-top:6px"><button class="btn" onclick="confirmPayment(${p.id})">قبول</button> <button class="btn ghost" onclick="rejectPayment(${p.id})">رفض</button></div></div>`).join('') : '<div class="small">ماكان حتى طلب</div>'}</div>
+    <div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`;
+  showOverlay(html);
+}
+function confirmPayment(id){
+  let payments = ensure('algeriano_payments_final', []);
+  const idx = payments.findIndex(x=>x.id===id); if(idx===-1) return;
+  payments[idx].status='confirmed'; save('algeriano_payments_final', payments);
+  // grant coins simple: 1 coin = 10 DZD
+  const users = ensure(LS_USERS);
+  let u = users.find(x=>x.username===payments[idx].user); if(!u){ u={id:payments[idx].user, username:payments[idx].user, display:payments[idx].user, coins:0}; users.push(u); }
+  const coins = Math.round(payments[idx].amount/10); u.coins = (u.coins||0) + coins; save(LS_USERS, users);
+  alert('تم التأكيد و المبلغ تحول لنقاط: ' + coins + ' coins'); renderFeed(); closeOverlay();
+}
+function rejectPayment(id){ let payments=ensure('algeriano_payments_final',[]); const idx=payments.findIndex(x=>x.id===id); if(idx===-1) return; payments[idx].status='rejected'; save('algeriano_payments_final', payments); alert('تم الرفض'); renderFeed(); closeOverlay(); }
+
+/* create payment (user flow) */
+function createPayment(amount,note,receiptDataUrl){
+  const payments = ensure('algeriano_payments_final', []);
   const current = ensure(LS_CURRENT);
-  showOverlay(`<h3>بروفايلي — @${current.username}</h3>
-    <div class="small">Coins: ${current.coins||0}</div>
-    <div style="margin-top:8px"><button class="btn" onclick="logout()">خروج</button></div>
-    <h4 style="margin-top:12px">فيديوهاتي</h4>
-    <div class="profile-grid">${ensure(LS_VIDEOS).filter(v=>v.user===current.username).map(v=>`<div class="thumb" onclick="openVideoFromThumb('${encodeURIComponent(v.src)}')">${v.title}</div>`).join('') || '<div class="small">لا فيديوهات</div>'}</div>
-  `);
+  const id = uid();
+  payments.unshift({id:id, user:current.username, amount:amount, note:note, receipt:receiptDataUrl, status:'pending', created:Date.now()});
+  save('algeriano_payments_final', payments);
 }
-function openVideoFromThumb(srcEnc){
-  const src = decodeURIComponent(srcEnc);
-  // place it to top
-  const videos = ensure(LS_VIDEOS);
-  const v = videos.find(x=>x.src===src);
-  if(v){
-    // move to top
-    const idx = videos.indexOf(v); videos.splice(idx,1); videos.unshift(v); save(LS_VIDEOS, videos); renderFeed();
-    closeOverlay();
-    // scroll top
-    q('.container').scrollTo({top:0,behavior:'smooth'});
-  }
+
+/* Payment overlay for users */
+function openPaymentFlow(){
+  showOverlay(`<h3>الدفع اليدوي — BaridiMob</h3>
+    <div class="small">انسخ رقم BaridiMob و قم بالتحويل ثم ارفق صورة الوصل</div>
+    <div style="margin-top:8px"><input id="payAmount" class="input" placeholder="المبلغ (دج)"></div>
+    <div style="margin-top:8px"><input id="payNote" class="input" placeholder="ملاحظة (اختياري)"></div>
+    <div style="margin-top:8px"><input id="payReceipt" type="file" accept="image/*"></div>
+    <div style="margin-top:8px"><button class="btn primary" onclick="doPayment()">إرسال الطلب</button></div>`);
 }
-function logout(){ if(confirm('تريد تخرج؟')){ save(LS_CURRENT, {username:'guest'}); closeOverlay(); alert('تم الخروج'); }}
+function doPayment(){
+  const amount = parseInt(document.getElementById('payAmount').value||0);
+  const note = document.getElementById('payNote').value||'';
+  const file = document.getElementById('payReceipt').files[0];
+  if(!amount || !file) return alert('دخل مبلغ ورفع صورة الوصل');
+  const r=new FileReader(); r.onload=function(e){ createPayment(amount,note,e.target.result); closeOverlay(); alert('تم إرسال الطلب، Admin سيراجعه'); };
+  r.readAsDataURL(file);
+}
 
-/* Search */
-q('#search').addEventListener('input', (e)=> {
-  const v = e.target.value.trim();
-  if(v.length>0) renderFeed('latest', v);
-  else renderFeed('latest','');
-});
+/* Share utility */
+function shareVideo(enc){ const src=decodeURIComponent(enc); if(navigator.share){ navigator.share({title:'شوف هاد الفيديو', url:src}).catch(()=>{}); } else prompt('انسخ الرابط', src); }
 
-/* Random */
-q('#btnRandom').addEventListener('click', ()=> { renderFeed('random',''); q('#feed').scrollTo({top:0,behavior:'smooth'}); });
+/* export/import data (admin) */
+function exportData(){
+  const data={videos:ensure(LS_VIDEOS),comments:ensure(LS_COMMENTS),likes:ensure(LS_LIKES),users:ensure(LS_USERS)};
+  const blob=new Blob([JSON.stringify(data)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='algeriano_export.json'; a.click();
+}
 
-/* Admin quick — double-tap header to admin login (simple) */
-q('.header').addEventListener('dblclick', ()=>{
-  const username = prompt('اسم الادمن','admin'); const pass = prompt('كلمة السر','admin123');
-  // for prototype accept admin/admin123
-  if(username==='admin' && pass==='admin123'){ showOverlay(`<h3>لوحة Admin (تجريب)</h3>
-    <div class="small">عدد الفيديوهات: ${ensure(LS_VIDEOS).length}</div>
-    <div style="margin-top:8px"><button class="btn" onclick="clearVideos()">مسح كل الفيديوهات</button></div>
-    <div style="margin-top:8px"><button class="btn" onclick="exportData()">تصدير البيانات</button></div>
-    <div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>
-  `); } else alert('معلومات خاطئة');
-});
-function clearVideos(){ if(confirm('تأكيد مسح كل الفيديوهات؟')){ save(LS_VIDEOS, []); renderFeed(); alert('تم المسح'); closeOverlay(); } }
-function exportData(){ const data = {videos:ensure(LS_VIDEOS),comments:ensure(LS_COMMENTS),likes:ensure(LS_LIKES)}; const s = JSON.stringify(data); const blob = new Blob([s],{type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='algeriano_data.json'; a.click(); }
+/* helper: open video from profile/thumbnail */
+function openFromThumb(enc){ const src=decodeURIComponent(enc); const vids=ensure(LS_VIDEOS); const v=vids.find(x=>x.src===src); if(v){ const idx=vids.indexOf(v); vids.splice(idx,1); vids.unshift(v); save(LS_VIDEOS,vids); renderFeed(); closeOverlay(); document.getElementById('feed').scrollTo({top:0,behavior:'smooth'}); } }
 
-/* initial render */
-renderFeed();
+/* initial render & controls */
+document.getElementById('btnUpload').addEventListener('click', openUpload);
+document.getElementById('btnProfile').addEventListener('click', openProfile);
+function setupTopSearch(){
+  const s = document.getElementById('search');
+  s.addEventListener('input', (e)=>{ const v=e.target.value.trim(); if(v.length>0) renderFeed('latest', v); else renderFeed('latest',''); });
+}
+document.getElementById('btnRandom').addEventListener('click', ()=>{ renderFeed('random',''); document.getElementById('feed').scrollTo({top:0,behavior:'smooth'}); });
+
+renderFeed(); setupTopSearch();
+
+/* auto-play first visible on load */
+window.addEventListener('load', ()=>{ setTimeout(()=>attachObservers(),200); });
+
 </script>
 
 </body>
