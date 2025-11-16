@@ -1,109 +1,146 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALGERIANO_NEO</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Algeriano_NEO</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background: #0c0c14;
-            color: #fff;
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0f;
+        font-family: 'Cairo', sans-serif;
+        color: white;
+    }
+
+    /* ---- عنوان فخم ---- */
+    .title {
+        font-size: 38px;
+        font-weight: 800;
+        margin: 25px;
+        color: #c08cff;
+        text-shadow: 0 0 10px #b37bff, 0 0 25px #7933ff;
+    }
+
+    /* ---- الواجهة مقسمة ---- */
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    /* ---- نص الوصف ---- */
+    .description {
+        width: 60%;
+        font-size: 20px;
+        line-height: 1.8;
+        color: #dcdcdc;
+    }
+
+    /* ---- القائمة الفاخرة العمودية ---- */
+    .sidebar {
+        width: 35%;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 25px;
+        border-radius: 18px;
+        border: 2px solid rgba(150, 100, 255, 0.25);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 15px #4b008263;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #c08cff;
+        text-shadow: 0 0 10px #b37bff;
+    }
+
+    .menu a {
+        display: block;
+        padding: 14px 20px;
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        text-decoration: none;
+        color: #e8e8e8;
+        font-size: 18px;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .menu a:hover {
+        background: rgba(150, 100, 255, 0.20);
+        box-shadow: 0 0 12px #a278ff;
+        transform: translateX(-5px);
+    }
+
+    /* ---- زر الانضمام ---- */
+    .join-btn {
+        margin-top: 25px;
+        width: 100%;
+        padding: 15px;
+        font-size: 20px;
+        background: #2b0a4a;
+        color: white;
+        text-align: center;
+        border-radius: 14px;
+        text-decoration: none;
+        box-shadow: 0 0 15px #8b42ff;
+        transition: 0.3s;
+        border: 1px solid #834bff;
+        display: block;
+    }
+
+    .join-btn:hover {
+        background: #51209e;
+        box-shadow: 0 0 25px #a86fff;
+    }
+
+    /* ---- موبايل ---- */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
         }
-
-        /* ===== القائمة العمودية ===== */
+        .description, .sidebar {
+            width: 100%;
+        }
         .sidebar {
-            width: 230px;
-            height: 100vh;
-            background: #11111c;
-            padding-top: 20px;
-            position: fixed;
-            top: 0;
-            right: 0;
-            border-left: 1px solid rgba(255,255,255,0.05);
-            box-shadow: -3px 0 10px rgba(50,0,100,0.3);
+            margin-top: 20px;
         }
+    }
 
-        .sidebar h2 {
-            text-align: center;
-            color: #b37aff;
-            margin-bottom: 25px;
-            font-size: 22px;
-        }
-
-        .sidebar a {
-            display: block;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-size: 17px;
-            color: #ddd;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            padding-right: 35px;
-            color: #b37aff;
-            background: rgba(150,80,255,0.12);
-        }
-
-        .join-btn {
-            background: linear-gradient(90deg,#7b2ff7,#00c6ff);
-            margin: 20px;
-            padding: 13px !important;
-            border-radius: 10px;
-            text-align: center;
-            color: #fff !important;
-            box-shadow: 0 0 10px rgba(123,47,247,0.5);
-        }
-
-        /* ===== محتوى الصفحة ===== */
-        .content {
-            margin-right: 230px;
-            padding: 40px 25px;
-        }
-
-        .hero-title {
-            font-size: 40px;
-            color: #b37aff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(180,140,255,0.7);
-        }
-
-        .hero-text {
-            font-size: 20px;
-            color: #ccc;
-            line-height: 1.7;
-            max-width: 450px;
-        }
-
-    </style>
+</style>
 </head>
+
 <body>
 
-    <!-- ===== قائمة عمودية ===== -->
-    <div class="sidebar">
-        <h2>القائمة</h2>
+    <div class="title">Algeriano_NEO</div>
 
-        <a href="#">الرئيسية</a>
-        <a href="#">Marketplace</a>
-        <a href="#">الخدمات</a>
-        <a href="#">الترفيه</a>
-        <a href="#">السائقين</a>
-        <a href="#">الصحة</a>
+    <div class="container">
+        
+        <div class="description">
+            منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، 
+            والخدمات في نظام واحد فخم من الجيل الجديد.
+        </div>
 
-        <a href="#" class="join-btn">انضم الآن</a>
-    </div>
+        <div class="sidebar">
 
-    <!-- ===== المحتوى ===== -->
-    <div class="content">
-        <h1 class="hero-title">Algeriano_NEO</h1>
-        <p class="hero-text">
-            منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، الصحة والخدمات  
-            في نظام واحد فخم من الجيل الجديد.
-        </p>
+            <h2>القائمة</h2>
+
+            <div class="menu">
+                <a href="#">الرئيسية</a>
+                <a href="#">Marketplace</a>
+                <a href="#">الخدمات</a>
+                <a href="#">الترفيه</a>
+                <a href="#">السائقين</a>
+                <a href="#">الصحة</a>
+            </div>
+
+            <a class="join-btn" href="#">انضم الآن</a>
+
+        </div>
     </div>
 
 </body>
