@@ -1,477 +1,444 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Algeriano_Neo — Hybrid Feed</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Algeriano_Neo — Ultra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#05060a; --panel:#0b0f19; --muted:#9aa3b2;
-  --primary:#00c2ff; --accent:#8b00ff; --glass: rgba(255,255,255,0.03);
-  --text:#e8f6ff;
-  font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  --bg:#04050a;
+  --panel:rgba(255,255,255,0.03);
+  --glass:rgba(255,255,255,0.04);
+  --muted:#9aa3b2;
+  --accent1:#00b894; /* teal-green */
+  --accent2:#0066cc; /* deep-blue */
+  --gold:#c7a965;
+  --white: #eef6ff;
+  --danger:#ff6b6b;
+  --radius:14px;
+  font-family: 'Tajawal', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  color:var(--white);
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#020207);color:var(--text);-webkit-font-smoothing:antialiased}
-.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.03);position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));z-index:120}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:44px;height:44;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#020202;font-weight:900;font-size:16px}
-.title{font-weight:900;font-size:18px}
-.controls{display:flex;gap:8px;align-items:center}
-.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);color:var(--primary);cursor:pointer;font-weight:800}
-.btn.primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#000;border:none}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.03)}
-.input{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)}
-.small{font-size:13px;color:var(--muted);}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#02030a 0%, #070812 60%);-webkit-font-smoothing:antialiased}
+.header{
+  position:fixed;top:0;left:0;right:0;height:76px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.18));
+  border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px);z-index:120;padding:10px 20px;
+}
+.header-inner{width:1200px;max-width:96%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;cursor:default}
+.logo{
+  width:56px;height:56;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;
+  align-items:center;justify-content:center;font-weight:800;color:#00111a;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.6);
+}
+.title{font-weight:800;font-size:18px;letter-spacing:2px}
+.subtitle{font-size:12px;color:var(--muted);margin-top:2px}
 
-/* layout */
-.app-wrap{position:fixed;top:64px;bottom:0;left:0;right:0;display:flex;overflow:hidden}
-.sidebar{width:320px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-left:1px solid rgba(255,255,255,0.02);padding:12px;display:flex;flex-direction:column;gap:12px}
-.main{flex:1;position:relative;overflow:hidden}
-.footer-note{position:fixed;left:0;right:0;bottom:0;padding:8px;text-align:center;color:var(--muted);font-size:12px;z-index:50}
+/* controls right */
+.controls{display:flex;align-items:center;gap:8px}
+.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--white);cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#00111a;box-shadow:0 6px 22px rgba(0,0,0,0.6)}
+.search{width:340px;max-width:40vw;padding:8px 12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--white)}
 
-/* Hybrid feed styles */
-.view-toolbar{display:flex;gap:8px;align-items:center;padding:8px}
-.toggle{padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text);cursor:pointer}
-.feed-full{position:absolute;inset:0;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
-.feed-card{position:relative;height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
-.feed-video{width:100%;height:100%;object-fit:cover;background:#000}
-.meta{position:absolute;left:16px;bottom:26px;right:86px;display:flex;flex-direction:column;gap:6px;text-align:right;z-index:40}
-.meta .user{font-weight:900;font-size:16px}
-.meta .title{font-size:14px;color:var(--muted)}
-.side-controls{position:absolute;right:12px;bottom:100px;display:flex;flex-direction:column;gap:12px;align-items:center;z-index:50}
-.icon{width:56px;height:56;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,0.03);font-weight:900}
-.icon .count{display:block;font-size:12px;color:var(--muted);margin-top:6px;text-align:center}
+/* container */
+.container{max-width:1200px;margin:110px auto 60px;padding:18px;}
 
-/* grid view */
-.feed-grid{position:absolute;inset:0;overflow:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.grid-item{background:#071018;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-.grid-thumb{width:100%;height:160px;object-fit:cover;background:#000}
-.grid-title{padding:8px;font-weight:800;color:var(--text);font-size:14px}
-.grid-user{padding:0 8px 8px;color:var(--muted);font-size:12px}
+/* news ticker */
+.ticker{height:44px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:6px 12px;display:flex;align-items:center;gap:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+.ticker .label{background:linear-gradient(90deg,var(--gold),rgba(255,255,255,0.02));padding:6px 10px;border-radius:10px;color:#021; font-weight:800}
+.ticker .scroll{white-space:nowrap;display:inline-block;padding-left:12px;color:var(--muted);font-weight:600;animation:marquee 22s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-60%)}}
 
-/* upload & widgets */
-.widget{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-.upl-input{display:flex;flex-direction:column;gap:8px}
-.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px}
+.hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.028);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+.hero h1{margin:0;font-size:28px;letter-spacing:1px}
+.hero p{color:var(--muted);margin-top:8px}
 
-/* overlay */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:720px;width:100%}
+/* marketplace preview */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.02);min-height:140px;display:flex;flex-direction:column;gap:8px}
+.product-thumb{height:140px;border-radius:10px;background:linear-gradient(135deg, rgba(0,0,0,0.45), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+
+/* sections */
+.section{margin-top:20px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.section-title h3{margin:0;font-size:16px}
+.section-sub{color:var(--muted);font-size:13px}
+
+/* videos feed */
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.video-thumb{height:220px;border-radius:12px;background:#000;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative;overflow:hidden}
+.video-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, transparent, rgba(0,0,0,0.45))}
+
+/* services list */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.service{background:var(--panel);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+
+/* drivers block */
+.drivers{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+
+/* health */
+.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.health-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+
+/* user sections */
+.user-sections{display:flex;gap:12px}
+.box{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+
+/* footer */
+footer{margin-top:28px;padding:18px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,0.02)}
 
 /* responsive */
 @media(max-width:1000px){
-  .sidebar{display:none}
-  .app-wrap{top:64px}
-  .grid-thumb{height:120px}
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .videos{grid-template-columns:repeat(2,1fr)}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .health-grid{grid-template-columns:repeat(2,1fr)}
 }
+@media(max-width:640px){
+  .header-inner{padding:6px}
+  .search{display:none}
+  .grid{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .services{grid-template-columns:1fr}
+  .container{padding:12px;margin-top:100px}
+  .drivers{flex-direction:column;align-items:stretch}
+}
+.small{font-size:13px;color:var(--muted)}
+.kicker{font-size:12px;color:var(--gold);font-weight:800}
+.highlight{color:var(--accent1);font-weight:800}
+.badge{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-weight:700;color:var(--muted)}
 </style>
 </head>
 <body>
 
-<header class="header" title="Double-click to open Admin">
-  <div class="brand">
-    <div class="logo">AN</div>
-    <div>
-      <div class="title">Algeriano_Neo</div>
-      <div class="small">Hybrid Feed — Full / Grid</div>
+<header class="header" aria-label="رأس الصفحة">
+  <div class="header-inner">
+    <div class="brand" style="justify-content:center;flex:1">
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="logo">AN</div>
+        <div style="text-align:center">
+          <div class="title">ALGERIANO_NE O</div>
+          <div class="subtitle small">منصة التجارة • الترفيه • الخدمات</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="controls">
-    <input id="search" class="input" placeholder="دور على فيديو أو يوزر" style="width:220px">
-    <button class="btn" id="btnRandom">عشوائي</button>
-    <button class="btn primary" id="btnUpload">رفع</button>
-    <button class="btn" id="btnPay">دفع</button>
-    <button class="btn" id="btnProfile">بروفايلي</button>
-    <button class="btn" id="btnToggleView" title="بدل العرض">Full / Grid</button>
+
+    <div style="flex:1;display:flex;justify-content:flex-end;align-items:center;gap:10px">
+      <input aria-label="بحث" class="search" placeholder="دور عن منتوج، خدمة أو فيديو...">
+      <button class="btn">المساعدة</button>
+      <button class="btn">انشاء حساب</button>
+      <button class="btn primary">تسجيل الدخول</button>
+    </div>
   </div>
 </header>
 
-<div class="app-wrap">
-  <div class="main">
-    <!-- Full-screen feed -->
-    <div id="feedFull" class="feed-full" role="feed" aria-live="polite"></div>
-
-    <!-- Grid feed (hidden by default) -->
-    <div id="feedGrid" class="feed-grid" style="display:none"></div>
+<main class="container" role="main">
+  <!-- news ticker -->
+  <div class="ticker" aria-live="polite">
+    <div class="label kicker">عاجل</div>
+    <div class="scroll" id="newsScroll">⚡ عروض اليوم: تخفيضات حتى 60% | 🚚 توصيل فوري في الولايات الرئيسية | 🏥 حجوزات طبية متاحة الآن | 🎥 فيديوهات جديدة من صناع المحتوى المحلي</div>
   </div>
 
-  <!-- Sidebar widgets (desktop) -->
-  <aside class="sidebar">
-    <div class="widget">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong>لوحة تحكم مختصرة</strong><button class="btn ghost" id="btnAdminMini">Admin</button>
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-card">
+      <h1>أول منصة متعددة الخدمات في الجزائر — Algeriano_Neo</h1>
+      <p>تجربة موحّدة: تجارة مؤمنة بالوسيط، خدمات احترافية، صحة ذكية، فيديوهات ترفيهية، وشبكة توصيل محترفة — في مكان واحد.</p>
+
+      <div class="grid" aria-hidden="false">
+        <div class="card">
+          <div class="product-thumb">بيع آمن — المنصة كوسيط</div>
+          <div class="small">حجز الأموال لدى Algeriano_Neo و صرف للبائع بعد التأكد</div>
+          <div style="margin-top:auto;display:flex;gap:8px">
+            <button class="btn primary">تسوّق الآن</button>
+            <button class="btn">تعلم أكثر</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="product-thumb">خدمات سريعة</div>
+          <div class="small">كل حرفي موثّق — احجز فوريًا</div>
+          <div style="margin-top:auto;display:flex;gap:8px">
+            <button class="btn primary">احجز الآن</button>
+            <button class="btn">أضف خدمتك</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="product-thumb">الصحة الذكية</div>
+          <div class="small">حجوزات أطباء، سكانير وتوصيل أدوية</div>
+          <div style="margin-top:auto;display:flex;gap:8px">
+            <button class="btn primary">احجز فحص</button>
+            <button class="btn">استشر دكتور</button>
+          </div>
+        </div>
       </div>
-      <div class="small" style="margin-top:8px">BaridiMob: <span id="baridiDisplay">(فارغ)</span></div>
     </div>
 
-    <div class="widget">
-      <strong>رفع سريع</strong>
-      <div class="upl-input" style="margin-top:8px">
-        <input id="sideFile" type="file" accept="video/*">
-        <input id="sideUrl" class="input" placeholder="أو ألصق رابط mp4">
-        <input id="sideTitle" class="input" placeholder="عنوان الفيديو">
-        <div style="display:flex;gap:8px"><button class="btn primary" id="sideUploadBtn">رفع</button><button class="btn ghost" id="sideClear">مسح</button></div>
+    <aside class="hero-card" aria-label="معلومات سريعة">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="kicker">أكثر ما يشاهد</div>
+            <div class="section-sub">فيديوهات ومنتجات رائجة الآن</div>
+          </div>
+          <div class="badge">Online</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;background:linear-gradient(135deg, rgba(0,0,0,0.45), rgba(255,255,255,0.02));border-radius:10px;padding:10px">
+              <div class="small">فيديو: عروض اليوم</div>
+              <div style="height:86px;background:#000;border-radius:8px;margin-top:6px;display:flex;align-items:center;justify-content:center;color:var(--muted)">[ فيديو تجريبي ]</div>
+            </div>
+            <div style="width:96px;background:linear-gradient(135deg, rgba(255,255,255,0.02), transparent);border-radius:10px;padding:8px">
+              <div class="small">سائقون</div>
+              <div style="height:46px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:8px;margin-top:6px;display:flex;align-items:center;justify-content:center;color:#00111a;font-weight:800">اشتراك</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1">
+              <div class="small">حالة النظام</div>
+              <div style="height:8px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:6px;margin-top:6px"></div>
+            </div>
+            <div style="width:120px;display:flex;flex-direction:column;gap:6px">
+              <div class="small">المستخدمين</div>
+              <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;text-align:center">1,234</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <!-- Entertainment / Videos -->
+  <section class="section" aria-labelledby="videosTitle">
+    <div class="section-title">
+      <div>
+        <h3 id="videosTitle">🎥 ترفيه — فيديوهات قصيرة</h3>
+        <div class="section-sub">فيديوهات منتقاة ومقاطع من صناع المحتوى المحلي</div>
+      </div>
+      <div class="small">عرض المزيد ▸</div>
+    </div>
+    <div class="videos" role="list" aria-label="قائمة الفيديوهات">
+      <div class="video-thumb">فيديو 1</div>
+      <div class="video-thumb">فيديو 2</div>
+      <div class="video-thumb">فيديو 3</div>
+      <div class="video-thumb">فيديو 4</div>
+      <div class="video-thumb">فيديو 5</div>
+      <div class="video-thumb">فيديو 6</div>
+    </div>
+  </section>
+
+  <!-- Marketplace -->
+  <section class="section" aria-labelledby="marketTitle">
+    <div class="section-title" style="margin-top:18px">
+      <div>
+        <h3 id="marketTitle">🛍️ التجارة — السوق المختار</h3>
+        <div class="section-sub">منتجات مميزة، بيع آمن ووسيط المنصة</div>
+      </div>
+      <div class="small">كل العروض ▸</div>
+    </div>
+
+    <div class="grid" role="list">
+      <div class="card">
+        <div class="product-thumb">منتج 1</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="small">اسم البائع • ولاية</div>
+          <div style="font-weight:800;color:var(--accent2)">3,000 دج</div>
+        </div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">اشترِ الآن</button>
+          <button class="btn">تفاصيل</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="product-thumb">منتج 2</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="small">اسم البائع • ولاية</div>
+          <div style="font-weight:800;color:var(--accent2)">1,200 دج</div>
+        </div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">اشترِ الآن</button>
+          <button class="btn">تفاصيل</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="product-thumb">منتج 3</div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="small">اسم البائع • ولاية</div>
+          <div style="font-weight:800;color:var(--accent2)">5,900 دج</div>
+        </div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">اشترِ الآن</button>
+          <button class="btn">تفاصيل</button>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="widget">
-      <strong>إحصائيات</strong>
-      <div class="small" style="margin-top:8px" id="statVideos">فيديوهات: 0</div>
-      <div class="small" id="statUsers">مستخدمين: 0</div>
-      <div class="small" id="statPayments">طلبات دفع: 0</div>
+  <!-- Services -->
+  <section class="section" aria-labelledby="servicesTitle">
+    <div class="section-title" style="margin-top:18px">
+      <div>
+        <h3 id="servicesTitle">🛠️ الخدمات — احجز محترف</h3>
+        <div class="section-sub">حرفيون، صيانة، تنظيف، إصلاح الأجهزة والمزيد</div>
+      </div>
+      <div class="small">أظهر كل الخدمات ▸</div>
     </div>
 
-    <div class="widget">
-      <strong>مفضلاتي</strong>
-      <div class="profile-grid" id="favGrid"></div>
+    <div class="services" role="list">
+      <div class="service"><div class="small">كهربائي</div><div style="font-weight:800">من 1,500 دج</div></div>
+      <div class="service"><div class="small">نجار</div><div style="font-weight:800">من 2,000 دج</div></div>
+      <div class="service"><div class="small">ميكانيك سيارات</div><div style="font-weight:800">حسب الاتفاق</div></div>
+      <div class="service"><div class="small">تنظيف منازل</div><div style="font-weight:800">من 800 دج</div></div>
     </div>
-  </aside>
-</div>
+  </section>
 
-<div class="footer-note">Algeriano_Neo — Hybrid • Dark Neon</div>
+  <!-- Drivers -->
+  <section class="section" aria-labelledby="driversTitle">
+    <div class="section-title" style="margin-top:18px">
+      <div>
+        <h3 id="driversTitle">🚗 النقل — سائقين باشتراك</h3>
+        <div class="section-sub">سائقون محترفون — اشترك واستلم طلبات توصيل مباشرة</div>
+      </div>
+      <div class="small">اشترك الآن ▸</div>
+    </div>
 
-<!-- Overlay -->
-<div id="overlay" class="overlay" aria-hidden="true"><div class="card" id="overlayCard"></div></div>
+    <div class="drivers">
+      <div style="flex:1">
+        <div class="small">مستوى السائقين</div>
+        <div style="font-weight:800">Pro • Premium • VIP</div>
+        <div class="small" style="margin-top:8px">احصل على إشعارات بالطلبات القريبة — أرباح يومية مباشرة</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn primary">انضم كسائق</button>
+        <button class="btn">تفاصيل الباقات</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Health -->
+  <section class="section" aria-labelledby="healthTitle">
+    <div class="section-title" style="margin-top:18px">
+      <div>
+        <h3 id="healthTitle">🏥 الصحة — Smart Health</h3>
+        <div class="section-sub">استشارات طبية، حجز سكانير، توصيل أدوية</div>
+      </div>
+      <div class="small">احجز الآن ▸</div>
+    </div>
+
+    <div class="health-grid" role="list">
+      <div class="health-card">
+        <div class="small">استشارة طبية</div>
+        <div style="font-weight:800;margin-top:8px">من 500 دج</div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">استشر الآن</button>
+          <button class="btn">احجز</button>
+        </div>
+      </div>
+
+      <div class="health-card">
+        <div class="small">حجز سكانير</div>
+        <div style="font-weight:800;margin-top:8px">حسب النوع</div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">حجز فوري</button>
+          <button class="btn">المراكز</button>
+        </div>
+      </div>
+
+      <div class="health-card">
+        <div class="small">صيدلية توصيل</div>
+        <div style="font-weight:800;margin-top:8px">توصيل خلال الساعات</div>
+        <div style="margin-top:auto;display:flex;gap:8px">
+          <button class="btn primary">اطلب دواء</button>
+          <button class="btn">قائمة الصيدليات</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- user sections -->
+  <section class="section" style="margin-top:18px">
+    <div class="section-title">
+      <div><h3>المجتمعات — مناطق خاصة</h3><div class="section-sub">القسم النسائي و القسم المختلط — خصوصية ومحتوى مخصص</div></div>
+      <div class="small">تخصيص ▸</div>
+    </div>
+
+    <div class="user-sections" style="margin-top:12px">
+      <div class="box">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><strong>القسم النسائي 🌸</strong><div class="small">مكان آمن ومختص للنساء</div></div>
+          <div class="badge">خاص</div>
+        </div>
+        <div style="margin-top:12px" class="small">دردشة خاصة، بث مباشر للنساء، خدمات وتوصيل خاص</div>
+      </div>
+
+      <div class="box">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><strong>القسم المختلط</strong><div class="small">محتوى للجميع</div></div>
+          <div class="badge">عام</div>
+        </div>
+        <div style="margin-top:12px" class="small">تجارة، فيديوهات، خدمات، الصحة — للجميع</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div style="font-weight:800">Algeriano_Neo</div>
+      <div class="small">© 2025 Algeriano_Neo — كل الحقوق محفوظة</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="small">اتصل بنا</div>
+      <div class="small">الشروط</div>
+      <div class="small">الخصوصية</div>
+    </div>
+  </footer>
+
+</main>
 
 <script>
-/* -----------------------------
-  Algeriano_Neo — Hybrid Final
-  Single-file app: Full + Grid
-  Storage: localStorage
-------------------------------*/
-
-/* Keys */
-const LS_VIDEOS = 'alg_videos_hybrid_v1';
-const LS_USERS = 'alg_users_hybrid_v1';
-const LS_COMMENTS = 'alg_comments_hybrid_v1';
-const LS_LIKES = 'alg_likes_hybrid_v1';
-const LS_PAYMENTS = 'alg_payments_hybrid_v1';
-const LS_SETTINGS = 'alg_settings_hybrid_v1';
-const LS_CURRENT = 'alg_current_hybrid_v1';
-
-/* Helpers */
-function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
-function load(k){ return JSON.parse(localStorage.getItem(k) || 'null'); }
-function ensure(k,init){ if(!localStorage.getItem(k)) save(k,init); return load(k); }
-function uid(){ return Date.now()+Math.floor(Math.random()*999); }
-
-/* Init default data */
-function initData(){
-  ensure(LS_SETTINGS, {siteName:'Algeriano_Neo', baridiNumber:'07XXXXXXXX', adminUser:'admin', adminPass:'admin123'});
-  ensure(LS_USERS, [{id:'you', username:'you', display:'أنت', coins:0}]);
-  ensure(LS_COMMENTS, []);
-  ensure(LS_LIKES, {});
-  ensure(LS_PAYMENTS, []);
-  if(!localStorage.getItem(LS_VIDEOS)){
-    save(LS_VIDEOS, [
-      {id:1, user:'algeriano', title:'تجريبي — الجزائر', src:'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', likes:120, views:230, created:Date.now()-300000},
-      {id:2, user:'sara_dz', title:'زهرة', src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', likes:88, views:140, created:Date.now()-200000},
-      {id:3, user:'yassine', title:'قصير', src:'https://samplelib.com/lib/preview/mp4/sample-5s.mp4', likes:45, views:78, created:Date.now()-100000}
-    ]);
+/* Simple interactions for Ultra home page */
+(function(){
+  // news ticker speed fine tune
+  const news = document.getElementById('newsScroll');
+  let pos = 0;
+  function tick(){
+    pos -= 1;
+    if(Math.abs(pos) > news.scrollWidth/1.2) pos = 0;
+    news.style.transform = `translateX(${pos}px)`;
+    requestAnimationFrame(tick);
   }
-  ensure(LS_CURRENT, {username:'you'});
-}
-initData();
+  requestAnimationFrame(tick);
 
-/* Elements */
-const feedFull = document.getElementById('feedFull');
-const feedGrid = document.getElementById('feedGrid');
-const baridiDisplay = document.getElementById('baridiDisplay');
-
-/* UI: update settings display */
-function refreshUIstats(){
-  const vids = ensure(LS_VIDEOS); const users = ensure(LS_USERS); const payments = ensure(LS_PAYMENTS);
-  document.getElementById('statVideos').innerText = 'فيديوهات: ' + vids.length;
-  document.getElementById('statUsers').innerText = 'مستخدمين: ' + users.length;
-  document.getElementById('statPayments').innerText = 'طلبات دفع: ' + payments.length;
-  const set = ensure(LS_SETTINGS); baridiDisplay.innerText = set.baridiNumber || '(فارغ)';
-  // favorites preview (simple top liked)
-  const favGrid = document.getElementById('favGrid'); favGrid.innerHTML='';
-  vids.slice(0,3).forEach(v=>{ const d=document.createElement('div'); d.style.background='#071018'; d.style.borderRadius='8px'; d.style.padding='8px'; d.style.fontSize='12px'; d.innerText=v.title; favGrid.appendChild(d); });
-}
-
-/* Renderers */
-function renderFull(order='latest', filter=''){
-  feedFull.innerHTML=''; feedFull.scrollTop=0;
-  let vids = ensure(LS_VIDEOS).slice();
-  if(order==='latest') vids.sort((a,b)=>b.created - a.created);
-  else vids.sort(()=>Math.random()-0.5);
-  if(filter){ vids = vids.filter(v=> (v.title||'').includes(filter) || (v.user||'').includes(filter)); }
-  vids.forEach(v=>{
-    const sec = document.createElement('section'); sec.className='feed-card';
-    sec.innerHTML = `
-      <video class="feed-video" src="${v.src}" playsinline muted preload="metadata"></video>
-      <div class="meta">
-        <div class="user">@${v.user}</div>
-        <div class="title">${v.title}</div>
-      </div>
-      <div class="side-controls">
-        <div class="icon" data-id="${v.id}" onclick="toggleLike(event)">❤ <span class="count" id="like-${v.id}">${v.likes||0}</span></div>
-        <div class="icon" onclick="openComments(${v.id})">💬</div>
-        <div class="icon" onclick="shareVideo('${encodeURIComponent(v.src)}')">🔗</div>
-      </div>
-    `;
-    feedFull.appendChild(sec);
-  });
-  setTimeout(()=>attachObservers(),50);
-}
-
-function renderGrid(order='latest', filter=''){
-  feedGrid.innerHTML=''; feedGrid.scrollTop=0;
-  let vids = ensure(LS_VIDEOS).slice();
-  if(order==='latest') vids.sort((a,b)=>b.created - a.created);
-  else vids.sort(()=>Math.random()-0.5);
-  if(filter){ vids = vids.filter(v=> (v.title||'').includes(filter) || (v.user||'').includes(filter)); }
-  vids.forEach(v=>{
-    const item = document.createElement('div'); item.className='grid-item';
-    item.innerHTML = `<img class="grid-thumb" src="${videoPoster(v.src)}" onerror="this.src='https://via.placeholder.com/400x240.png?text=Video'"/>
-      <div class="grid-title">${v.title}</div>
-      <div class="grid-user">@${v.user}</div>`;
-    item.addEventListener('click', ()=>{ openVideoFromGrid(v.id); });
-    feedGrid.appendChild(item);
-  });
-}
-
-/* utility to generate thumbnail placeholder: if remote mp4 can't poster, use placeholder */
-function videoPoster(src){
-  // if src is data URL or remote, use placeholder (browsers don't allow generating poster easily client-side)
-  return 'https://via.placeholder.com/400x240.png?text=Algeriano_Neo';
-}
-
-/* Autoplay observer for full feed */
-let io;
-function attachObservers(){
-  const vids = Array.from(document.querySelectorAll('.feed-video'));
-  if(io) io.disconnect();
-  io = new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      const v = en.target;
-      if(en.isIntersecting && en.intersectionRatio>0.6){ v.muted=false; v.play().catch(()=>{}); incrementView(v.src); }
-      else v.pause();
+  // simple demo: clicking primary buttons shows alert (replace with real actions)
+  document.querySelectorAll('.btn.primary').forEach(b=>{
+    b.addEventListener('click', (e)=>{
+      e.preventDefault();
+      alert('ميزة تجريبية — هذه الواجهة نموذجية. ربط الوظائف قادم.');
     });
-  }, {threshold:[0.6]});
-  vids.forEach(v=> io.observe(v));
-}
+  });
 
-/* Views actions */
-function openVideoFromGrid(id){
-  const vids = ensure(LS_VIDEOS);
-  const v = vids.find(x=>x.id===id);
-  if(v){
-    // move to top for full view
-    const idx = vids.indexOf(v); vids.splice(idx,1); vids.unshift(v); save(LS_VIDEOS, vids);
-    renderFull(); toggleToFull();
-    // scroll top
-    document.querySelector('.feed-full').scrollTo({top:0,behavior:'smooth'});
-  }
-}
-
-/* Likes */
-function toggleLike(e){
-  const id = parseInt(e.currentTarget.dataset.id);
-  const likes = ensure(LS_LIKES);
-  const user = ensure(LS_CURRENT).username;
-  const key = `${user}_${id}`;
-  if(likes[key]){ delete likes[key]; updateLikeCount(id,-1); }
-  else { likes[key]=true; updateLikeCount(id,+1); }
-  save(LS_LIKES, likes); renderLikeUI(id);
-}
-function updateLikeCount(id,delta){
-  const vids = ensure(LS_VIDEOS);
-  const v = vids.find(x=>x.id===id);
-  if(v){ v.likes = (v.likes||0) + delta; save(LS_VIDEOS, vids); const el = document.getElementById('like-'+id); if(el) el.innerText = v.likes; refreshUIstats(); }
-}
-function renderLikeUI(id){
-  const likes = ensure(LS_LIKES); const user = ensure(LS_CURRENT).username; const key = `${user}_${id}`; const el = document.querySelector(`[data-id="${id}"]`); if(el) el.style.background = likes[key] ? 'linear-gradient(90deg,var(--primary),var(--accent))' : '';
-}
-
-/* Views: comments overlay */
-function openComments(id){
-  const comments = ensure(LS_COMMENTS).filter(c=>c.videoId===id);
-  const html = `<h3>التعليقات</h3>
-    <div style="max-height:40vh;overflow:auto;margin-top:8px">${comments.map(c=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>@${c.user}</strong><div class="small">${c.text}</div></div>`).join('') || '<div class="small">لا تعليقات بعد</div>'}</div>
-    <div style="margin-top:8px" class="form-row"><input id="cText" class="input" placeholder="اكتب تعليق"><button class="btn primary" onclick="postComment(${id})">نشر</button></div>`;
-  showOverlay(html);
-}
-function postComment(id){
-  const txt = document.getElementById('cText').value.trim();
-  if(!txt) return alert('اكتب تعليق');
-  const comments = ensure(LS_COMMENTS); const user = ensure(LS_CURRENT).username;
-  comments.unshift({id:uid(), videoId:id, user:user, text:txt, created:Date.now()}); save(LS_COMMENTS, comments); closeOverlay(); alert('تم النشر'); refreshUIstats();
-}
-
-/* share */
-function shareVideo(enc){
-  const src = decodeURIComponent(enc);
-  if(navigator.share) navigator.share({title:'شوف هاد الفيديو', url:src}).catch(()=>{});
-  else prompt('انسخ الرابط', src);
-}
-
-/* overlay helpers */
-function showOverlay(html){
-  const ov = document.getElementById('overlay'); const card = document.getElementById('overlayCard');
-  card.innerHTML = html + '<div style="text-align:left;margin-top:10px"><button class="btn" onclick="closeOverlay()">إغلاق</button></div>';
-  ov.style.display='flex'; ov.setAttribute('aria-hidden','false');
-}
-function closeOverlay(){ const ov=document.getElementById('overlay'); ov.style.display='none'; ov.setAttribute('aria-hidden','true'); document.getElementById('overlayCard').innerHTML=''; }
-
-/* Upload flows (top and sidebar) */
-document.getElementById('btnUpload').addEventListener('click', openUpload);
-document.getElementById('sideUploadBtn').addEventListener('click', sideDoUpload);
-document.getElementById('sideClear').addEventListener('click', ()=>{ document.getElementById('sideFile').value=''; document.getElementById('sideUrl').value=''; document.getElementById('sideTitle').value=''; });
-
-function openUpload(){
-  showOverlay(`<h3>رفع فيديو جديد</h3>
-    <div class="form-row"><input id="upFile" type="file" accept="video/*" class="input"></div>
-    <div style="margin-top:8px"><input id="upUrl" placeholder="أو ألصق رابط mp4" class="input"></div>
-    <div style="margin-top:8px"><input id="upTitle" placeholder="عنوان الفيديو" class="input"></div>
-    <div style="margin-top:8px"><button class="btn primary" onclick="doUpload()">رفع</button></div>
-    <div class="small" style="margin-top:8px">ملاحظة: رفع ملفات كبيرة على localStorage محدود، استعمل روابط إن أمكن</div>`);
-}
-function doUpload(){
-  const f = document.getElementById('upFile')?.files?.[0]; const url = document.getElementById('upUrl')?.value.trim(); const title = document.getElementById('upTitle')?.value.trim()||'بدون عنوان';
-  if(f){
-    const r=new FileReader(); r.onload=function(e){ addVideo({src:e.target.result,title}); closeOverlay(); alert('تم الرفع (محلي)'); }; r.readAsDataURL(f); return;
-  }
-  if(url){ addVideo({src:url,title}); closeOverlay(); alert('تم الإضافة'); return; }
-  alert('اختار ملف أو رابط');
-}
-function sideDoUpload(){
-  const f = document.getElementById('sideFile')?.files?.[0]; const url = document.getElementById('sideUrl')?.value.trim(); const title = document.getElementById('sideTitle')?.value.trim()||'بدون عنوان';
-  if(f){
-    const r=new FileReader(); r.onload=function(e){ addVideo({src:e.target.result,title}); alert('تم الرفع'); }; r.readAsDataURL(f); return;
-  }
-  if(url){ addVideo({src:url,title}); alert('تم الإضافة'); return; }
-  alert('اختار ملف أو رابط');
-}
-function addVideo({src,title}){
-  const vids = ensure(LS_VIDEOS); const id=uid(); vids.unshift({id:id,user:ensure(LS_CURRENT).username||'you',title:title,src:src,likes:0,views:0,created:Date.now()}); save(LS_VIDEOS,vids); renderFull(); renderGrid(); refreshUIstats();
-}
-
-/* Profile */
-document.getElementById('btnProfile').addEventListener('click', openProfile);
-function openProfile(){
-  const cur = ensure(LS_CURRENT);
-  showOverlay(`<h3>بروفايلي — @${cur.username}</h3><div class="small">Coins: ${cur.coins||0}</div><div style="margin-top:8px"><button class="btn" onclick="logout()">خروج</button></div><h4 style="margin-top:12px">فيديوهاتي</h4><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">${ensure(LS_VIDEOS).filter(v=>v.user===cur.username).map(v=>`<div style="background:#071018;border-radius:8px;padding:8px;text-align:center;cursor:pointer" onclick="openFromThumb('${encodeURIComponent(v.src)}')">${v.title}</div>`).join('')||'<div class="small">لا فيديوهات</div>'}</div>`);
-}
-function openFromThumb(enc){ const src=decodeURIComponent(enc); const vids=ensure(LS_VIDEOS); const v=vids.find(x=>x.src===src); if(v){ const idx=vids.indexOf(v); vids.splice(idx,1); vids.unshift(v); save(LS_VIDEOS,vids); renderFull(); renderGrid(); closeOverlay(); document.querySelector('.feed-full')?.scrollTo({top:0,behavior:'smooth'}); } }
-function logout(){ if(confirm('تريد تخرج؟')){ save(LS_CURRENT,{username:'guest'}); closeOverlay(); alert('تم الخروج'); } }
-
-/* Search & Random */
-document.getElementById('search').addEventListener('input',(e)=>{ const v=e.target.value.trim(); if(v.length>0) { renderFull('latest',v); renderGrid('latest',v);} else { renderFull(); renderGrid(); } });
-document.getElementById('btnRandom').addEventListener('click', ()=>{ renderFull('random',''); renderGrid('random',''); document.querySelector('.feed-full').scrollTo({top:0,behavior:'smooth'}); });
-
-/* Toggle view */
-const btnToggle = document.getElementById('btnToggleView');
-let currentView = 'full';
-btnToggle.addEventListener('click', ()=>{ if(currentView==='full') toggleToGrid(); else toggleToFull(); });
-function toggleToGrid(){ currentView='grid'; document.getElementById('feedFull').style.display='none'; document.getElementById('feedGrid').style.display='grid'; btnToggle.innerText='Grid ✓'; }
-function toggleToFull(){ currentView='full'; document.getElementById('feedFull').style.display='block'; document.getElementById('feedGrid').style.display='none'; btnToggle.innerText='Full ✓'; }
-
-/* Admin quick (double-click header) */
-document.querySelector('.header').addEventListener('dblclick', ()=>{
-  const settings = ensure(LS_SETTINGS);
-  const u = prompt('اسم الادمن','admin'); const p = prompt('كلمة السر','admin123');
-  if(u===settings.adminUser && p===settings.adminPass){
-    showAdminPanel();
-  } else alert('معلومات خاطئة');
-});
-
-function showAdminPanel(){
-  const vids = ensure(LS_VIDEOS); const users = ensure(LS_USERS); const payments = ensure(LS_PAYMENTS); const settings = ensure(LS_SETTINGS);
-  const html = `<h3>لوحة Admin — Algeriano_Neo</h3>
-    <div class="small">الفيديوهات: ${vids.length} — المستخدمين: ${users.length} — طلبات: ${payments.length}</div>
-    <div style="margin-top:8px">
-      <button class="btn" onclick="openManageVideos()">ادارة الفيديوهات</button>
-      <button class="btn" onclick="openManageUsers()">ادارة المستخدمين</button>
-      <button class="btn" onclick="showPayments()">طلبات الدفع</button>
-      <button class="btn" onclick="openSettings()">الاعدادات</button>
-    </div>
-    <div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`;
-  showOverlay(html);
-}
-
-/* Manage videos/users */
-function openManageVideos(){
-  const vids = ensure(LS_VIDEOS);
-  const html = `<h3>ادارة الفيديوهات</h3><div style="max-height:50vh;overflow:auto">${vids.map(v=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>${v.title}</strong> — @${v.user}<div style="margin-top:6px"><button class="btn" onclick="adminDeleteVideo(${v.id})">حذف</button></div></div>`).join('')}</div><div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`;
-  showOverlay(html);
-}
-function adminDeleteVideo(id){ if(!confirm('تأكيد حذف الفيديو؟')) return; let vids = ensure(LS_VIDEOS); vids = vids.filter(v=>v.id!==id); save(LS_VIDEOS,vids); alert('تم الحذف'); renderFull(); renderGrid(); closeOverlay(); refreshUIstats(); }
-function openManageUsers(){ const users = ensure(LS_USERS); const html = `<h3>ادارة المستخدمين</h3><div style="max-height:50vh;overflow:auto">${users.map(u=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)">@${u.username} — Coins: ${u.coins||0}<div style="margin-top:6px"><button class="btn" onclick="adminAdjustCoins('${u.username}')">تعديل نقاط</button></div></div>`).join('')}</div><div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`; showOverlay(html); }
-function adminAdjustCoins(username){ const amount = parseInt(prompt('كم تريد تضيف/تنقص (مثال +100 أو -50) للـ '+username,'+100')); if(isNaN(amount)) return alert('قيمة غير صحيحة'); const users = ensure(LS_USERS); const u = users.find(x=>x.username===username); if(!u) return; u.coins = (u.coins||0) + amount; save(LS_USERS,users); alert('تم التعديل'); openManageUsers(); }
-
-/* Payments (manual BaridiMob) */
-function openPaymentFlow(){
-  showOverlay(`<h3>الدفع اليدوي — BaridiMob</h3>
-    <div class="small">انسخ رقم BaridiMob و قم بالتحويل ثم ارفق صورة الوصل</div>
-    <div style="margin-top:8px"><input id="payAmount" class="input" placeholder="المبلغ (دج)"></div>
-    <div style="margin-top:8px"><input id="payNote" class="input" placeholder="ملاحظة (اختياري)"></div>
-    <div style="margin-top:8px"><input id="payReceipt" type="file" accept="image/*"></div>
-    <div style="margin-top:8px"><button class="btn primary" onclick="doPayment()">إرسال الطلب</button></div>`);
-}
-document.getElementById('btnPay').addEventListener('click', openPaymentFlow);
-function doPayment(){
-  const amount = parseInt(document.getElementById('payAmount')?.value||0); const note = document.getElementById('payNote')?.value||''; const file = document.getElementById('payReceipt')?.files?.[0];
-  if(!amount || !file) return alert('دخل مبلغ ورفع صورة الوصل');
-  const r=new FileReader(); r.onload=function(e){ const payments = ensure(LS_PAYMENTS); const user = ensure(LS_CURRENT).username; const id=uid(); payments.unshift({id:id,user:user,amount:amount,note:note,receipt:e.target.result,status:'pending',created:Date.now()}); save(LS_PAYMENTS,payments); alert('تم إرسال الطلب'); closeOverlay(); refreshUIstats(); }; r.readAsDataURL(file);
-}
-function showPayments(){
-  const payments = ensure(LS_PAYMENTS); const settings = ensure(LS_SETTINGS);
-  const html = `<h3>طلبات الدفع (BaridiMob)</h3><div class="small">BaridiMob: ${settings.baridiNumber || '(فارغ)'}</div><div style="margin-top:8px">${payments.length?payments.map(p=>`<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)"><strong>@${p.user}</strong> — ${p.amount} دج — الحالة: <em>${p.status}</em><div style="margin-top:6px"><img src="${p.receipt}" style="max-width:160px;border-radius:6px"></div><div style="margin-top:6px"><button class="btn" onclick="confirmPayment(${p.id})">قبول</button> <button class="btn ghost" onclick="rejectPayment(${p.id})">رفض</button></div></div>`).join(''):'<div class="small">ماكان حتى طلب</div>'}</div><div style="margin-top:8px"><button class="btn ghost" onclick="closeOverlay()">إغلاق</button></div>`;
-  showOverlay(html);
-}
-function confirmPayment(id){
-  const payments = ensure(LS_PAYMENTS); const idx = payments.findIndex(x=>x.id===id); if(idx===-1) return; payments[idx].status='confirmed'; save(LS_PAYMENTS,payments);
-  // grant coins: 1 coin = 10 DZD
-  const users = ensure(LS_USERS); let u = users.find(x=>x.username===payments[idx].user); if(!u){ u={id:payments[idx].user,username:payments[idx].user,display:payments[idx].user,coins:0}; users.push(u); }
-  const coins = Math.round(payments[idx].amount/10); u.coins = (u.coins||0) + coins; save(LS_USERS,users);
-  alert('تم التأكيد — رصيد تمت اضافته: ' + coins + ' coins'); refreshUIstats(); closeOverlay();
-}
-function rejectPayment(id){ let payments = ensure(LS_PAYMENTS); const idx=payments.findIndex(x=>x.id===id); if(idx===-1) return; payments[idx].status='rejected'; save(LS_PAYMENTS,payments); alert('تم الرفض'); refreshUIstats(); }
-
-/* Admin helpers: settings */
-function openSettings(){
-  const settings = ensure(LS_SETTINGS);
-  showOverlay(`<h3>الاعدادات</h3>
-    <div class="form-row"><label class="small">BaridiMob</label><input id="setBaridi" class="input" value="${settings.baridiNumber||''}"></div>
-    <div style="margin-top:8px"><button class="btn" onclick="saveSettings()">حفظ</button></div>`);
-}
-function saveSettings(){ const v=document.getElementById('setBaridi').value.trim(); const s=ensure(LS_SETTINGS); s.baridiNumber=v; save(LS_SETTINGS,s); alert('تم الحفظ'); closeOverlay(); refreshUIstats(); }
-
-/* admin manage entry points */
-function openManageUsers(){ showAdminPanel(); }
-function openManageVideos(){ showAdminPanel(); }
-
-/* export/import */
-function exportData(){ const data={videos:ensure(LS_VIDEOS),users:ensure(LS_USERS),comments:ensure(LS_COMMENTS),likes:ensure(LS_LIKES),payments:ensure(LS_PAYMENTS)}; const blob=new Blob([JSON.stringify(data)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='algeriano_export.json'; a.click(); }
-
-/* views glue */
-function incrementView(src){
-  const vids = ensure(LS_VIDEOS);
-  const v = vids.find(x=>x.src===src); if(v){ v.views = (v.views||0)+1; save(LS_VIDEOS,vids); }
-}
-
-/* open video from grid */
-function openFromThumb(enc){ const src=decodeURIComponent(enc); const vids=ensure(LS_VIDEOS); const v=vids.find(x=>x.src===src); if(v){ const idx=vids.indexOf(v); vids.splice(idx,1); vids.unshift(v); save(LS_VIDEOS,vids); renderFull(); toggleToFull(); closeOverlay(); document.getElementById('feedFull').scrollTo({top:0,behavior:'smooth'}); } }
-
-/* init render */
-renderFull(); renderGrid(); refreshUIstats(); toggleToFull();
-
-/* initial controls */
-document.getElementById('btnAdminMini').addEventListener('click', ()=>{ const settings=ensure(LS_SETTINGS); const u=prompt('admin user','admin'); const p=prompt('admin pass','admin123'); if(u===settings.adminUser && p===settings.adminPass) showAdminPanel(); else alert('معلومات خاطئة'); });
-document.getElementById('btnProfile').addEventListener('click', openProfile);
-
-/* small keyboard: press G to go Grid, F to Full */
-document.addEventListener('keydown',(e)=>{ if(e.key==='g' || e.key==='G') toggleToGrid(); if(e.key==='f' || e.key==='F') toggleToFull(); });
-
-/* helper for opening payments from header if user clicks btnPay */
-function openPaymentFromHeader(){ openPaymentFlow(); }
-
-/* Safe: close overlays on Escape */
-document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeOverlay(); });
-
+  // keyboard quick: press V to go videos, M to marketplace
+  document.addEventListener('keydown', (e)=>{
+    if(e.key.toLowerCase()==='v') document.getElementById('videosTitle')?.scrollIntoView({behavior:'smooth'});
+    if(e.key.toLowerCase()==='m') document.getElementById('marketTitle')?.scrollIntoView({behavior:'smooth'});
+  });
+})();
 </script>
+
 </body>
-</html>
+  </html>
