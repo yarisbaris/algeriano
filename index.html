@@ -1,22 +1,19 @@
-<!-- زر فتح القائمة -->
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<!-- القائمة -->
-<div id="sidebar" class="sidebar">
-    <h2 class="sidebar-title">الأقسام</h2>
-    <ul class="menu">
-        <li><a class="active" href="#">الصفحة الرئيسية</a></li>
-        <li><a href="#">التجارة</a></li>
-        <li><a href="#">الخدمات</a></li>
-        <li><a href="#">الترفيه</a></li>
-        <li><a href="#">الصحة</a></li>
-        <li><a href="#">النقل</a></li>
-        <li><a href="#">قسم المرأة</a></li>
-    </ul>
-</div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algeriano_NEO</title>
 
 <style>
-/* زر القائمة */
+body {
+    margin: 0;
+    background: #000;
+    font-family: "Cairo", sans-serif;
+    color: white;
+}
+
+/* زر فتح القائمة */
 .menu-btn {
     position: fixed;
     top: 15px;
@@ -46,7 +43,6 @@
     z-index: 1000;
 }
 
-/* يظهر */
 .sidebar.open {
     right: 0;
 }
@@ -91,10 +87,63 @@
     color: black;
     font-weight: bold;
 }
+
+/* محتوى الصفحة */
+.header {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.title {
+    font-size: 38px;
+    color: gold;
+    font-weight: 800;
+    text-shadow: 0 0 12px gold;
+}
+
+.desc {
+    font-size: 20px;
+    color: #ddd;
+    padding: 20px;
+    text-align: center;
+    line-height: 1.7;
+}
 </style>
+</head>
+
+<body>
+
+<!-- زر القائمة -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<!-- القائمة -->
+<div id="sidebar" class="sidebar">
+    <h2 class="sidebar-title">الأقسام</h2>
+    <ul class="menu">
+        <li><a class="active" href="#">الصفحة الرئيسية</a></li>
+        <li><a href="#">التجارة</a></li>
+        <li><a href="#">الخدمات</a></li>
+        <li><a href="#">الترفيه</a></li>
+        <li><a href="#">الصحة</a></li>
+        <li><a href="#">النقل</a></li>
+        <li><a href="#">قسم المرأة</a></li>
+    </ul>
+</div>
+
+<!-- محتوى الصفحة -->
+<div class="header">
+    <h1 class="title">Algeriano_NEO</h1>
+    <p class="desc">
+        منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، والخدمات  
+        في نظام واحد فخم من الجيل الجديد.
+    </p>
+</div>
 
 <script>
 function toggleMenu() {
     document.getElementById("sidebar").classList.toggle("open");
 }
 </script>
+
+</body>
+</html>
