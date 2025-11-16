@@ -1,125 +1,129 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Algeriano_NEO</title>
-
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algeriano_Neo</title>
+  <style>
     body {
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(180deg, #050509 0%, #0b0b12 100%);
-        font-family: 'Cairo', sans-serif;
-        color: white;
-    }
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+    }/* الشريط العلوي */
+header {
+  background: #111;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #d4af37;
+  text-shadow: 0 0 10px #d4af37;
+}
 
-    /* ---- عنوان Ultra Premium ---- */
-    .title {
-        font-size: 42px;
-        font-weight: 900;
-        margin: 30px 0;
-        text-align: center;
-        color: #c590ff;
-        text-shadow: 0 0 15px #c27bff, 0 0 35px #7f3dff;
-    }
+/* تخطيط الصفحة */
+.container {
+  display: flex;
+}
 
-    .description {
-        text-align: center;
-        font-size: 20px;
-        width: 90%;
-        margin: auto;
-        line-height: 1.9;
-        color: #e1d4ff;
-    }
+/* القائمة العمودية */
+nav {
+  width: 260px;
+  background: #151515;
+  padding: 20px;
+  border-left: 2px solid #d4af37;
+  height: 100vh;
+}
 
-    /* ---- صندوق القائمة ---- */
-    .sidebar {
-        width: 92%;
-        margin: 35px auto;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 25px;
-        border-radius: 22px;
-        border: 1px solid rgba(150, 100, 255, 0.25);
-        box-shadow: 0 0 20px #5d1b9955;
-        backdrop-filter: blur(10px);
-    }
+nav h3 {
+  margin: 0 0 20px;
+  font-size: 22px;
+  color: #d4af37;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
 
-    .sidebar h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 26px;
-        color: #d5aaff;
-        text-shadow: 0 0 12px #ba7eff;
-    }
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    /* ---- عناصر القائمة ---- */
-    .menu a {
-        display: block;
-        padding: 16px 22px;
-        margin-bottom: 16px;
-        background: rgba(255, 255, 255, 0.06);
-        border-radius: 16px;
-        text-decoration: none;
-        color: #f0e9ff;
-        font-size: 19px;
-        transition: 0.3s;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+nav ul li {
+  margin: 15px 0;
+}
 
-    .menu a:hover {
-        background: rgba(160, 110, 255, 0.25);
-        box-shadow: 0 0 15px #b67cff;
-        transform: scale(1.03);
-    }
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  border-radius: 8px;
+  transition: 0.3s;
+}
 
-    /* ---- زر الانضمام ---- */
-    .join-btn {
-        margin-top: 25px;
-        padding: 15px;
-        width: 100%;
-        font-size: 20px;
-        background: #2e0a4d;
-        color: white;
-        text-align: center;
-        border-radius: 16px;
-        text-decoration: none;
-        border: 1px solid #9a5fff;
-        box-shadow: 0 0 15px #8d4cff;
-        transition: 0.3s;
-        display: block;
-    }
+nav ul li a:hover {
+  background: #d4af37;
+  color: #000;
+}
 
-    .join-btn:hover {
-        background: #5319a0;
-        box-shadow: 0 0 25px #b57bff;
-    }
-</style>
-</head>
+/* المحتوى */
+.content {
+  flex: 1;
+  padding: 40px;
+}
 
-<body>
+.hero {
+  background: linear-gradient(#000000aa, #000000aa), url('banner.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 80px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 25px #000;
+}
 
-    <div class="title">Algeriano_NEO</div>
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #d4af37;
+  text-shadow: 0 0 15px #d4af37;
+}
 
-    <div class="description">
-        منصة جزائرية ذكية تجمع التجارة، الترفيه، 
-        النقل، والخدمات في نظام واحد فخم من الجيل الجديد.
-    </div>
+.hero p {
+  font-size: 22px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
 
-    <div class="sidebar">
-        <h2>القائمة</h2>
+  </style>
+</head><body>
+  <header>Algeriano_Neo</header>  <div class="container"><!-- القائمة العمودية -->
+<nav>
+  <h3>الأقسام</h3>
+  <ul>
+    <li><a href="#">الصفحة الرئيسية</a></li>
+    <li><a href="#">التجارة</a></li>
+    <li><a href="#">الخدمات</a></li>
+    <li><a href="#">الترفيه</a></li>
+    <li><a href="#">الصحة</a></li>
+    <li><a href="#">النقل</a></li>
+    <li><a href="#">قسم المرأة</a></li>
+  </ul>
+</nav>
 
-        <div class="menu">
-            <a href="#">الرئيسية</a>
-            <a href="#">Marketplace</a>
-            <a href="#">الخدمات</a>
-            <a href="#">الترفيه</a>
-            <a href="#">السائقين</a>
-            <a href="#">الصحة</a>
-        </div>
+<!-- منطقة المحتوى -->
+<div class="content">
+  <div class="hero">
+    <h1>مرحباً بكم في عالم الفخامة</h1>
+    <p>
+      منصة متعددة الخدمات تجمع بين التجارة، الترفيه، الصحة، والخدمات الذكية<br>
+      كل شيء تحت نظام واحد... عالم جديد بنكهة جزائرية.
+    </p>
+  </div>
+</div>
 
-        <a class="join-btn" href="#">انضم الآن</a>
-    </div>
-
+  </div>
 </body>
 </html>
