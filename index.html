@@ -9,108 +9,91 @@
     body {
         margin: 0;
         padding: 0;
-        background: #0a0a0f;
+        background: linear-gradient(180deg, #050509 0%, #0b0b12 100%);
         font-family: 'Cairo', sans-serif;
         color: white;
     }
 
-    /* ---- عنوان فخم ---- */
+    /* ---- عنوان Ultra Premium ---- */
     .title {
-        font-size: 38px;
-        font-weight: 800;
-        margin: 25px;
-        color: #c08cff;
-        text-shadow: 0 0 10px #b37bff, 0 0 25px #7933ff;
+        font-size: 42px;
+        font-weight: 900;
+        margin: 30px 0;
+        text-align: center;
+        color: #c590ff;
+        text-shadow: 0 0 15px #c27bff, 0 0 35px #7f3dff;
     }
 
-    /* ---- الواجهة مقسمة ---- */
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 20px;
-    }
-
-    /* ---- نص الوصف ---- */
     .description {
-        width: 60%;
+        text-align: center;
         font-size: 20px;
-        line-height: 1.8;
-        color: #dcdcdc;
+        width: 90%;
+        margin: auto;
+        line-height: 1.9;
+        color: #e1d4ff;
     }
 
-    /* ---- القائمة الفاخرة العمودية ---- */
+    /* ---- صندوق القائمة ---- */
     .sidebar {
-        width: 35%;
+        width: 92%;
+        margin: 35px auto;
         background: rgba(255, 255, 255, 0.03);
         padding: 25px;
-        border-radius: 18px;
-        border: 2px solid rgba(150, 100, 255, 0.25);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 0 15px #4b008263;
+        border-radius: 22px;
+        border: 1px solid rgba(150, 100, 255, 0.25);
+        box-shadow: 0 0 20px #5d1b9955;
+        backdrop-filter: blur(10px);
     }
 
     .sidebar h2 {
         text-align: center;
         margin-bottom: 25px;
-        color: #c08cff;
-        text-shadow: 0 0 10px #b37bff;
+        font-size: 26px;
+        color: #d5aaff;
+        text-shadow: 0 0 12px #ba7eff;
     }
 
+    /* ---- عناصر القائمة ---- */
     .menu a {
         display: block;
-        padding: 14px 20px;
-        margin-bottom: 12px;
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 12px;
+        padding: 16px 22px;
+        margin-bottom: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
         text-decoration: none;
-        color: #e8e8e8;
-        font-size: 18px;
+        color: #f0e9ff;
+        font-size: 19px;
         transition: 0.3s;
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .menu a:hover {
-        background: rgba(150, 100, 255, 0.20);
-        box-shadow: 0 0 12px #a278ff;
-        transform: translateX(-5px);
+        background: rgba(160, 110, 255, 0.25);
+        box-shadow: 0 0 15px #b67cff;
+        transform: scale(1.03);
     }
 
     /* ---- زر الانضمام ---- */
     .join-btn {
         margin-top: 25px;
-        width: 100%;
         padding: 15px;
+        width: 100%;
         font-size: 20px;
-        background: #2b0a4a;
+        background: #2e0a4d;
         color: white;
         text-align: center;
-        border-radius: 14px;
+        border-radius: 16px;
         text-decoration: none;
-        box-shadow: 0 0 15px #8b42ff;
+        border: 1px solid #9a5fff;
+        box-shadow: 0 0 15px #8d4cff;
         transition: 0.3s;
-        border: 1px solid #834bff;
         display: block;
     }
 
     .join-btn:hover {
-        background: #51209e;
-        box-shadow: 0 0 25px #a86fff;
+        background: #5319a0;
+        box-shadow: 0 0 25px #b57bff;
     }
-
-    /* ---- موبايل ---- */
-    @media (max-width: 768px) {
-        .container {
-            flex-direction: column;
-        }
-        .description, .sidebar {
-            width: 100%;
-        }
-        .sidebar {
-            margin-top: 20px;
-        }
-    }
-
 </style>
 </head>
 
@@ -118,29 +101,24 @@
 
     <div class="title">Algeriano_NEO</div>
 
-    <div class="container">
-        
-        <div class="description">
-            منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، 
-            والخدمات في نظام واحد فخم من الجيل الجديد.
+    <div class="description">
+        منصة جزائرية ذكية تجمع التجارة، الترفيه، 
+        النقل، والخدمات في نظام واحد فخم من الجيل الجديد.
+    </div>
+
+    <div class="sidebar">
+        <h2>القائمة</h2>
+
+        <div class="menu">
+            <a href="#">الرئيسية</a>
+            <a href="#">Marketplace</a>
+            <a href="#">الخدمات</a>
+            <a href="#">الترفيه</a>
+            <a href="#">السائقين</a>
+            <a href="#">الصحة</a>
         </div>
 
-        <div class="sidebar">
-
-            <h2>القائمة</h2>
-
-            <div class="menu">
-                <a href="#">الرئيسية</a>
-                <a href="#">Marketplace</a>
-                <a href="#">الخدمات</a>
-                <a href="#">الترفيه</a>
-                <a href="#">السائقين</a>
-                <a href="#">الصحة</a>
-            </div>
-
-            <a class="join-btn" href="#">انضم الآن</a>
-
-        </div>
+        <a class="join-btn" href="#">انضم الآن</a>
     </div>
 
 </body>
