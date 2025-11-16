@@ -1,193 +1,136 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Algeriano_Neo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algeriano Neo</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <style>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background: #0a0a12;
+            color: white;
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0e0b16;
-      font-family: 'Cairo', sans-serif;
-      color: #eee;
-    }
+        /* ====== NAVBAR ====== */
+        nav {
+            width: 100%;
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 25px;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid rgba(150, 80, 255, 0.3);
+            box-shadow: 0 0 20px rgba(140, 60, 255, 0.25);
+        }
 
-    /* هيدر فااخر */
-    .neo-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(14px);
-      background: rgba(20, 15, 40, 0.45);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 30px;
-      box-shadow: 0 4px 22px rgba(0, 0, 0, 0.25);
-      direction: rtl;
-    }
+        nav .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #b478ff;
+            text-shadow: 0 0 10px #9f4fff;
+        }
 
-    .neo-logo {
-      font-size: 1.6rem;
-      font-weight: 900;
-      background: linear-gradient(90deg, #b474ff, #7a2fff, #00eaff);
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 12px rgba(160, 90, 255, 0.6);
-    }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
 
-    .neo-nav ul {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+        nav ul li a {
+            text-decoration: none;
+            color: #e0d8ff;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
 
-    .neo-nav ul li a {
-      color: #ddddff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.05rem;
-      transition: 0.3s;
-    }
+        nav ul li a:hover {
+            color: #bb86ff;
+            text-shadow: 0 0 8px #a05cff;
+        }
 
-    .neo-nav ul li a:hover {
-      color: #ae7bff;
-      text-shadow: 0 0 8px #ae7bff;
-    }
+        /* ====== HERO SECTION ====== */
+        .hero {
+            padding-top: 120px;
+            text-align: right;
+            padding-right: 30px;
+            padding-left: 30px;
+        }
 
-    .neo-actions {
-      display: flex;
-      gap: 12px;
-    }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #c58cff;
+            text-shadow: 0 0 15px rgba(180, 100, 255, 0.8);
+        }
 
-    .neo-btn {
-      padding: 8px 18px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.25s;
-    }
+        .hero-text {
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin-top: -10px;
+            line-height: 1.7;
+            color: #e5d8ff;
+        }
 
-    .join {
-      background: linear-gradient(90deg, #7a2fff, #00eaff);
-      color: white;
-      box-shadow: 0 0 12px rgba(122, 47, 255, 0.4);
-    }
+        /* BUTTON */
+        .start-btn {
+            margin-top: 25px;
+            display: inline-block;
+            background: linear-gradient(90deg, #b478ff, #7b1fff);
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(150, 70, 255, 0.6);
+            transition: 0.2s;
+        }
 
-    .join:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 18px rgba(122, 47, 255, 0.7);
-    }
-
-    .login {
-      background: rgba(255, 255, 255, 0.15);
-      color: #eaeaff;
-      backdrop-filter: blur(10px);
-    }
-
-    .login:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.05);
-    }
-
-    /* الهيرو */
-    .hero {
-      text-align: center;
-      padding: 120px 20px;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #d0a3ff, #8c4bff, #00eaff);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 20px rgba(100, 60, 255, 0.6);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-    }
-
-    /* شريط الأخبار */
-    .ticker {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 10px 0;
-      margin-top: 40px;
-    }
-
-    .ticker span {
-      display: inline-block;
-      padding-right: 50px;
-      animation: scroll 12s linear infinite;
-      color: #b783ff;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-  </style>
-
+        .start-btn:hover {
+            box-shadow: 0 0 25px rgba(170, 90, 255, 0.9);
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- الهيدر -->
-  <header class="neo-header">
-    <div class="neo-logo">ALGERIANO_NEO</div>
-
-    <nav class="neo-nav">
-      <ul>
-        <li><a href="#">الرئيسية</a></li>
-        <li><a href="#">Marketplace</a></li>
-        <li><a href="#">الخدمات</a></li>
-        <li><a href="#">الترفيه</a></li>
-        <li><a href="#">السائقين</a></li>
-        <li><a href="#">الصحة</a></li>
-      </ul>
+    <!-- NAV -->
+    <nav>
+        <div class="logo">ALGERIANO NEO</div>
+        <ul>
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">الخدمات</a></li>
+            <li><a href="#">الترفيه</a></li>
+            <li><a href="#">السائقين</a></li>
+            <li><a href="#">الصحة</a></li>
+            <li><a href="#">انضم الآن</a></li>
+        </ul>
     </nav>
 
-    <div class="neo-actions">
-      <button class="neo-btn join">انضم الآن</button>
-      <button class="neo-btn login">دخول</button>
-    </div>
-  </header>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1 class="hero-title">Algeriano Neo</h1>
+        <p class="hero-text">
+            منصة ذكية تجمع التجارة، الترفيه، السائقين، الصحة والخدمات.  
+            الجيل الجديد من المنصات الجزائرية.
+        </p>
 
-  <!-- الهيرو -->
-  <section class="hero">
-    <h1>Algeriano_Neo — الجيل الجديد</h1>
-    <p>منصة جزائرية ذكية تجمع التجارة، الترفيه، السائقين، الصحة والخدمات.</p>
-  </section>
-
-  <!-- شريط الأخبار -->
-  <div class="ticker">
-    <span>⚡ إطلاق أول نسخة تجريبية من منصة Algeriano_Neo</span>
-    <span>📦 التجارة الإلكترونية بوساطة وحماية مالية</span>
-    <span>🚕 منصة السائقين بنظام اشتراك</span>
-    <span>🏥 خدمات صحية رقمية لأول مرة في الجزائر</span>
-  </div>
+        <a class="start-btn" href="#">⚡ إطلاق أول نسخة</a>
+    </section>
 
 </body>
 </html>
