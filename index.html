@@ -1,126 +1,128 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Algeriano_NEO</title>
 
-<!-- خط راقي -->
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
-
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #000;
-        color: #eee;
-        font-family: 'Tajawal', sans-serif;
-        text-align: center;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #f5f5f5;
+    font-family: "Cairo", sans-serif;
+    text-align: center;
+  }
 
-    /* العنوان */
-    h1 {
-        font-size: 2.8rem;
-        margin-top: 140px;
-        color: #d4af37; /* ذهبي مات */
-        font-weight: 700;
-        letter-spacing: 1px;
-    }
+  /* --- زر القائمة --- */
+  .menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 55px;
+    height: 55px;
+    background: #222; 
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px #000;
+    transition: 0.3s;
+  }
+  .menu-btn:hover { background: #333; }
 
-    /* الوصف */
-    p {
-        font-size: 1.3rem;
-        width: 90%;
-        margin: 20px auto;
-        line-height: 1.8;
-        color: #f1f1f1;
-    }
+  .menu-btn div {
+    width: 35px;
+    height: 4px;
+    background: #eee;
+    margin: 6px 0;
+    border-radius: 4px;
+  }
 
-    /* زر القائمة */
-    .menu-btn {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background: #d4af37; /* ذهبي مات */
-        width: 55px;
-        height: 55px;
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        box-shadow: 0 0 10px #000;
-    }
+  /* --- القائمة الجانبية --- */
+  .sidebar {
+    position: fixed;
+    right: -260px;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    background: #111;
+    padding-top: 100px;
+    transition: 0.4s;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.6);
+  }
 
-    .menu-btn div {
-        width: 30px;
-        height: 4px;
-        background: #000;
-        margin: 4px 0;
-        border-radius: 4px;
-    }
+  .sidebar a {
+    display: block;
+    padding: 18px;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 20px;
+    border-bottom: 1px solid #222;
+    transition: 0.3s;
+  }
+  .sidebar a:hover {
+    background: #222;
+    padding-right: 30px;
+  }
 
-    /* القائمة العمودية */
-    .sidebar {
-        position: fixed;
-        top: 0;
-        right: -260px;
-        width: 260px;
-        height: 100%;
-        background: #111;
-        padding-top: 80px;
-        transition: 0.3s;
-        border-left: 2px solid #d4af37;
-    }
+  /* --- المحتوى الرئيسي --- */
+  .hero {
+    margin-top: 160px;
+    padding: 20px;
+  }
 
-    .sidebar a {
-        display: block;
-        padding: 18px;
-        font-size: 1.2rem;
-        color: #d4af37;
-        text-decoration: none;
-    }
+  h1 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #eaeaea;
+  }
 
-    .sidebar a:hover {
-        background: #222;
-    }
+  p {
+    line-height: 2;
+    font-size: 22px;
+  }
 
-    .show {
-        right: 0 !important;
-    }
 </style>
 
 <script>
-    function toggleMenu() {
-        document.getElementById("side").classList.toggle("show");
-    }
+function toggleMenu() {
+  const sidebar = document.getElementById("sideMenu");
+  sidebar.style.right = sidebar.style.right === "0px" ? "-260px" : "0px";
+}
 </script>
-
 </head>
+
 <body>
 
+<!-- زر القائمة -->
 <div class="menu-btn" onclick="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
 </div>
 
-<div id="side" class="sidebar">
-    <a href="#">الصفحة الرئيسية</a>
-    <a href="#">التجارة</a>
-    <a href="#">الترفيه</a>
-    <a href="#">النقل</a>
-    <a href="#">الخدمات</a>
-    <a href="#">قسم المرأة</a>
-    <a href="#">الصحة</a> <!-- تمت إضافة قسم الصحة -->
+<!-- القائمة العمودية -->
+<div class="sidebar" id="sideMenu">
+  <a href="#">التجارة</a>
+  <a href="#">الخدمات</a>
+  <a href="#">النقل</a>
+  <a href="#">الترفيه</a>
+  <a href="#">الصحة</a>
+  <a href="#">قسم المرأة</a>
 </div>
 
-<h1>Algeriano_NEO</h1>
-
-<p>
-منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، والخدمات  
-في نظام واحد فخم من الجيل الجديد.
-</p>
+<!-- المحتوى -->
+<div class="hero">
+  <h1>Algeriano_NEO</h1>
+  <p>
+    منصة جزائرية ذكية تجمع التجارة، الترفيه، النقل، والخدمات في نظام واحد.<br>
+    فخامة من الجيل الجديد.
+  </p>
+</div>
 
 </body>
 </html>
