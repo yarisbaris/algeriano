@@ -2,148 +2,149 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Algeriano_Neo</title>
 
 <style>
     body {
         margin: 0;
-        font-family: "Cairo", sans-serif;
-        background: #0a0a0a;
+        font-family: 'Arial', sans-serif;
+        background: radial-gradient(circle at top, #1a0033, #000);
         color: #fff;
+        overflow-x: hidden;
     }
 
-    /* 🔥 لوغو فاخر + هالة */
-    .header {
-        display: flex;
-        align-items: center;
-        padding: 18px 20px;
-        gap: 15px;
-        background: rgba(20, 20, 20, 0.6);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid #222;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    }
-
-    .header img {
-        width: 60px;
-        height: 60px;
-        border-radius: 14px;
-        box-shadow: 0 0 12px #0ff;
-    }
-
-    .header .title {
-        font-size: 26px;
-        font-weight: 900;
-        background: linear-gradient(90deg,#0ff,#6f00ff);
+    /* 🔵🟣 لوغو */
+    .logo {
+        text-align: center;
+        font-size: 35px;
+        font-weight: bold;
+        margin-top: 20px;
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, #00d9ff, #b400ff);
         -webkit-background-clip: text;
         color: transparent;
+        text-shadow: 0 0 15px #8000ff;
     }
 
-    /* 🔥 شريط أخبار فاخر */
-    @keyframes ticker {
+    /* 🟣🔵 شريط الأخبار */
+    .news-bar {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 10px 0;
+        overflow: hidden;
+        border-top: 2px solid #6a00ff;
+        border-bottom: 2px solid #00c3ff;
+        margin-top: 15px;
+    }
+
+    .news-text {
+        white-space: nowrap;
+        display: inline-block;
+        animation: slide 18s linear infinite;
+        font-size: 18px;
+        color: #d6d6ff;
+        text-shadow: 0 0 10px #8a2be2;
+    }
+
+    @keyframes slide {
         0% { transform: translateX(-100%); }
         100% { transform: translateX(100%); }
     }
 
-    .news-ticker {
-        width: 100%;
-        padding: 12px 0;
-        overflow: hidden;
-        background: rgba(30,30,30,0.6);
-        backdrop-filter: blur(8px);
-        border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
-        direction: ltr;
-    }
-
-    .news-ticker-content {
-        display: inline-block;
-        animation: ticker 14s linear infinite;
-        font-size: 18px;
-        color: #0ff;
-    }
-
-    /* 🔥 زر القائمة */
+    /* القائمة الجانبية */
     .menu-btn {
-        width: 100%;
-        background: rgba(15, 15, 15, 0.7);
-        color: #0ff;
-        border: none;
-        padding: 16px;
-        font-size: 20px;
+        font-size: 28px;
         cursor: pointer;
-        border-bottom: 1px solid #222;
-        backdrop-filter: blur(5px);
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.4);
+        padding: 10px 15px;
+        border-radius: 10px;
+        z-index: 999;
+        color: #6e00ff;
+        text-shadow: 0 0 10px #6e00ff;
+    }
+
+    .side-menu {
+        position: fixed;
+        top: 0;
+        right: -260px;
+        width: 260px;
+        height: 100%;
+        background: rgba(20, 0, 40, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: -3px 0 25px #7f00ff;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .side-menu.open {
+        right: 0;
+    }
+
+    .side-menu a {
+        display: block;
+        padding: 15px 25px;
+        font-size: 20px;
+        color: #d6baff;
+        text-decoration: none;
         transition: 0.3s;
     }
 
-    .menu-btn:hover {
-        background: rgba(0, 0, 0, 0.9);
-        color: #6f00ff;
+    .side-menu a:hover {
+        background: rgba(100,0,255,0.3);
+        padding-right: 35px;
     }
 
-    /* 🔥 القائمة العمودية الفاخرة */
-    .menu {
-        display: none;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(10px);
-        animation: fade 0.4s forwards;
+    /* البوكسات */
+    .sections {
+        width: 90%;
+        margin: 40px auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
-    @keyframes fade {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+    .box {
+        background: rgba(40, 0, 80, 0.6);
+        border: 2px solid rgba(120,0,255,0.5);
+        padding: 25px;
+        border-radius: 18px;
+        text-align: center;
+        font-size: 22px;
+        text-shadow: 0 0 8px #7a00ff;
+        transition: 0.3s;
     }
 
-    .menu a {
-        display: block;
-        padding: 14px;
-        font-size: 18px;
-        color: #fff;
-        text-decoration: none;
-        border-bottom: 1px solid #222;
-        transition: 0.2s;
-    }
-
-    .menu a:hover {
-        background: rgba(255,255,255,0.05);
-        color: #0ff;
-        padding-right: 25px;
+    .box:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 25px #9a00ff;
     }
 </style>
-
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById("menu");
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-</script>
 
 </head>
 <body>
 
-<!-- 🔱 اللوغو -->
-<div class="header">
-    <img src="https://i.imgur.com/8Km9tLL.png" alt="logo">
-    <div class="title">Algeriano_Neo</div>
+<!-- زر القائمة -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<!-- لوغو -->
+<div class="logo">Algeriano_Neo</div>
+
+<!-- شريط الأخبار -->
+<div class="news-bar">
+    <div class="news-text">مرحبا بكم في منصة Algeriano_Neo — أول منصة جزائرية عالمية: تجارة، ترفيه، خدمات، صحة، نقل بالسائقين، المرأة، المطاعم، التقنية، العقار، السياحة، السفر، متجر عام</div>
 </div>
 
-<!-- 📰 شريط الأخبار -->
-<div class="news-ticker">
-    <div class="news-ticker-content">⚡ منصة شبابية — تجارة بوسيط — خدمات — صحة — ترفيه — نقل بالسائقين — قسم المرأة — أقوى مشروع جزائري بنكهة عالمية ⚡</div>
-</div>
-
-<!-- 📂 زر القائمة -->
-<button class="menu-btn" onclick="toggleMenu()">☰ القائمة الرئيسية</button>
-
-<!-- 📂 القائمة العمودية -->
-<div class="menu" id="menu">
+<!-- القائمة الجانبية -->
+<div id="sideMenu" class="side-menu">
     <a href="#">الرئيسية</a>
     <a href="#">التجارة بوسيط</a>
     <a href="#">الخدمات</a>
     <a href="#">الترفيه</a>
-    <a href="#">السائقين</a>
+    <a href="#">السائقين (النقل)</a>
     <a href="#">الصحة</a>
     <a href="#">قسم المرأة</a>
     <a href="#">المطاعم والتغذية</a>
@@ -152,6 +153,29 @@
     <a href="#">السفر والسياحة</a>
     <a href="#">المتجر العام</a>
 </div>
+
+<!-- الأقسام الرئيسية -->
+<div class="sections">
+
+    <div class="box">التجارة بوسيط</div>
+    <div class="box">الخدمات</div>
+    <div class="box">الترفيه</div>
+    <div class="box">السائقين</div>
+    <div class="box">الصحة</div>
+    <div class="box">قسم المرأة</div>
+    <div class="box">التقنية والدروس</div>
+    <div class="box">العقار</div>
+    <div class="box">السفر والسياحة</div>
+    <div class="box">المطاعم</div>
+    <div class="box">المتجر العام</div>
+
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+</script>
 
 </body>
 </html>
