@@ -1,71 +1,119 @@
 <!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Algeriano_Neo 2026</title>
-<style>
- body {
-   margin: 0;
-   font-family: "Tahoma", sans-serif;
-   background: #0d0d0d;
-   color: #fff;
- }
- header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 15px 20px;
-   background: #111;
-   position: fixed;
-   width: 100%;
-   top: 0;
-   z-index: 1000;
- }
- .logo {
-   font-size: 26px;
-   font-weight: bold;
-   color: #00e0ff;
-   text-shadow: 0 0 10px #00e0ff;
- }
- .menu-toggle {
-   font-size: 28px;
-   cursor: pointer;
-   user-select: none;
- }
- nav {
-   position: fixed;
-   top: 0;
-   right: -260px;
-   width: 250px;
-   height: 100%;
-   background: #000;
-   padding-top: 80px;
-   transition: 0.4s;
- }
- nav.open {
-   right: 0;
- }
- nav a {
-   display: block;
-   padding: 15px;
-   color: #fff;
-   text-decoration: none;
-   border-bottom: 1px solid #222;
-   font-size: 18px;
- }
- nav a:hover {
-   background: #00e0ff33;
- }/* شريط الأخبار */ .news-bar { margin-top: 70px; width: 100%; background: #00e0ff; color: #000; overflow: hidden; white-space: nowrap; box-shadow: 0 0 10px #00e0ff; } .news-text { display: inline-block; padding: 10px; font-weight: bold; animation: news 15s linear infinite; } @keyframes news { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algeriano_Neo 2026</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }/* رأس الصفحة */
+header {
+  background: #111;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
 
-/* الأقسام */ .sections { margin-top: 40px; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; } .sec { background: #111; padding: 20px; border-radius: 15px; text-align: center; font-size: 20px; border: 1px solid #00e0ff44; transition: 0.3s; } .sec:hover { transform: scale(1.05); box-shadow: 0 0 15px #00e0ff; }
+/* صورة صغيرة قبل اللوغو */
+.pre-logo-img {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  border-radius: 8px;
+  object-fit: cover;
+}
 
-footer { margin-top: 40px; padding: 20px; text-align: center; background: #000; color: #00e0ff; border-top: 1px solid #00e0ff33; } </style>
+/* اللوغو */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+/* القائمة */
+nav {
+  display: none;
+  flex-direction: column;
+  background: #222;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 220px;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  font-size: 16px;
+}
+
+nav a:hover {
+  background: #444;
+}
+
+/* زر تفتح وتغلق */
+.menu-btn {
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* شريط الأخبار */
+.news-bar {
+  background: #222;
+  color: white;
+  padding: 8px;
+  margin-top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: ltr; /* مهم باش يمشي من اليسار إلى اليمين */
+}
+
+.news-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 12s linear infinite;
+  font-size: 18px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+  </style>
 </head>
-<body><header>
-  <div class="logo">Algeriano_Neo</div>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-</header><nav id="sideMenu">
+<body>  <header><!-- صورة قبل اللوغو -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_map_of_Algeria.svg/640px-Flag_map_of_Algeria.svg.png" class="pre-logo-img" />
+
+<!-- اللوغو -->
+<div class="logo">Algeriano_Neo</div>
+
+<!-- زر القائمة -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<!-- القائمة المنسدلة -->
+<nav id="menu">
   <a href="#">الرئيسية</a>
   <a href="#">التجارة بوسيط</a>
   <a href="#">الخدمات</a>
@@ -73,32 +121,21 @@ footer { margin-top: 40px; padding: 20px; text-align: center; background: #000; 
   <a href="#">النقل بالسائقين</a>
   <a href="#">الصحة</a>
   <a href="#">قسم المرأة</a>
-  <a href="#">المطاعم والتغذية</a>
+  <a href="#">المطاعم</a>
   <a href="#">العقار</a>
   <a href="#">التقنية والدروس</a>
   <a href="#">السفر والسياحة</a>
   <a href="#">المتجر العام</a>
-</nav><div class="news-bar">
-  <div class="news-text">مرحباً بكم في مشروع Algeriano_Neo — أقوى منصة عصرية جزائرية 2026 🔥🚀</div>
-</div><div class="sections">
-  <div class="sec">الرئيسية</div>
-  <div class="sec">التجارة بوسيط</div>
-  <div class="sec">الخدمات</div>
-  <div class="sec">الترفيه</div>
-  <div class="sec">النقل بالسائقين</div>
-  <div class="sec">الصحة</div>
-  <div class="sec">قسم المرأة</div>
-  <div class="sec">المطاعم والتغذية</div>
-  <div class="sec">العقار</div>
-  <div class="sec">التقنية والدروس</div>
-  <div class="sec">السفر والسياحة</div>
-  <div class="sec">المتجر العام</div>
-</div><footer>
-  جميع الحقوق محفوظة 2026 © Algeriano_Neo
-</footer><script>
-function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
-  menu.classList.toggle("open");
-}
-</script></body>
+</nav>
+
+  </header>  <!-- شريط الأخبار من اليسار إلى اليمين -->  <div class="news-bar">
+    <div class="news-text">مرحبًا بكم في Algeriano_Neo — منصتكم العملاقة متعددة الخدمات 2026 🚀</div>
+  </div>  <footer>
+    جميع الحقوق محفوظة 2026 © Algeriano_Neo
+  </footer>  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script></body>
 </html>
