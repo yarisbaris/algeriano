@@ -26,14 +26,14 @@
     .logo {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         font-size: 22px;
         font-weight: 700;
     }
 
     .algeria-map {
-        width: 40px;
-        filter: drop-shadow(0 0 6px #00e1ff);
+        width: 45px;
+        filter: drop-shadow(0 0 8px #00e1ff);
     }
 
     /* NEWS BAR */
@@ -43,6 +43,7 @@
         background: #1a1a1a;
         border-top: 1px solid #333;
         border-bottom: 1px solid #333;
+        direction: ltr; /* مهم جداً لعكس الاتجاه */
     }
 
     .news {
@@ -50,15 +51,15 @@
         white-space: nowrap;
         padding: 10px;
         font-size: 16px;
-        animation: slide-left 18s linear infinite;
+        animation: slide-right 18s linear infinite;
     }
 
-    @keyframes slide-left {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
+    @keyframes slide-right {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
     }
 
-    /* MENU */
+    /* MENU BUTTON */
     .menu-btn {
         position: absolute;
         left: 20px;
@@ -70,6 +71,7 @@
         border: 1px solid #444;
     }
 
+    /* MENU */
     aside {
         width: 260px;
         background: #111;
@@ -88,8 +90,8 @@
 
     aside ul {
         list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 0;
     }
 
     aside li {
@@ -105,7 +107,7 @@
         padding-right: 28px;
     }
 
-    /* MAIN */
+    /* MAIN SECTION */
     .hero {
         padding: 60px 20px;
         text-align: center;
@@ -130,16 +132,18 @@
 
 <header>
     <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_map_of_Algeria.svg" class="algeria-map">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Algeria_relief_location_map.jpg"
+             class="algeria-map">
         Algeriano_Neo
     </div>
 
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
+<!-- NEWS BAR -->
 <div class="news-container">
     <div class="news">
-        🔥 آخر الأخبار: إطلاق منصة Algeriano_Neo الإصدار التجريبي… خدمات عصرية… تجارة بوسيط… سائقين باشتراك… والمزيد قادم!
+        🔥 آخر الأخبار: إطلاق منصة Algeriano_Neo الإصدار التجريبي… خدمات عصرية… تجارة بوسيط… سائقين باشتراك… والمزيد قريباً!
     </div>
 </div>
 
