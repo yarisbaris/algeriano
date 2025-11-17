@@ -3,251 +3,173 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Algeriano_Neo — Ultra 3D</title>
+<title>Algeriano_Neo — Ultra 3D (Fixed)</title>
 <style>
-  :root{
-    --neon: #00eaff;
-    --neon-2:#8a2be2;
-    --bg:#020203;
-    --card:#081018;
-  }
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#020203 0%, #06060a 70%);font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  /* HEADER */
-  .header {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    padding:18px 26px;
-    position:relative;
-    z-index:20;
-    backdrop-filter: blur(6px);
-  }
+:root{
+  --neon:#00eaff;
+  --neon2:#8a2be2;
+  --bg:#020203;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:"Cairo",sans-serif;background:linear-gradient(180deg,#020203 0%,#06060a 70%);color:#eaf7ff}
+.header{
+  display:flex;align-items:center;justify-content:space-between;padding:16px 20px;position:relative;z-index:50;
+  background:transparent;
+}
+/* brand */
+.brand{display:flex;align-items:center;gap:14px}
+.logoText{
+  font-weight:800;font-size:26px;
+  background:linear-gradient(90deg,var(--neon),var(--neon2));
+  -webkit-background-clip:text;color:transparent;text-shadow:0 0 12px rgba(0,234,255,0.12)
+}
+.brandSub{font-size:12px;color:#9fbfdc;opacity:.9;margin-top:6px}
 
-  /* Logo + map container */
-  .brand {
-    display:flex;
-    align-items:center;
-    gap:18px;
-    cursor:default;
-  }
+/* map-card (inline SVG) */
+.map-card{width:86px;height:86px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(0,234,255,0.04), rgba(138,43,226,0.02));
+  border:1px solid rgba(0,234,255,0.12);
+  box-shadow:0 10px 30px rgba(0,234,255,0.06), inset 0 0 18px rgba(0,234,255,0.03);
+  transition:transform .18s ease-out;transform-style:preserve-3d;
+  overflow:hidden;
+}
 
-  /* 3D logo text */
-  .logo {
-    font-weight:800;
-    font-size:28px;
-    letter-spacing:2px;
-    color:transparent;
-    background:linear-gradient(90deg,var(--neon), var(--neon-2));
-    -webkit-background-clip:text;
-    text-shadow:0 0 14px rgba(0,234,255,0.12), 0 0 28px rgba(138,43,226,0.06);
-    transform-style:preserve-3d;
-    transition:transform .18s ease-out;
-  }
+/* simple inline SVG map styling */
+.map-svg{width:64px;height:64px;display:block;filter:drop-shadow(0 0 8px rgba(0,234,255,.18))}
 
-  /* map wrapper (neon holo card) */
-  .map-card{
-    width:92px;
-    height:92px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(180deg, rgba(0,234,255,0.04), rgba(138,43,226,0.02));
-    border:1px solid rgba(0,234,255,0.14);
-    box-shadow:
-      0 6px 30px rgba(0,234,255,0.06),
-      inset 0 0 18px rgba(0,234,255,0.03);
-    transform-style:preserve-3d;
-    transition:transform .18s ease-out, box-shadow .18s ease-out;
-    position:relative;
-    overflow:hidden;
-  }
+/* hero */
+.hero{padding:48px 18px 14px;text-align:center;pointer-events:none}
+.hero h1{margin:0;font-size:44px;font-weight:900;background:linear-gradient(90deg,var(--neon),var(--neon2));-webkit-background-clip:text;color:transparent;text-shadow:0 0 22px rgba(0,234,255,.12)}
+.hero p{margin:12px auto 0;max-width:900px;color:#cfeeff;opacity:.9;font-size:17px}
 
-  .map-card::after{
-    content:"";
-    position:absolute;inset:0;
-    box-shadow:0 0 40px rgba(0,234,255,0.07);
-    border-radius:14px;
-    pointer-events:none;
-  }
+/* ticker */
+.ticker{margin:18px auto 0;width:100%;background:rgba(255,255,255,0.015);border-top:1px solid rgba(0,234,255,0.06);border-bottom:1px solid rgba(138,43,226,0.04);overflow:hidden;padding:10px 0;position:relative}
+.ticker .line{display:inline-block;white-space:nowrap;position:absolute;will-change:transform;animation:marq 16s linear infinite;color:var(--neon);font-size:15px;padding-left:100%}
+@keyframes marq{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
-  .map-svg{
-    width:70px;height:70px;
-    filter:drop-shadow(0 0 10px rgba(0,234,255,0.25));
-    transform-style:preserve-3d;
-  }
+/* vertical menu (right side) */
+.menu{
+  position:fixed;top:120px;right:18px;width:220px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(0,234,255,0.06);border-radius:12px;padding:12px;box-shadow:0 8px 40px rgba(0,0,0,0.6);z-index:60;
+  max-height:70vh;overflow:auto;
+}
+.menu h4{margin:0 0 8px;color:var(--neon);text-align:center}
+.menu a{display:block;padding:10px 8px;color:#e7f7fb;text-decoration:none;font-size:16px;border-radius:8px;margin-bottom:8px;transition:.18s}
+.menu a:hover{background:rgba(0,234,255,0.06);color:var(--neon);padding-right:12px}
 
-  /* center title below header */
-  .hero {
-    padding:52px 18px 36px;
-    text-align:center;
-    pointer-events:none;
-  }
-  .hero h1{
-    margin:0;
-    font-size:48px;
-    font-weight:900;
-    background:linear-gradient(90deg,var(--neon),var(--neon-2));
-    -webkit-background-clip:text;color:transparent;
-    text-shadow:0 0 30px rgba(0,234,255,0.12);
-    transform:translateZ(0);
-  }
-  .hero p{margin:12px auto 0;max-width:820px;color:#bfcbd6;opacity:.9;font-size:18px;}
+/* responsive adjustments */
+@media(max-width:720px){
+  .map-card{width:68px;height:68px}
+  .logoText{font-size:20px}
+  .hero h1{font-size:30px}
+  .menu{right:10px;top:150px;width:180px}
+}
 
-  /* ticker */
-  .ticker{
-    margin:18px auto 0;
-    width:100%;
-    background:rgba(255,255,255,0.02);
-    border-top:1px solid rgba(0,234,255,0.06);
-    border-bottom:1px solid rgba(138,43,226,0.04);
-    overflow:hidden;
-    padding:8px 0;
-    position:relative;
-  }
-  .ticker .line{
-    display:inline-block;
-    white-space:nowrap;
-    position:absolute;
-    will-change:transform;
-    animation:marquee 16s linear infinite;
-    color:var(--neon);
-    font-size:16px;
-    padding-left:100%;
-    text-shadow:0 0 12px rgba(0,234,255,0.12);
-  }
-  @keyframes marquee{
-    0%{transform:translateX(-100%);}
-    100%{transform:translateX(100%);}
-  }
-
-  /* left menu (vertical) */
-  .menu {
-    position:fixed;
-    right:18px;
-    top:110px;
-    width:210px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(0,234,255,0.06);
-    border-radius:12px;
-    padding:14px;
-    box-shadow:0 8px 40px rgba(0,0,0,0.6);
-  }
-  .menu h4{margin:0 0 10px;color:var(--neon);text-align:center}
-  .menu a{
-    display:block;padding:12px 10px;color:#e7f7fb;text-decoration:none;font-size:17px;border-radius:8px;margin-bottom:8px;
-    transition:.18s;background:transparent;
-  }
-  .menu a:hover{background:rgba(0,234,255,0.06);color:var(--neon);padding-right:18px;}
-
-  /* responsive: on small screens stack header elements */
-  @media (max-width:720px){
-    .header{flex-direction:column;gap:8px;padding:14px}
-    .brand{gap:12px}
-    .map-card{width:78px;height:78px}
-    .logo{font-size:26px}
-    .hero h1{font-size:34px}
-    .menu{right:10px;top:140px;width:180px}
-  }
-
-  /* small polished footer spacer */
-  .spacer{height:90vh}
+/* ensure content below menu not hidden */
+.content-wrap{padding-bottom:160px}
+.spacer{height:60vh}
 </style>
 </head>
 <body>
 
-  <header class="header">
-    <!-- brand: logo text + small subtitle -->
-    <div class="brand" id="brand">
-      <!-- map card sits visually beside the logo -->
-      <div class="map-card" id="mapCard" title="خريطة الجزائر">
-        <!-- using public SVG (safe) - inline <img> pointing to Wikimedia svg -->
-        <img class="map-svg" alt="Algeria" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag-map_of_Algeria.svg">
-      </div>
-
-      <div style="display:flex;flex-direction:column;align-items:flex-start;">
-        <div class="logo" id="logoText">Algeriano_Neo</div>
-        <div style="font-size:12px;color:#9fbfdc;margin-top:6px;opacity:.9;">منصّة جزائرية ذكية • تجارة • ترفيه • خدمات</div>
-      </div>
+<header class="header">
+  <div class="brand" id="brand">
+    <div class="map-card" id="mapCard" title="خريطة الجزائر">
+      <!-- INLINE SVG simplified map silhouette + flag colors -->
+      <svg class="map-svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+        </defs>
+        <!-- green background part of flag -->
+        <rect x="0" y="0" width="512" height="512" fill="#006233"/>
+        <!-- white crescent+star simplified at center (stylized, not precise) -->
+        <g transform="translate(160,120) scale(0.8)">
+          <path d="M120 80c0 44-36 80-80 80 26-18 44-48 44-80s-18-62-44-80c44 0 80 36 80 80z" fill="#fff"/>
+          <polygon points="210,120 230,160 190,140 230,140 190,160" fill="#fff" transform="translate(-60,0) scale(.9)"/>
+        </g>
+      </svg>
     </div>
 
-    <!-- right side: small quick actions (placeholder) -->
-    <div style="display:flex;gap:12px;align-items:center;">
-      <button onclick="toggleMenu()" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:#bfefff;padding:10px 12px;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px rgba(0,234,255,0.03)">القائمة</button>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;">
+      <div class="logoText" id="logoText">Algeriano_Neo</div>
+      <div class="brandSub">منصّة جزائرية ذكيّة • تجارة • ترفيه • خدمات</div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="hero" id="hero">
-      <h1>Algeriano_Neo</h1>
-      <p>النسخة الأروع لواجهة 2026 — لوغو ثلاثي الأبعاد، خريطة الجزائر نيون بجنب اللوغو، تفاعلات ماوس خفيفة وتجربة شبابية عالمية.</p>
-    </section>
+  <div>
+    <button onclick="toggleMenu()" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:#bfefff;padding:8px 10px;border-radius:10px;cursor:pointer">القائمة</button>
+  </div>
+</header>
 
-    <div class="ticker"><div class="line">⚡ Algeriano_Neo — إطلاق تجريبي الآن — انضم وجرّب أقسام التجارة، الخدمات، الصحة، السائقين وقسم المرأة ⚡</div></div>
+<main class="content-wrap">
+  <section class="hero" id="hero">
+    <h1>Algeriano_Neo</h1>
+    <p>نسخة محسّنة: خريطة الجزائر جنب اللوغو، تأثير نيوني بسيط، وشريط أخبار متحرك — خفيف وسلس على الموبايل.</p>
+  </section>
 
-    <!-- vertical menu -->
-    <aside class="menu" id="sideMenu">
-      <h4>الأقسام</h4>
-      <a href="#">الرئيسية</a>
-      <a href="#">التجارة بوسيط</a>
-      <a href="#">الخدمات</a>
-      <a href="#">الترفيه</a>
-      <a href="#">السائقين</a>
-      <a href="#">الصحة</a>
-      <a href="#">قسم المرأة</a>
-      <a href="#">المطاعم</a>
-      <a href="#">العقار</a>
-      <a href="#">التقنية</a>
-      <a href="#">السفر</a>
-      <a href="#">المتجر العام</a>
-    </aside>
+  <div class="ticker"><div class="line">⚡ Algeriano_Neo — انضم الآن: التجارة • الخدمات • الصحة • النقل • ترفيه • قسم المرأة ⚡</div></div>
 
-    <div class="spacer"></div>
-  </main>
+  <aside class="menu" id="sideMenu">
+    <h4>الأقسام</h4>
+    <a href="#">الرئيسية</a>
+    <a href="#">التجارة بوسيط</a>
+    <a href="#">الخدمات</a>
+    <a href="#">الترفيه</a>
+    <a href="#">السائقين</a>
+    <a href="#">الصحة</a>
+    <a href="#">قسم المرأة</a>
+    <a href="#">المطاعم</a>
+    <a href="#">العقار</a>
+    <a href="#">التقنية</a>
+    <a href="#">السفر</a>
+    <a href="#">المتجر العام</a>
+  </aside>
+
+  <div class="spacer"></div>
+</main>
 
 <script>
-  // 3D tilt for both logo text and map-card
-  const brand = document.getElementById('brand');
+  // small tilt effect but limited to avoid layout shifting
   const mapCard = document.getElementById('mapCard');
   const logoText = document.getElementById('logoText');
   const sideMenu = document.getElementById('sideMenu');
 
-  // toggle simple visibility for side menu (mobile friendly)
   function toggleMenu(){
-    sideMenu.style.display = (sideMenu.style.display === 'block') ? 'none' : 'block';
+    // simple toggle (for mobile and desktop)
+    if(getComputedStyle(sideMenu).display === 'none' || sideMenu.style.display === 'none'){
+      sideMenu.style.display = 'block';
+    } else {
+      sideMenu.style.display = 'none';
+    }
   }
 
-  // mouse move tilt effect (gentle)
+  // init side menu visible on desktop, hidden on small screens
+  function initMenu(){
+    if(window.innerWidth <= 720) sideMenu.style.display = 'none';
+    else sideMenu.style.display = 'block';
+  }
+  initMenu();
+  window.addEventListener('resize', initMenu);
+
+  // mousemove gentle tilt
   document.addEventListener('mousemove', (e) => {
-    // calculate center-based small angles
     const cx = window.innerWidth/2;
     const cy = window.innerHeight/2;
-    const dx = e.clientX - cx;
-    const dy = e.clientY - cy;
-    const rx = (-dy / cy) * 6; // rotateX
-    const ry = (dx / cx) * 6;  // rotateY
-
-    // apply transforms with subtleness
-    const transformVal = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    mapCard.style.transform = transformVal + ' translateZ(6px)';   // map card 3D tilt
-    logoText.style.transform = `translateZ(10px) rotateY(${ry/6}deg)`; // smaller movement for text
+    const dx = (e.clientX - cx) / cx; // -1..1
+    const dy = (e.clientY - cy) / cy;
+    const rx = -dy * 6; // rotateX
+    const ry = dx * 6;  // rotateY
+    mapCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+    logoText.style.transform = `translateZ(8px) rotateY(${ry/5}deg)`;
   });
 
-  // small enter animation
-  window.addEventListener('load', () => {
-    mapCard.style.transition = 'transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s';
-    mapCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(6px)';
-  });
-
-  // mobile touch tilt: use deviceorientation if available (light)
+  // mobile orientation fallback
   if(window.DeviceOrientationEvent){
     window.addEventListener('deviceorientation', (ev) => {
-      const beta = ev.beta || 0; // x
-      const gamma = ev.gamma || 0; // y
-      const rx = (beta/90) * 6;
-      const ry = (gamma/90) * 6;
-      mapCard.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+      const beta = ev.beta || 0; const gamma = ev.gamma || 0;
+      const rx = (beta/90) * 6; const ry = (gamma/90) * 6;
+      mapCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
     }, true);
   }
 </script>
