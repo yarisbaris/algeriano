@@ -1,148 +1,166 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Algeriano_Neo</title>
 
 <style>
-
-/* خلفية وفخامة عامة */
+/* الخلفية */
 body {
     margin: 0;
-    font-family: "Cairo", sans-serif;
-    background: #0f0f0f;
+    padding: 0;
+    font-family: "Tajawal", sans-serif;
+    background: #050505;
     color: white;
+    overflow-x: hidden;
 }
 
-/* القسم العلوي */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px 0;
-    background: linear-gradient(90deg, #121212, #1c1c1c, #121212);
-    font-size: 2rem;
+/* عنوان الموقع */
+.header-title {
+    text-align: center;
+    font-size: 3rem;
+    margin: 25px 0 10px;
     font-weight: 700;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+    text-shadow: 0 0 25px #00eaffaa, 0 0 45px #00eaff55;
 }
 
-/* شريط الأخبار */
+/* شريط الأقسام / الأخبار */
 .news-bar {
     width: 100%;
-    overflow: hidden;
     white-space: nowrap;
-    background: #222;
-    padding: 10px 0;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+    overflow: hidden;
+    padding: 12px 0;
+    border-top: 1px solid #00eaff55;
+    border-bottom: 1px solid #00eaff55;
+    background: #0b0b0b;
+    box-shadow: 0 0 25px #00eaff33 inset;
 }
 
 .news-content {
     display: inline-block;
-    animation: scroll-left 12s linear infinite;
-    font-size: 1.1rem;
-    color: #00e5ff;
+    animation: scroll-left 16s linear infinite;
+    font-size: 1.15rem;
+    color: #00eaff;
+    padding-left: 100%;
+    text-shadow: 0 0 8px #00eaff99;
 }
 
 @keyframes scroll-left {
-    from { transform: translateX(100%); }
-    to   { transform: translateX(-100%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
-/* القائمة العمودية */
+/* زر القائمة */
+.menu-btn {
+    margin: 25px auto;
+    display: block;
+    width: 140px;
+    padding: 14px;
+    text-align: center;
+    background: #00eaff;
+    color: black;
+    border-radius: 14px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 18px #00eaffaa, 0 0 30px #00eaff55;
+    transition: 0.2s;
+}
+
+.menu-btn:hover {
+    transform: scale(1.05);
+}
+
+/* القائمة الجانبية */
 .menu {
-    width: 260px;
-    background: #141414;
-    padding: 20px;
     position: fixed;
-    top: 120px;
-    right: -260px;
+    top: 0;
+    right: -270px;
+    width: 270px;
     height: 100%;
-    transition: 0.4s;
-    border-left: 1px solid #333;
+    background: rgba(5, 5, 5, 0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: -3px 0 20px rgba(0,0,0,0.7);
+    padding-top: 70px;
+    transition: 0.35s ease-in-out;
 }
 
 .menu.open {
     right: 0;
 }
 
-.menu-button {
-    position: fixed;
-    top: 140px;
-    right: 15px;
-    background: #00e5ff;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #000;
-    z-index: 1000;
-}
-
 .menu a {
     display: block;
-    padding: 12px 0;
-    font-size: 1.1rem;
-    border-bottom: 1px solid #333;
-    color: #eee;
+    padding: 18px 25px;
+    font-size: 1.25rem;
+    color: #e6e6e6;
     text-decoration: none;
-    transition: 0.2s;
-}
-.menu a:hover {
-    color: #00e5ff;
-    padding-right: 5px;
+    transition: 0.25s;
 }
 
-/* محتوى رئيسي placeholder */
-.content {
-    padding: 40px 20px;
-    margin-top: 40px;
+.menu a:hover {
+    padding-right: 35px;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaffaa;
+}
+
+/* قسم الترحيب */
+.welcome {
+    width: 90%;
+    margin: 50px auto;
     text-align: center;
 }
 
-/* FOOTER فخم 2026 */
+.welcome h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px #ffffff33;
+}
+
+.welcome p {
+    font-size: 1.25rem;
+    line-height: 2.1rem;
+    color: #dddddd;
+}
+
+/* الفوتر */
 .footer {
     width: 100%;
-    padding: 22px 0;
-    margin-top: 60px;
-    background: linear-gradient(90deg, #0a0a0a, #141414, #0a0a0a);
+    padding: 25px 0;
+    margin-top: 70px;
+    background: #0d0d0dee;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -2px 22px rgba(0,0,0,0.7);
 }
 
 .footer p {
-    margin: 0;
-    font-size: 15px;
-    letter-spacing: 1px;
-    color: #cfcfcf;
-    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1.3px;
+    color: #e2e2e2;
+    text-shadow: 0 0 4px #ffffff33;
 }
-
 </style>
 
 </head>
 <body>
 
-<!-- العنوان الرئيسي -->
-<div class="header">
-    Algeriano_Neo
-</div>
+<!-- العنوان -->
+<h1 class="header-title">Algeriano_Neo</h1>
 
-<!-- شريط الأخبار -->
+<!-- شريط الأقسام -->
 <div class="news-bar">
     <div class="news-content">
-        جديد المنصة: خدمات — تجارة — ترفيه — صحة — نقل — تقنية — دروس — مطاعم — سفر وسياحة — المرأة — المتجر — العقار
+        التجارة — الخدمات — الترفيه — السائقين — الصحة — قسم المرأة — المطاعم — التقنية — السفر والسياحة — العقار — المتجر العام —
     </div>
 </div>
 
 <!-- زر القائمة -->
-<div class="menu-button" onclick="toggleMenu()">القائمة</div>
+<div class="menu-btn" onclick="toggleMenu()">القائمة</div>
 
-<!-- القائمة العمودية -->
-<div id="menu" class="menu">
+<!-- القائمة الجانبية -->
+<div class="menu" id="sideMenu">
     <a href="#">الرئيسية</a>
     <a href="#">التجارة بوسيط</a>
     <a href="#">الخدمات</a>
@@ -150,29 +168,32 @@ body {
     <a href="#">السائقين</a>
     <a href="#">الصحة</a>
     <a href="#">قسم المرأة</a>
-    <a href="#">المطاعم والتغذية</a>
+    <a href="#">المطاعم</a>
     <a href="#">العقار</a>
-    <a href="#">التقنية والدروس</a>
-    <a href="#">السفر والسياحة</a>
+    <a href="#">التقنية</a>
+    <a href="#">السفر</a>
     <a href="#">المتجر العام</a>
 </div>
 
-<!-- محتوى رئيسي -->
-<div class="content">
-    <h2>مرحبًا بك في Algeriano_Neo</h2>
-    <p>العملاق الجزائري الجديد… يجمع التجارة، الترفيه، الخدمات، الصحة، التوصيل، التقنية، المطاعم، العقار، وكل شيء في منصة واحدة ✨.</p>
+<!-- قسم الترحيب -->
+<div class="welcome">
+    <h2>مرحباً بك في <span style="color:#00eaff;">Algeriano_Neo</span></h2>
+    <p>
+        العملاق الجزائري الجديد… يجمع التجارة، الترفيه، الخدمات،
+        الصحة، التوصيل، التقنية، المطاعم، العقار، وكل شيء في منصة واحدة ✨✨.
+    </p>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>جميع الحقوق محفوظة © 2026 — <strong>Algeriano_Neo</strong></p>
-</footer>
+<!-- الفوتر -->
+<div class="footer">
+    <p>جميع الحقوق محفوظة © 2026 — Algeriano_Neo</p>
+</div>
 
 <script>
 function toggleMenu() {
-    document.getElementById("menu").classList.toggle("open");
+    document.getElementById("sideMenu").classList.toggle("open");
 }
 </script>
 
 </body>
-        </html>
+</html>
