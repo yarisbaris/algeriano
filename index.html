@@ -1,199 +1,104 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Algeriano_Neo</title>
-
+<title>Algeriano_Neo 2026</title>
 <style>
-/* الخلفية */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Tajawal", sans-serif;
-    background: #050505;
-    color: white;
-    overflow-x: hidden;
-}
+ body {
+   margin: 0;
+   font-family: "Tahoma", sans-serif;
+   background: #0d0d0d;
+   color: #fff;
+ }
+ header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 15px 20px;
+   background: #111;
+   position: fixed;
+   width: 100%;
+   top: 0;
+   z-index: 1000;
+ }
+ .logo {
+   font-size: 26px;
+   font-weight: bold;
+   color: #00e0ff;
+   text-shadow: 0 0 10px #00e0ff;
+ }
+ .menu-toggle {
+   font-size: 28px;
+   cursor: pointer;
+   user-select: none;
+ }
+ nav {
+   position: fixed;
+   top: 0;
+   right: -260px;
+   width: 250px;
+   height: 100%;
+   background: #000;
+   padding-top: 80px;
+   transition: 0.4s;
+ }
+ nav.open {
+   right: 0;
+ }
+ nav a {
+   display: block;
+   padding: 15px;
+   color: #fff;
+   text-decoration: none;
+   border-bottom: 1px solid #222;
+   font-size: 18px;
+ }
+ nav a:hover {
+   background: #00e0ff33;
+ }/* شريط الأخبار */ .news-bar { margin-top: 70px; width: 100%; background: #00e0ff; color: #000; overflow: hidden; white-space: nowrap; box-shadow: 0 0 10px #00e0ff; } .news-text { display: inline-block; padding: 10px; font-weight: bold; animation: news 15s linear infinite; } @keyframes news { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-/* عنوان الموقع */
-.header-title {
-    text-align: center;
-    font-size: 3rem;
-    margin: 25px 0 10px;
-    font-weight: 700;
-    text-shadow: 0 0 25px #00eaffaa, 0 0 45px #00eaff55;
-}
+/* الأقسام */ .sections { margin-top: 40px; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; } .sec { background: #111; padding: 20px; border-radius: 15px; text-align: center; font-size: 20px; border: 1px solid #00e0ff44; transition: 0.3s; } .sec:hover { transform: scale(1.05); box-shadow: 0 0 15px #00e0ff; }
 
-/* شريط الأقسام / الأخبار */
-.news-bar {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 12px 0;
-    border-top: 1px solid #00eaff55;
-    border-bottom: 1px solid #00eaff55;
-    background: #0b0b0b;
-    box-shadow: 0 0 25px #00eaff33 inset;
-}
-
-.news-content {
-    display: inline-block;
-    animation: scroll-left 16s linear infinite;
-    font-size: 1.15rem;
-    color: #00eaff;
-    padding-left: 100%;
-    text-shadow: 0 0 8px #00eaff99;
-}
-
-@keyframes scroll-left {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-/* زر القائمة */
-.menu-btn {
-    margin: 25px auto;
-    display: block;
-    width: 140px;
-    padding: 14px;
-    text-align: center;
-    background: #00eaff;
-    color: black;
-    border-radius: 14px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 18px #00eaffaa, 0 0 30px #00eaff55;
-    transition: 0.2s;
-}
-
-.menu-btn:hover {
-    transform: scale(1.05);
-}
-
-/* القائمة الجانبية */
-.menu {
-    position: fixed;
-    top: 0;
-    right: -270px;
-    width: 270px;
-    height: 100%;
-    background: rgba(5, 5, 5, 0.97);
-    backdrop-filter: blur(12px);
-    box-shadow: -3px 0 20px rgba(0,0,0,0.7);
-    padding-top: 70px;
-    transition: 0.35s ease-in-out;
-}
-
-.menu.open {
-    right: 0;
-}
-
-.menu a {
-    display: block;
-    padding: 18px 25px;
-    font-size: 1.25rem;
-    color: #e6e6e6;
-    text-decoration: none;
-    transition: 0.25s;
-}
-
-.menu a:hover {
-    padding-right: 35px;
-    color: #00eaff;
-    text-shadow: 0 0 10px #00eaffaa;
-}
-
-/* قسم الترحيب */
-.welcome {
-    width: 90%;
-    margin: 50px auto;
-    text-align: center;
-}
-
-.welcome h2 {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    text-shadow: 0 0 20px #ffffff33;
-}
-
-.welcome p {
-    font-size: 1.25rem;
-    line-height: 2.1rem;
-    color: #dddddd;
-}
-
-/* الفوتر */
-.footer {
-    width: 100%;
-    padding: 25px 0;
-    margin-top: 70px;
-    background: #0d0d0dee;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 -2px 22px rgba(0,0,0,0.7);
-}
-
-.footer p {
-    font-size: 16px;
-    letter-spacing: 1.3px;
-    color: #e2e2e2;
-    text-shadow: 0 0 4px #ffffff33;
-}
-</style>
+footer { margin-top: 40px; padding: 20px; text-align: center; background: #000; color: #00e0ff; border-top: 1px solid #00e0ff33; } </style>
 
 </head>
-<body>
-
-<!-- العنوان -->
-<h1 class="header-title">Algeriano_Neo</h1>
-
-<!-- شريط الأقسام -->
-<div class="news-bar">
-    <div class="news-content">
-        التجارة — الخدمات — الترفيه — السائقين — الصحة — قسم المرأة — المطاعم — التقنية — السفر والسياحة — العقار — المتجر العام —
-    </div>
-</div>
-
-<!-- زر القائمة -->
-<div class="menu-btn" onclick="toggleMenu()">القائمة</div>
-
-<!-- القائمة الجانبية -->
-<div class="menu" id="sideMenu">
-    <a href="#">الرئيسية</a>
-    <a href="#">التجارة بوسيط</a>
-    <a href="#">الخدمات</a>
-    <a href="#">الترفيه</a>
-    <a href="#">السائقين</a>
-    <a href="#">الصحة</a>
-    <a href="#">قسم المرأة</a>
-    <a href="#">المطاعم</a>
-    <a href="#">العقار</a>
-    <a href="#">التقنية</a>
-    <a href="#">السفر</a>
-    <a href="#">المتجر العام</a>
-</div>
-
-<!-- قسم الترحيب -->
-<div class="welcome">
-    <h2>مرحباً بك في <span style="color:#00eaff;">Algeriano_Neo</span></h2>
-    <p>
-        العملاق الجزائري الجديد… يجمع التجارة، الترفيه، الخدمات،
-        الصحة، التوصيل، التقنية، المطاعم، العقار، وكل شيء في منصة واحدة ✨✨.
-    </p>
-</div>
-
-<!-- الفوتر -->
-<div class="footer">
-    <p>جميع الحقوق محفوظة © 2026 — Algeriano_Neo</p>
-</div>
-
-<script>
+<body><header>
+  <div class="logo">Algeriano_Neo</div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header><nav id="sideMenu">
+  <a href="#">الرئيسية</a>
+  <a href="#">التجارة بوسيط</a>
+  <a href="#">الخدمات</a>
+  <a href="#">الترفيه</a>
+  <a href="#">النقل بالسائقين</a>
+  <a href="#">الصحة</a>
+  <a href="#">قسم المرأة</a>
+  <a href="#">المطاعم والتغذية</a>
+  <a href="#">العقار</a>
+  <a href="#">التقنية والدروس</a>
+  <a href="#">السفر والسياحة</a>
+  <a href="#">المتجر العام</a>
+</nav><div class="news-bar">
+  <div class="news-text">مرحباً بكم في مشروع Algeriano_Neo — أقوى منصة عصرية جزائرية 2026 🔥🚀</div>
+</div><div class="sections">
+  <div class="sec">الرئيسية</div>
+  <div class="sec">التجارة بوسيط</div>
+  <div class="sec">الخدمات</div>
+  <div class="sec">الترفيه</div>
+  <div class="sec">النقل بالسائقين</div>
+  <div class="sec">الصحة</div>
+  <div class="sec">قسم المرأة</div>
+  <div class="sec">المطاعم والتغذية</div>
+  <div class="sec">العقار</div>
+  <div class="sec">التقنية والدروس</div>
+  <div class="sec">السفر والسياحة</div>
+  <div class="sec">المتجر العام</div>
+</div><footer>
+  جميع الحقوق محفوظة 2026 © Algeriano_Neo
+</footer><script>
 function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("open");
+  const menu = document.getElementById("sideMenu");
+  menu.classList.toggle("open");
 }
-</script>
-
-</body>
+</script></body>
 </html>
