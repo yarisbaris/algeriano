@@ -1,146 +1,143 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!-- Ultra Premium 2026 Homepage --><!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Algeriano Neo</title>
+  <title>Algeriano_Neo</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f10, #1a1a1d 60%, #0d0d0e);
+      font-family: 'Cairo', sans-serif;
+      background: #0d0d0d;
       color: #fff;
+      overflow-x: hidden;
     }/* HEADER */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  background: rgba(255,255,255,0.03);
+header {
+  background: rgba(20,20,20,0.85);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-
-.logo {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  background: linear-gradient(45deg, #6cc4ff, #ffffff);
-  -webkit-background-clip: text;
-  color: transparent;
+  padding: 25px 0;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #00eaff;
+  text-shadow: 0 0 15px #00eaff;
 }
 
 /* NEWS TICKER */
-.news-bar {
-  background: rgba(255,255,255,0.05);
-  padding: 12px;
+.ticker {
+  margin-top: 10px;
+  width: 100%;
+  background: #101820;
+  padding: 12px 0;
   overflow: hidden;
-  white-space: nowrap;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid #00eaff55;
+  border-bottom: 1px solid #00eaff55;
 }
 
-.news-text {
+.ticker-content {
   display: inline-block;
-  animation: ticker 18s linear infinite;
+  white-space: nowrap;
+  animation: tickerMove 18s linear infinite;
   font-size: 18px;
-  opacity: 0.85;
+  color: #00eaff;
 }
 
-@keyframes ticker {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+@keyframes tickerMove {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
 }
 
-/* SIDEBAR */
-.sidebar {
+/* MENU */
+.menu-btn {
   position: fixed;
-  top: 0;
-  right: -260px;
-  width: 260px;
-  height: 100%;
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(14px);
-  padding: 25px;
-  box-shadow: -4px 0 15px rgba(0,0,0,0.4);
-  transition: 0.4s;
-}
-
-.sidebar.open {
-  right: 0;
-}
-
-.menu-toggle {
+  top: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  background: #00eaff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 28px;
   cursor: pointer;
+  box-shadow: 0 0 15px #00eaff;
+  z-index: 999;
 }
 
-.sidebar a {
+nav {
+  position: fixed;
+  top: 0;
+  left: -270px;
+  width: 250px;
+  height: 100vh;
+  background: #0f1a20;
+  padding-top: 80px;
+  transition: 0.4s ease;
+  box-shadow: 4px 0 20px #000;
+  z-index: 998;
+}
+
+nav.open {
+  left: 0;
+}
+
+nav a {
   display: block;
-  padding: 14px;
-  margin: 10px 0;
-  background: rgba(255,255,255,0.06);
+  padding: 18px;
+  font-size: 20px;
+  color: #cce7ff;
   text-decoration: none;
-  color: #fff;
-  border-radius: 10px;
-  transition: 0.3s;
-  font-size: 18px;
+  border-bottom: 1px solid #1e2c33;
+  transition: 0.25s;
 }
 
-.sidebar a:hover {
-  background: #6cc4ff;
-  color: #000;
-  transform: translateX(-6px);
+nav a:hover {
+  background: #00eaff22;
+  color: #00eaff;
+  padding-right: 28px;
 }
 
-/* MAIN */
+/* MAIN SECTION */
 .hero {
-  padding: 80px 25px;
+  margin-top: 80px;
   text-align: center;
+  padding: 60px 20px;
 }
 
 .hero h1 {
-  font-size: 42px;
-  font-weight: 900;
-  margin-bottom: 15px;
-  background: linear-gradient(45deg, #6cc4ff, #ffffff);
-  -webkit-background-clip: text;
-  color: transparent;
+  font-size: 48px;
+  color: #00eaff;
+  text-shadow: 0 0 20px #00eaffaa;
 }
 
 .hero p {
-  font-size: 20px;
+  font-size: 22px;
   opacity: 0.8;
-  max-width: 500px;
-  margin: auto;
 }
 
   </style>
 </head>
-<body>
-  <div class="header">
-    <div class="logo">NEO DZ</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  </div>  <div class="news-bar">
-    <span class="news-text">🔥 آخر الأخبار — إطلاق منصة Algeriano Neo في نسختها 2026 — خدمات تجارة، صحة، ترفيه، نقل، مطاعم، تقنية والمزيد...</span>
-  </div>  <div class="sidebar" id="sidebar">
-    <a href="#">الرئيسية</a>
+<body>  <header>Algeriano_Neo</header>  <div class="ticker">
+    <div class="ticker-content">🔥 مرحباً بكم في أقوى منصة جزائرية — تجارة • ترفيه • خدمات • صحة • سائقين • نساء • مطاعم 🔥</div>
+  </div>  <div class="menu-btn" onclick="toggleMenu()">☰</div>  <nav id="sideMenu">
     <a href="#">التجارة بوسيط</a>
-    <a href="#">الخدمات</a>
     <a href="#">الترفيه</a>
-    <a href="#">السائقين</a>
-    <a href="#">الصحة</a>
+    <a href="#">الخدمات</a>
+    <a href="#">قسم السائقين</a>
+    <a href="#">قسم الصحة</a>
     <a href="#">قسم المرأة</a>
-    <a href="#">المطاعم والتغذية</a>
+    <a href="#">المطاعم و التغذية</a>
     <a href="#">العقار</a>
-    <a href="#">الدروس والتقنية</a>
-    <a href="#">السفر والسياحة</a>
+    <a href="#">التقنية و الدروس</a>
+    <a href="#">السفر و السياحة</a>
     <a href="#">المتجر العام</a>
-  </div>  <section class="hero">
-    <h1>مرحبا بك في مستقبل المنصات</h1>
-    <p>النسخة الأكثر فخامة، عصرية، وقوة لعام 2026 — مصممة للشباب، وسهلة، وسريعة، وبأفضل تجربة مستخدم.</p>
+  </nav>  <section class="hero">
+    <h1>مرحباً بك في المستقبل</h1>
+    <p>تجربة جزائرية 100%… بجودة عالمية و ستايل 2026 ✨</p>
   </section>  <script>
     function toggleMenu() {
-      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sideMenu').classList.toggle('open');
     }
   </script></body>
 </html>
