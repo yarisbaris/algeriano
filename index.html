@@ -1,150 +1,505 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Algeriano_Neo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Algeriano_Neo — Home</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: "Cairo", sans-serif;
-  background: black;
-  color: white;
-  overflow-x: hidden;
-}
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-/* خلفية متوهجة فاخرة */
-.glow-left, .glow-right {
-  position: fixed;
-  top: 0;
-  width: 70px;
-  height: 100%;
-  background: #00eaff55;
-  filter: blur(60px);
-  z-index: -1;
-}
-.glow-left { left: 0; }
-.glow-right { right: 0; }
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --card:#0f1113;
+      --muted:#bfc7cf;
+      --neon:#00eaff;
+      --glass: rgba(255,255,255,0.04);
+      --accent-glow: 0 0 18px rgba(0,234,255,0.12), 0 6px 30px rgba(0,234,255,0.06);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Tajawal",system-ui,Segoe UI,Arial;
+      background:linear-gradient(180deg,#050507 0%, #0b0b0f 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
 
-/* زر القائمة */
-.menu-btn {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  background: #00eaff;
-  color: black;
-  padding: 10px 15px;
-  font-size: 26px;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 0 12px #00eaff;
-  transition: 0.2s;
-}
-.menu-btn:hover {
-  transform: scale(1.1);
-}
+    /* TOP BAR: logo + news ticker */
+    .topbar{
+      width:100%;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1200;
+      padding:12px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      background:linear-gradient(180deg, rgba(6,6,8,0.55), rgba(6,6,8,0.25));
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
 
-/* القائمة الجانبية */
-#sidebar {
-  position: fixed;
-  top: 0;
-  right: -270px;
-  width: 270px;
-  height: 100%;
-  background: #000000ee;
-  transition: 0.35s ease-in-out;
-  padding-top: 90px;
-  z-index: 9998;
-  backdrop-filter: blur(6px);
-  border-left: 2px solid #00eaff55;
-}
+    .topbar-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
 
-#sidebar.open {
-  right: 0;
-}
+    /* logo (icon + text) */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-icon{
+      width:46px;height:46px;
+      display:inline-grid;
+      place-items:center;
+      background:linear-gradient(90deg,#004f8a,#00eaff);
+      border-radius:10px;
+      box-shadow: var(--accent-glow);
+    }
+    .logo-icon svg{width:26px;height:26px;filter:drop-shadow(0 3px 10px rgba(0,234,255,0.09));}
+    .brand .name{
+      font-weight:800;
+      font-size:20px;
+      color:var(--neon);
+      letter-spacing:1px;
+      text-shadow:0 0 8px rgba(0,234,255,0.12);
+    }
 
-#sidebar a {
-  display: block;
-  padding: 22px;
-  text-align: center;
-  font-size: 24px;
-  color: white;
-  border-bottom: 1px solid #111;
-  transition: 0.2s;
-}
+    /* news ticker */
+    .news-wrap{
+      width:100%;
+      overflow:hidden;
+      border-radius:10px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding:8px 12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .news-label{
+      background:var(--neon);
+      color:#001;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:8px;
+      font-size:14px;
+    }
+    .news-track{
+      white-space:nowrap;
+      display:inline-block;
+      padding-left:6px;
+      direction:rtl; /* important for Arabic flow */
+      animation: newsScroll 20s linear infinite;
+      font-weight:600;
+      color:var(--muted);
+    }
+    @keyframes newsScroll{
+      0%{transform:translateX(100%)}
+      100%{transform:translateX(-100%)}
+    }
 
-#sidebar a:hover {
-  background: #00eaff;
-  color: black;
-}
+    /* Menu button */
+    .menu-btn{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:1300;
+      width:56px;height:56px;
+      background:linear-gradient(180deg,#071018,#0b2630);
+      border-radius:12px;
+      display:grid;place-items:center;
+      box-shadow:0 6px 24px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.04);
+      cursor:pointer;
+    }
+    .menu-btn .bars{
+      width:30px;height:3px;background:var(--neon);
+      box-shadow:0 0 8px rgba(0,234,255,0.3);
+      position:relative;border-radius:3px;
+    }
+    .menu-btn .bars::before,
+    .menu-btn .bars::after{
+      content:"";position:absolute;left:0;width:30px;height:3px;background:var(--neon);border-radius:3px;
+    }
+    .menu-btn .bars::before{top:-8px}
+    .menu-btn .bars::after{top:8px}
 
-/* العنوان الرئيسي */
-h1 {
-  margin-top: 140px;
-  text-align: center;
-  font-size: 52px;
-  color: white;
-  text-shadow: 0 0 18px #00eaff, 0 0 30px #00eaffaa;
-}
+    /* Sidebar (slide from right) */
+    .sidebar{
+      position:fixed;
+      top:0;
+      right:-320px;
+      width:320px;
+      height:100vh;
+      background:linear-gradient(180deg, rgba(10,10,12,0.96), rgba(6,6,8,0.96));
+      box-shadow:-18px 0 60px rgba(0,20,40,0.6);
+      z-index:1250;
+      transition:right .38s cubic-bezier(.2,.9,.2,1);
+      padding:28px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      border-left:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px);
+    }
+    .sidebar.open{ right:0; }
 
-/* وصف */
-p {
-  text-align: center;
-  font-size: 22px;
-  color: #ddd;
-  margin-top: -10px;
-}
+    .sidebar h3{
+      margin:0;color:var(--neon);font-size:18px;font-weight:700;
+      text-align:right;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.03)
+    }
+    .nav-links{margin-top:10px;display:flex;flex-direction:column;gap:8px;overflow:auto;padding-right:6px}
+    .nav-links a{
+      text-decoration:none;color:#dfe7ee;padding:12px 14px;border-radius:10px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      font-weight:600;font-size:16px;background:transparent;transition:all .18s;
+    }
+    .nav-links a:hover{background:rgba(0,234,255,0.06);color:#001}
+    .nav-links a .icon{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,0.03)}
+    .nav-links a.active{background:linear-gradient(90deg, rgba(0,234,255,0.08), rgba(0,234,255,0.04));color:var(--neon)}
 
-/* فوتر */
-footer {
-  margin-top: 80px;
-  text-align: center;
-  font-size: 18px;
-  color: #666;
-}
-</style>
+    /* main container under topbar */
+    .main{
+      padding:150px 5% 80px; /* top space to avoid fixed topbar */
+      max-width:1200px;margin:0 auto;
+    }
+
+    /* Hero banner */
+    .hero{
+      display:flex;align-items:center;gap:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:18px;padding:28px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+      overflow:hidden;
+    }
+    .hero-left{flex:1;text-align:right}
+    .hero-left h1{font-size:36px;margin:0;color:var(--neon);letter-spacing:1px}
+    .hero-left p{color:var(--muted);margin-top:10px;font-size:18px;max-width:680px}
+    .hero-cta{margin-top:18px;display:flex;gap:12px;justify-content:flex-end}
+    .btn{
+      padding:10px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer;
+    }
+    .btn.primary{background:var(--neon);color:#001;box-shadow:var(--accent-glow)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--neon)}
+
+    .hero-right{width:320px;height:200px;border-radius:14px;background:linear-gradient(90deg,#022233,#002b3b);box-shadow:0 8px 30px rgba(0,0,0,0.6);display:grid;place-items:center}
+    .hero-right img{max-width:88%;height:auto;filter:drop-shadow(0 10px 30px rgba(0,234,255,0.06))}
+
+    /* Sections grid (12) */
+    .sections{
+      margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+    }
+    .card{
+      background:var(--card);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;
+      border:1px solid rgba(255,255,255,0.03);transition:transform .18s,box-shadow .18s;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+    .card .icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,#002f40,#003f52);display:grid;place-items:center}
+    .card h4{margin:0;font-size:18px;color:#fff}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Offers */
+    .offers{margin-top:28px;display:grid;grid-template-columns:2fr 1fr;gap:18px}
+    .offer-main{background:linear-gradient(90deg,#031430,#002a37);padding:22px;border-radius:14px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+    .offer-main h3{margin:0;color:var(--neon)}
+    .offer-grid{display:grid;gap:12px;grid-auto-rows:1fr}
+    .offer-mini{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Quick actions */
+    .quick{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .quick .q{flex:1;min-width:140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+    .quick .q strong{display:block;font-size:16px;margin-bottom:6px;color:#fff}
+    .quick .q span{color:var(--muted);font-size:14px}
+
+    /* footer */
+    footer{margin-top:40px;padding:28px 0;text-align:center;color:#9ea7b0;font-size:14px;border-top:1px solid rgba(255,255,255,0.03)}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .sections{grid-template-columns:repeat(3,1fr)}
+      .offers{grid-template-columns:1fr;grid-auto-rows:auto}
+      .hero-right{display:none}
+    }
+    @media (max-width:740px){
+      .topbar{padding:10px}
+      .hero{flex-direction:column;align-items:flex-start}
+      .sections{grid-template-columns:repeat(2,1fr)}
+      .card .icon{width:48px;height:48px}
+      .menu-btn{top:14px;right:12px}
+      .main{padding:120px 18px 60px}
+    }
+    @media (max-width:420px){
+      .sections{grid-template-columns:1fr}
+      .nav-links a{font-size:15px;padding:10px}
+      .hero-left h1{font-size:26px}
+      .brand .name{font-size:18px}
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- تأثير الإضاءة -->
-<div class="glow-left"></div>
-<div class="glow-right"></div>
+  <!-- topbar -->
+  <div class="topbar" role="banner">
+    <div class="topbar-row">
+      <div class="brand" aria-hidden="false">
+        <div class="logo-icon" aria-hidden="true">
+          <!-- bolt SVG -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14h7l-1 8L21 10h-7l-1-8z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="name">Algeriano_Neo</div>
+      </div>
 
-<!-- زر القائمة -->
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+      <!-- menu button -->
+      <button class="menu-btn" aria-label="فتح القائمة" id="menuBtn">
+        <div class="bars"></div>
+      </button>
+    </div>
 
-<!-- القائمة الجانبية -->
-<div id="sidebar">
-  <a href="#">التجارة</a>
-  <a href="#">الخدمات</a>
-  <a href="#">الترفيه</a>
-  <a href="#">السائقين</a>
-  <a href="#">الصحة</a>
-  <a href="#">المرأة</a>
-</div>
+    <!-- news ticker -->
+    <div class="news-wrap" aria-live="polite" role="status">
+      <div class="news-label">آخر الأخبار</div>
+      <div class="news-track" id="newsTrack">
+        إطلاق منصة Algeriano_Neo تجريبي — التجارة بوسيط الآن مُفعّلة — اشترك كسائق وابدأ التوصيل — قسم الصحة يضيف خدمات سكانير ووصفات دوائية.
+        &nbsp; • &nbsp;
+        عروض حصرية على قسم التجارة لمدة 24 ساعة — تابع التحديثات اليومية.
+      </div>
+    </div>
+  </div>
 
-<!-- المحتوى الرئيسي -->
-<h1>Algeriano_Neo</h1>
-<p>منصة متعددة الخدمات — تجارة، ترفيه، صحة، نقل، واهتمام خاص بالمرأة.</p>
+  <!-- sidebar -->
+  <nav class="sidebar" id="sidebar" aria-hidden="true">
+    <h3>الأقسام</h3>
+    <div class="nav-links" role="navigation">
+      <a href="#" class="active"><span>الرئيسية</span><span class="icon">🏠</span></a>
+      <a href="#"><span>التجارة بوسيط</span><span class="icon">🛒</span></a>
+      <a href="#"><span>الخدمات</span><span class="icon">🔧</span></a>
+      <a href="#"><span>الترفيه</span><span class="icon">🎮</span></a>
+      <a href="#"><span>السائقين</span><span class="icon">🚗</span></a>
+      <a href="#"><span>الصحة</span><span class="icon">🩺</span></a>
+      <a href="#"><span>قسم المرأة</span><span class="icon">👩‍🦰</span></a>
+      <a href="#"><span>المطاعم والتغذية</span><span class="icon">🍽️</span></a>
+      <a href="#"><span>العقار</span><span class="icon">🏘️</span></a>
+      <a href="#"><span>التقنية والدروس</span><span class="icon">💻</span></a>
+      <a href="#"><span>السفر والسياحة</span><span class="icon">✈️</span></a>
+      <a href="#"><span>المتجر العام</span><span class="icon">📦</span></a>
+    </div>
+  </nav>
 
-<footer>© 2025 Algeriano_Neo — All Rights Reserved</footer>
+  <!-- menu button already present, ensure clicking outside closes -->
+  <main class="main" id="mainContent">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">مرحباً بك في Algeriano_Neo</h1>
+        <p>منصة جزائرية ذكية تجمع التجارة، الترفيه، الصحة، الخدمات، والسائقين بنظام اشتراك — كل احتياجاتك في مكان واحد.</p>
+        <div class="hero-cta">
+          <button class="btn primary">ابدأ الآن</button>
+          <button class="btn ghost">اكتشف الأقسام</button>
+        </div>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <!-- decorative mockup -->
+        <img src="https://i.imgur.com/7QZ6Q9O.png" alt="demo" />
+      </div>
+    </section>
 
-<script>
-function toggleMenu() {
-  const menu = document.getElementById("sidebar");
-  menu.classList.toggle("open");
-}
+    <!-- Sections grid -->
+    <section class="sections" aria-label="أقسام المنصة">
+      <!-- 12 cards -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🛒</div>
+          <div style="text-align:right">
+            <h4>التجارة بوسيط</h4>
+            <p>بيع آمن — حماية المشتري — تتبع الطلب</p>
+          </div>
+        </div>
+      </div>
 
-window.onclick = function(e) {
-  const menu = document.getElementById("sidebar");
-  if (!menu.contains(e.target) && !e.target.classList.contains("menu-btn")) {
-    menu.classList.remove("open");
-  }
-};
-</script>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🔧</div>
+          <div style="text-align:right">
+            <h4>الخدمات</h4>
+            <p>حرفيون، صيانة، خدمات منزلية</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🎮</div>
+          <div style="text-align:right">
+            <h4>الترفيه</h4>
+            <p>فيديوهات، بث، ألعاب ومسابقات</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🚗</div>
+          <div style="text-align:right">
+            <h4>السائقين</h4>
+            <p>نظام اشتراك للسائقين وخدمات التوصيل</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🩺</div>
+          <div style="text-align:right">
+            <h4>الصحة</h4>
+            <p>حجز مواعيد، صيدلية، سكانير</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">👩‍🦰</div>
+          <div style="text-align:right">
+            <h4>قسم المرأة</h4>
+            <p>جمال، موضة، أمومة، وصفات</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🍽️</div>
+          <div style="text-align:right">
+            <h4>المطاعم والتغذية</h4>
+            <p>قوائم، توصيل، تقييمات</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">🏘️</div>
+          <div style="text-align:right">
+            <h4>العقار</h4>
+            <p>كراء، بيع، وساطة عقارية</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">💻</div>
+          <div style="text-align:right">
+            <h4>التقنية والدروس</h4>
+            <p>دروس، تكوين، شروحات تقنية</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">✈️</div>
+          <div style="text-align:right">
+            <h4>السفر والسياحة</h4>
+            <p>رحلات، فنادق، حجوزات وتنبيهات</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">📦</div>
+          <div style="text-align:right">
+            <h4>المتجر العام</h4>
+            <p>منتجات عامة، إعلانات، سلع مستعملة</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="icon">📰</div>
+          <div style="text-align:right">
+            <h4>الأخبار و التنبيهات</h4>
+            <p>تحديثات المنصة وعروض اليوم</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers area -->
+    <section class="offers" aria-label="عروض اليوم">
+      <div class="offer-main">
+        <h3>عرض اليوم: شحن مجاني لأول 100 طلب</h3>
+        <p style="color:var(--muted)">استغل العرض الآن — عروض محدودة المدة في قسم التجارة والمتجر العام.</p>
+        <div style="margin-top:14px"><button class="btn primary">تسوق الآن</button></div>
+      </div>
+      <div class="offer-grid">
+        <div class="offer-mini">خصم 20% على خدمات التوصيل</div>
+        <div class="offer-mini">استشارة طبية مجانية لأول مرة</div>
+        <div class="offer-mini">خصومات خاصة لقسم المرأة</div>
+      </div>
+    </section>
+
+    <!-- quick actions -->
+    <section class="quick" aria-label="خدمات سريعة">
+      <div class="q"><strong>تتبع طلبي</strong><span>اعرف مكان الطرد الآن</span></div>
+      <div class="q"><strong>دعم مباشر</strong><span>دردشة مع الدعم 24/7</span></div>
+      <div class="q"><strong>إضافة إعلان</strong><span>أنشر منتجك بسرعة</span></div>
+      <div class="q"><strong>سجل كسائق</strong><span>انضم لفريق التوصيل</span></div>
+    </section>
+
+    <footer>
+      © 2025 Algeriano_Neo — جميع الحقوق محفوظة • <a href="#" style="color:var(--neon);text-decoration:none">سياسة الخصوصية</a>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const sidebar = document.getElementById('sidebar');
+      const menuBtn = document.getElementById('menuBtn');
+      const main = document.getElementById('mainContent');
+
+      menuBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        const open = sidebar.classList.toggle('open');
+        sidebar.setAttribute('aria-hidden', open ? 'false' : 'true');
+      });
+
+      // close when click outside
+      document.addEventListener('click', function(e){
+        if(!sidebar.contains(e.target) && !menuBtn.contains(e.target)){
+          sidebar.classList.remove('open');
+          sidebar.setAttribute('aria-hidden','true');
+        }
+      });
+
+      // close on Escape
+      document.addEventListener('keydown', function(e){
+        if(e.key === "Escape") { sidebar.classList.remove('open'); sidebar.setAttribute('aria-hidden','true'); }
+      });
+
+      // pause news scroll on hover or focus
+      const newsTrack = document.getElementById('newsTrack');
+      newsTrack.addEventListener('mouseenter', ()=> newsTrack.style.animationPlayState = 'paused');
+      newsTrack.addEventListener('mouseleave', ()=> newsTrack.style.animationPlayState = 'running');
+
+    })();
+  </script>
 </body>
-</html>
+  </html>
