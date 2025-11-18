@@ -1,325 +1,206 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Algeriano_Neo — الصفحة الرئيسة (12 أقسام)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algeriano_Neo 2026</title>
+
 <style>
-:root{
-  --bg-1:#05060a; --bg-2:#0e1116;
-  --accent:#00e5ff; --accent2:#7a2bff; --muted:#bfcbd6;
-  --glass-bg: rgba(255,255,255,0.025);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family:"Cairo",sans-serif;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:#eef6fb;
-  -webkit-font-smoothing:antialiased;
-  overflow-y:auto;
+body {
+    margin: 0;
+    font-family: "Cairo", sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
 }
 
-/* TOP / HEADER */
-.top{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,rgba(8,8,12,0.66),rgba(6,6,8,0.5));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.02)}
-.header-row{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;gap:12px}
-.brand-title{font-weight:900;font-size:20px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
-.menu-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#02121a;padding:8px 12px;border-radius:10px;border:none;cursor:pointer}
-.news-wrap{background:rgba(255,255,255,0.01);border-top:1px solid rgba(0,229,255,0.03);border-bottom:1px solid rgba(122,43,255,0.03)}
-.news{white-space:nowrap;padding:10px 18px;color:var(--accent);animation:news 18s linear infinite}
-@keyframes news{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-
-/* SIDE MENU */
-.sideMenu{
-  position:fixed;top:0;right:-340px;width:340px;height:100%;background:linear-gradient(180deg,rgba(10,10,12,0.98),rgba(6,6,8,0.96));box-shadow:-30px 0 60px rgba(0,0,0,0.6);padding-top:100px;transition:0.35s;z-index:1300;
+/* حاوية الرأس */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(20,20,20,0.7);
+    backdrop-filter: blur(12px);
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
-.sideMenu .links{display:flex;flex-direction:column;gap:8px;padding:12px}
-.sideMenu a{color:#fff;text-decoration:none;padding:14px;border-radius:10px;background:rgba(255,255,255,0.02)}
-.sideMenu a:hover{background:rgba(0,229,255,0.06);color:#02121a}
 
-/* CONTAINER */
-.container{max-width:1200px;margin:28px auto;padding:0 18px}
-
-/* SECTIONS (glass cards) */
-.section{
-  margin:18px 0;
-  border-radius:16px;
-  padding:20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  position:relative;
-  overflow:hidden;
+/* صورة قبل اللوغو */
+.pre-logo-img {
+    width: 42px;
+    margin-left: 12px;
+    filter: drop-shadow(0 0 4px #00eaff);
 }
-.section h2{font-size:20px;margin-bottom:8px;color:var(--accent)}
-.section p{color:var(--muted);line-height:1.6}
 
-/* grid helpers */
-.row{display:flex;gap:14px;flex-wrap:wrap}
-.col{flex:1;min-width:220px}
-
-/* special hero */
-.hero{
-  display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:28px;
+/* اللوغو */
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #00eaff;
+    text-shadow: 0 0 12px #00bcd4;
 }
-.hero-left{flex:1;min-width:280px}
-.hero-title{font-size:30px;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent;margin-bottom:10px}
-.hero-cta{display:flex;gap:10px;margin-top:12px}
-.btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#02121a}
-.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
 
-/* small cards inside sections */
-.card{background:rgba(255,255,255,0.015);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-.card h4{margin-bottom:6px}
-.card p{color:var(--muted);font-size:14px}
-
-/* footer */
-footer{margin-top:30px;padding:16px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
-
-/* anchors spacing */
-.anchor-spacer{height:88px;display:block;margin-top:-88px;visibility:hidden}
-
-/* responsive */
-@media (max-width:920px){
-  .hero-title{font-size:22px}
-  .header-row{padding:10px}
-  .sideMenu{width:100%;right:-100%}
+/* زر القائمة */
+.menu-btn {
+    font-size: 32px;
+    cursor: pointer;
+    user-select: none;
 }
+
+/* القائمة المنسدلة */
+nav {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100vh;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(14px);
+    padding-top: 80px;
+    transition: 0.4s;
+    border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 18px;
+    color: #eee;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: rgba(0,255,255,0.08);
+    padding-right: 28px;
+}
+
+/* شريط الأخبار */
+.news-bar {
+    width: 100%;
+    background: rgba(0,200,255,0.12);
+    color: #00eaff;
+    padding: 10px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.news-text {
+    display: inline-block;
+    animation: slide-left 12s linear infinite;
+    font-size: 17px;
+}
+
+@keyframes slide-left {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* أقسام SPA */
+section {
+    display: none;
+    padding: 30px;
+    text-align: center;
+}
+
+section h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff;
+}
+
+/* الفوتر */
+footer {
+    text-align: center;
+    padding: 18px;
+    margin-top: 30px;
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
 </style>
-</head>
-<body>
-
-<!-- TOP -->
-<div class="top" role="banner">
-  <div class="header-row">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_map_of_Algeria.svg/640px-Flag_map_of_Algeria.svg.png" alt="dz" style="width:40px;height:auto;border-radius:6px">
-      </div>
-      <div class="brand-title">Algeriano_Neo</div>
-    </div>
-
-    <div style="display:flex;gap:10px;align-items:center">
-      <button class="menu-btn" id="openMenuBtn" aria-expanded="false" aria-controls="sideMenu">القائمة</button>
-    </div>
-  </div>
-  <div class="news-wrap"><div class="news" role="note" aria-live="polite">🔥 Algeriano_Neo — التجارة • الخدمات • الترفيه • الصحة • السائقين • المتجر — منصة جزائرية 2026</div></div>
-</div>
-
-<!-- SIDE MENU -->
-<nav id="sideMenu" class="sideMenu" aria-hidden="true">
-  <div class="links">
-    <a href="#home" data-close>الرئيسية</a>
-    <a href="#commerce" data-close>التجارة بوسيط</a>
-    <a href="#services" data-close>الخدمات</a>
-    <a href="#entertainment" data-close>الترفيه</a>
-    <a href="#drivers" data-close>السائقين</a>
-    <a href="#health" data-close>الصحة</a>
-    <a href="#women" data-close>قسم المرأة</a>
-    <a href="#restaurants" data-close>المطاعم والتغذية</a>
-    <a href="#realestate" data-close>العقار</a>
-    <a href="#tech" data-close>التقنية والدروس</a>
-    <a href="#travel" data-close>السفر والسياحة</a>
-    <a href="#store" data-close>المتجر العام</a>
-  </div>
-</nav>
-
-<!-- MAIN CONTENT -->
-<main class="container" id="home">
-
-  <!-- HERO -->
-  <section class="section hero" id="homeSection">
-    <span class="anchor-spacer" id="home"></span>
-    <div class="hero-left">
-      <div class="hero-title">Algeriano_Neo — المنصة الجزائريّة الشاملة</div>
-      <div class="hero-desc">منصة تجمع التجارة، الخدمات، الترفيه، الصحة، النقل والسائقين، وكل ما يحتاجه السوق الجزائري — تصميم 3D Glass Dark Futuristic 2026.</div>
-      <div class="hero-cta">
-        <button class="btn" onclick="document.querySelector('#commerce').scrollIntoView({behavior:'smooth'})">اكتشف التجارة</button>
-        <button class="btn ghost" onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">اطلب خدمة</button>
-      </div>
-    </div>
-    <div style="width:320px">
-      <div class="card">
-        <h4>شريط أخبار</h4>
-        <p style="color:var(--muted)">تحديثات، عروض، نتائج حملات، وشركاء Algeriano_Neo.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1. التجارة بوسيط -->
-  <section class="section" id="commerce">
-    <span class="anchor-spacer" id="commerce"></span>
-    <h2>التجارة بوسيط</h2>
-    <p>منصة سوق آمن: المشتري يدفع للمنصة، الأموال تتجمّد، البائع يتسلم بعد تأكيد التسليم.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>عرض المنتجات</h4><p class="muted">قوائم، فلاتر، تقييمات، وصف المنتج.</p></div>
-      <div class="col card"><h4>نظام البائع</h4><p class="muted">رفع منتجات، تتبع طلبات، رصيد.</p></div>
-    </div>
-  </section>
-
-  <!-- 2. الخدمات -->
-  <section class="section" id="services">
-    <span class="anchor-spacer" id="services"></span>
-    <h2>الخدمات</h2>
-    <p>خدمات محلية: سباك، كهربائي، تنظيف، تصميم، وأي خدمة تطلبها.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>اطلب خدمة</h4><p class="muted">نموذج طلب سريع، تحديد موعد.</p></div>
-      <div class="col card"><h4>مزودون معتمدون</h4><p class="muted">قوائم مزودين بعروض و تقييمات.</p></div>
-    </div>
-  </section>
-
-  <!-- 3. الترفيه -->
-  <section class="section" id="entertainment">
-    <span class="anchor-spacer" id="entertainment"></span>
-    <h2>الترفيه</h2>
-    <p>محتوى شبابي: فيديوهات قصيرة، مسابقات، بثوث، وفعاليات.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>فيديوهات</h4><p class="muted">مقاطع تختصر المتعة.</p></div>
-      <div class="col card"><h4>فعاليات</h4><p class="muted">حملات ومسابقات محلية.</p></div>
-    </div>
-  </section>
-
-  <!-- 4. السائقين -->
-  <section class="section" id="drivers">
-    <span class="anchor-spacer" id="drivers"></span>
-    <h2>السائقين — نقل البضائع و سائق خاص</h2>
-    <p>خدمة مزدوجة: نقل الطرود والبضائع + سائق خاص للأشخاص. إدارة الطلبات (تسيير) متاحة.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>اطلب نقل</h4><p class="muted">نموذج: نقطة الانطلاق، الوجهة، الوزن، وصف البضاعة.</p></div>
-      <div class="col card"><h4>سائق خاص</h4><p class="muted">حجز سائق شخصي بالساعة أو بالرحلة.</p></div>
-    </div>
-  </section>
-
-  <!-- 5. الصحة -->
-  <section class="section" id="health">
-    <span class="anchor-spacer" id="health"></span>
-    <h2>الصحة</h2>
-    <p>حجز مواعيد — بحث عن أطباء — مخابر — صيدليات. المرضى يحجزوا مجاناً؛ الأطباء/المخابر/الصيدليات هم من يدفعون للتواجد.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>حجز موعد</h4><p class="muted">اختيار طبيب، التخصص، التاريخ.</p></div>
-      <div class="col card"><h4>المخابر والصيدليات</h4><p class="muted">خدمات، نتائج، طلب أدوية.</p></div>
-    </div>
-  </section>
-
-  <!-- 6. قسم المرأة -->
-  <section class="section" id="women">
-    <span class="anchor-spacer" id="women"></span>
-    <h2>قسم المرأة</h2>
-    <p>مساحة آمنة للمرأة: محتوى، خدمات، دورات، منتجات وفعاليات مخصصة.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>خدمات نسائية</h4><p class="muted">جمال، صحة، تدريب.</p></div>
-      <div class="col card"><h4>مجتمع آمن</h4><p class="muted">مجموعات ومحتوى موجه للنساء.</p></div>
-    </div>
-  </section>
-
-  <!-- 7. المطاعم والتغذية -->
-  <section class="section" id="restaurants">
-    <span class="anchor-spacer" id="restaurants"></span>
-    <h2>المطاعم والتغذية</h2>
-    <p>قوائم مطاعم، طلب أكل، عروض وتوصيل.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>قوائم</h4><p class="muted">قوائم، سعر، وقت التوصيل.</p></div>
-      <div class="col card"><h4>عروض</h4><p class="muted">عروض يومية وخصومات.</p></div>
-    </div>
-  </section>
-
-  <!-- 8. العقار -->
-  <section class="section" id="realestate">
-    <span class="anchor-spacer" id="realestate"></span>
-    <h2>العقار</h2>
-    <p>إعلانات عقارية: بيع، شراء، كراء، وإعلانات مميزة.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>أبحث عن عقار</h4><p class="muted">فلاتر: المدينة، السعر، المساحة.</p></div>
-      <div class="col card"><h4>نشر إعلان</h4><p class="muted">نموذج رفع صور ووصف.</p></div>
-    </div>
-  </section>
-
-  <!-- 9. التقنية والدروس -->
-  <section class="section" id="tech">
-    <span class="anchor-spacer" id="tech"></span>
-    <h2>التقنية والدروس</h2>
-    <p>كورسات، دورات، دروس برمجية، ودروس تقنية قصيرة للشباب.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>دورات</h4><p class="muted">فيديوهات ودروس مدفوعة ومجانية.</p></div>
-      <div class="col card"><h4>خدمات تقنية</h4><p class="muted">تصليح، تصميم، دعم.</p></div>
-    </div>
-  </section>
-
-  <!-- 10. السفر والسياحة -->
-  <section class="section" id="travel">
-    <span class="anchor-spacer" id="travel"></span>
-    <h2>السفر والسياحة</h2>
-    <p>عروض سفر، دليل سياحي للمدن، وحجوزات مستقبلية.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>عروض</h4><p class="muted">رحلات وقوائم سياحية.</p></div>
-      <div class="col card"><h4>دليل المدن</h4><p class="muted">أماكن، فنادق، أنشطة.</p></div>
-    </div>
-  </section>
-
-  <!-- 11. المتجر العام -->
-  <section class="section" id="store">
-    <span class="anchor-spacer" id="store"></span>
-    <h2>المتجر العام</h2>
-    <p>سلع يومية، أدوات منزلية، ملابس، واختيارات واسعة.</p>
-    <div class="row" style="margin-top:12px">
-      <div class="col card"><h4>التسوق</h4><p class="muted">أقسام متعددة وسلة شراء (مستقبلاً).</p></div>
-      <div class="col card"><h4>عروض السوق</h4><p class="muted">تخفيضات وموسميات.</p></div>
-    </div>
-  </section>
-
-  <!-- 12. اتصل بنا / الدعم -->
-  <section class="section" id="contact">
-    <span class="anchor-spacer" id="contactAnchor"></span>
-    <h2>اتصل بنا / الدعم</h2>
-    <p>رقم واتساب: <strong>0663572199</strong> — البريد: <strong>youcef.bouf80@gmail.com</strong></p>
-    <p class="muted">أي استفسار ولا خطأ؟ تواصل معنا و نجاوبوك بسرعة.</p>
-  </section>
-
-</main>
-
-<footer>جميع الحقوق محفوظة © 2026 — Algeriano_Neo</footer>
 
 <script>
-/* MENU OPEN/CLOSE + auto-close on link click + smooth scroll */
-const openBtn = document.getElementById('openMenuBtn');
-const side = document.getElementById('sideMenu');
+function toggleMenu() {
+    let menu = document.getElementById("menu");
+    menu.style.right = (menu.style.right === "0px") ? "-260px" : "0px";
+}
 
-openBtn.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  const isOpen = side.style.right === '0px';
-  if(isOpen){ side.style.right = '-340px'; openBtn.setAttribute('aria-expanded','false'); side.setAttribute('aria-hidden','true'); }
-  else { side.style.right = '0px'; openBtn.setAttribute('aria-expanded','true'); side.setAttribute('aria-hidden','false'); }
-});
-
-// close clicking outside
-document.addEventListener('click', (e)=>{
-  if(side.style.right === '0px'){
-    const path = e.composedPath ? e.composedPath() : (e.path || []);
-    if(!path.includes(side) && !path.includes(openBtn)) { side.style.right = '-340px'; openBtn.setAttribute('aria-expanded','false'); side.setAttribute('aria-hidden','true'); }
-  }
-});
-
-// close on ESC
-document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { side.style.right='-340px'; openBtn.setAttribute('aria-expanded','false'); side.setAttribute('aria-hidden','true'); }});
-
-// smooth scroll for side links & close menu
-document.querySelectorAll('#sideMenu a[data-close]').forEach(a=>{
-  a.addEventListener('click', function(e){
-    e.preventDefault();
-    const href = this.getAttribute('href');
-    const target = document.querySelector(href);
-    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
-    side.style.right='-340px'; openBtn.setAttribute('aria-expanded','false'); side.setAttribute('aria-hidden','true');
-  });
-});
-
-/* pause news on hover */
-const news = document.querySelector('.news');
-if(news){
-  news.addEventListener('mouseenter', ()=> news.style.animationPlayState='paused');
-  news.addEventListener('mouseleave', ()=> news.style.animationPlayState='running');
+function openSection(id) {
+    document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    document.getElementById("menu").style.right = "-260px";
 }
 </script>
+</head>
+
+<body>
+
+<header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_map_of_Algeria.svg/640px-Flag_map_of_Algeria.svg.png" class="pre-logo-img">
+    <div class="logo">Algeriano_Neo</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<div class="news-bar">
+    <div class="news-text">مرحبًا بكم في منصة Algeriano_Neo — أقوى مشروع خدماتي وتجاري في الجزائر 2026 🚀</div>
+</div>
+
+<nav id="menu">
+    <a onclick="openSection('home')">الرئيسية</a>
+    <a onclick="openSection('trade')">التجارة بوسيط</a>
+    <a onclick="openSection('services')">الخدمات</a>
+    <a onclick="openSection('fun')">الترفيه</a>
+    <a onclick="openSection('drivers')">السائقين</a>
+    <a onclick="openSection('health')">الصحة</a>
+    <a onclick="openSection('women')">قسم المرأة</a>
+    <a onclick="openSection('food')">المطاعم والتغذية</a>
+    <a onclick="openSection('realestate')">العقار</a>
+    <a onclick="openSection('tech')">التقنية والدروس</a>
+    <a onclick="openSection('travel')">السفر والسياحة</a>
+    <a onclick="openSection('store')">المتجر العام</a>
+</nav>
+
+<!-- الأقسام -->
+
+<section id="home" style="display:block;">
+    <h1>مرحبًا بكم في Algeriano_Neo 2026</h1>
+    <p>عملاق الخدمات والتجارة في الجزائر.</p>
+</section>
+
+<section id="trade"><h1>التجارة بوسيط</h1></section>
+
+<section id="services"><h1>الخدمات</h1></section>
+
+<section id="fun"><h1>الترفيه</h1></section>
+
+<section id="drivers"><h1>السائقين</h1></section>
+
+<section id="health"><h1>الصحة</h1></section>
+
+<section id="women"><h1>قسم المرأة</h1></section>
+
+<section id="food"><h1>المطاعم والتغذية</h1></section>
+
+<section id="realestate"><h1>العقار</h1></section>
+
+<section id="tech"><h1>التقنية والدروس</h1></section>
+
+<section id="travel"><h1>sالسفر والسياحة</h1></section>
+
+<section id="store"><h1>المتجر العام</h1></section>
+
+<footer>
+جميع الحقوق محفوظة © 2026 — Algeriano_Neo
+</footer>
 
 </body>
 </html>
